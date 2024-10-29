@@ -1,0 +1,7 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+backend/backend/__pycache__/
+backend/backend/__pycache__/*.pyc
