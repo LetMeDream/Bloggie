@@ -41,9 +41,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Custom app
+    'api',
+
+    # Third party apps
+    'corsheaders', # required for apps where backend and frontend are separated
+    'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
+    'drf_yasg' # yet another swagger generator 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,6 +93,9 @@ DATABASES = {
     }
 }
 
+# Model to use for authetication
+
+AUTH_USER_MODEL = 'api.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -211,4 +223,16 @@ JAZZMIN_UI_TWEAKS = {
         "danger": "btn-danger",
         "success": "btn-success"
     }
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Media url
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication'
+    )
 }
