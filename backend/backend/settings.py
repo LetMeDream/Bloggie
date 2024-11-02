@@ -236,3 +236,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     )
 }
+
+AUTHENTICATION_BACKENDS = [
+    'api.backends.UsernameOrEmailBackend',  # Replace 'yourapp' with the name of your app
+    'django.contrib.auth.backends.ModelBackend',
+]
