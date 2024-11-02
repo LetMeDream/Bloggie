@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from api.views import CustomAdminLoginView
+from django.views.generic import RedirectView  # Add this import for redirecting
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/login/', CustomAdminLoginView.as_view()),  # Custom login view
+    path('admin/', admin.site.urls),   # Custom login view
 ]
