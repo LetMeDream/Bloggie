@@ -163,19 +163,15 @@ JAZZMIN_SETTINGS = {
     ],
     "icons": {
         "admin.LogEntry": "fas fa-file",
-
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
-
         "api.User": "fas fa-user",
         "api.Profile":"fas fa-address-card",
         "api.Post":"fas fa-th",
         "api.Category":"fas fa-tag",
         "api.Comment":"fas fa-envelope",
         "api.Notification":"fas fa-bell",
-        "api.Bookmark":"fas fa-heart",
-
-        
+        "api.Bookmark":"fas fa-heart", 
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-arrow-circle-right",
