@@ -18,8 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from api.views import CustomAdminLoginView
 from django.views.generic import RedirectView  # Add this import for redirecting
+from api.views import MyTokenObtainPairView, RegisterView, ProfileView, ProfileListView, UserView, UserListView, CategoryListView
 
 urlpatterns = [
     path('admin/login/', CustomAdminLoginView.as_view()),  # Custom login view
     path('admin/', admin.site.urls),   # Custom login view
+    #### Serialized views #### 
+    path('api/token/', MyTokenObtainPairView.as_view()),
+    path('api/register/', RegisterView.as_view(), name='register'),
+    path('api/profile/<int:user_id>', ProfileView.as_view()),
+    path('api/profiles', ProfileListView.as_view()),
+    path('api/user/<int:id>', UserView.as_view()),
+    path('api/users', UserListView.as_view()),
+    path('api/categories', CategoryListView.as_view())
+
 ]
