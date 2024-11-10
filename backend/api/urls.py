@@ -15,17 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from api.views import MyTokenObtainPairView, RegisterView, ProfileView, ProfileListView, UserView, UserListView, CategoryListView
+from api.views import MyTokenObtainPairView, RegisterView, ProfileView, ProfileListView, UserView, UserListView, CategoryListView, PostCategoryListView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     #### Serialized views #### 
-    path('token/', MyTokenObtainPairView.as_view()),
+
+    # User Auth Endpoints
+    path('user/token/', MyTokenObtainPairView.as_view()),
     path('user/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('register/', RegisterView.as_view(), name='register'),
-    path('profile/<int:user_id>', ProfileView.as_view()),
-    path('profiles', ProfileListView.as_view()),
+    path('user/register/', RegisterView.as_view(), name='register'),
+    path('user/profile/<int:user_id>', ProfileView.as_view()),
     path('user/<int:id>', UserView.as_view()),
-    path('users', UserListView.as_view()),
-    path('categories', CategoryListView.as_view())
+
+    # Post Endpoints
+    path('post/category/list/', CategoryListView.as_view()),
+    path('post/category/posts/<category_slug>', PostCategoryListView.as_view()),
+
+    # Misc
+    path('profiles', ProfileListView.as_view()),
+    path('users', UserListView.as_view())
 ]
