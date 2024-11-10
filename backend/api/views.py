@@ -1,10 +1,11 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializer import MyTokenObtainPairSerializer, RegisterSerializer, ExtendedProfileSerializer, ExtendedUserSerializer, CategorySerializer
+from .serializer import MyTokenObtainPairSerializer, RegisterSerializer, ExtendedProfileSerializer, ExtendedUserSerializer, CategorySerializer, PostSerializer
 from rest_framework.response import Response
 from rest_framework import status, generics
-from api.models import User, Profile, Category
+from rest_framework.permissions import AllowAny
+from api.models import User, Profile, Category, Post
 
 
 # Create your views here.
@@ -31,7 +32,7 @@ class RegisterView(generics.CreateAPIView):
     response = super().create(request, *args, **kwargs)
     return Response('Successfully created user', status=status.HTTP_201_CREATED)
 
-class ProfileView(generics.RetrieveAPIView):
+class ProfileView(generics.RetrieveUpdateAPIView):
   queryset = Profile.objects.all()
   serializer_class = ExtendedProfileSerializer
   lookup_field = 'user_id'  # Match with the actual field name in Profile
@@ -52,3 +53,13 @@ class UserListView(generics.ListAPIView):
 class CategoryListView(generics.ListAPIView):
   queryset = Category.objects.all()
   serializer_class = CategorySerializer
+
+class PostCategoryListView(generics.ListAPIView):
+  serializer_class = PostSerializer
+  permission_classes = [AllowAny]
+
+  def get_queryset(self):
+    category_slug = self.kwargs['category_slug']
+    category = Category.objects.get(slug=category_slug)
+    return Post.objects.filter(category=category, status='Active')
+
