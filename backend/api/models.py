@@ -74,7 +74,7 @@ class Category(models.Model):
   def save(self, *args, **kwargs):
     if not self.slug:
       self.slug = slugify(self.title)
-    super().save(*args, **kwargss)
+    super().save(*args, **kwargs)
 
   def count_post(self):
     return Post.objects.filter(category=self).count()
@@ -111,7 +111,7 @@ class Post(models.Model):
   def save(self, *args, **kwargs):
     if not self.slug:
       self.slug = slugify(self.title) + '-' + shortuuid.uuid()[:2]
-    super().save(*args, **kwargss)
+    super().save(*args, **kwargs)
 
 class Comment(models.Model):
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
