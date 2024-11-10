@@ -23,5 +23,5 @@ from api.views import MyTokenObtainPairView, RegisterView, ProfileView, ProfileL
 urlpatterns = [
     path('admin/login/', CustomAdminLoginView.as_view()),  # Custom login view
     path('admin/', admin.site.urls),   # Custom login view
-    path('api', include('api.urls'))
+    path('api/', include('api.urls'))
 ]
