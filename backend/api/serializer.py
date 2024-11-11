@@ -87,6 +87,12 @@ class UserSerializer(serializers.ModelSerializer):
     model = api_models.User
     fields = '__all__'
 
+# Not entended serializers
+class MinifiedUserSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = api_models.User
+    fields = ['id', 'full_name', 'email']
+
 class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = api_models.Profile
@@ -144,7 +150,7 @@ class CommentSerializer(serializers.ModelSerializer):
         self.Meta.depth = 1
 
 class PostSerializer(serializers.ModelSerializer):
-  user = UserSerializer()  # Addding 'depth' to the 'user' property >
+  user = MinifiedUserSerializer(read_only=True)  # Addding 'depth' to the 'user' property >
                            # returned inn /api/post/category/posts/<category-slug
   class Meta:
     model = api_models.Post
@@ -157,6 +163,11 @@ class PostSerializer(serializers.ModelSerializer):
         self.Meta.depth = 0
       else: 
         self.Meta.depth = 1
+
+class PostBySlugSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = api_models.Post
+    fields = '__all__'
 
 class BookmarkSerializer(serializers.ModelSerializer):
   class Meta:
