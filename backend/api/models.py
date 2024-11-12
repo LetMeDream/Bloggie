@@ -147,9 +147,9 @@ class Notification(models.Model):
     ('Comment', 'Comment'),
     ('Bookmark', 'Bookmark')
   )
-  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+  from_user = models.CharField(max_length=100)
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
-  title = models.CharField(max_length=100)
   date = models.DateTimeField(auto_now_add=True)
   type = models.CharField(choices=NOTIFICATION_TYPE, max_length=100)
   seen = models.BooleanField(default=False)
