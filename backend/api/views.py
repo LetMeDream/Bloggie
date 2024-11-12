@@ -12,6 +12,7 @@ from .serializer import (
 )
 from rest_framework.response import Response
 from rest_framework import status, generics
+from rest_framework.views import APIView 
 from rest_framework.permissions import AllowAny
 from api.models import User, Profile, Category, Post
 
@@ -100,3 +101,19 @@ class PostBySlugView(generics.ListAPIView):
     # Return a queryset instead of a single instance
     return Post.objects.filter(slug=post_slug, status='Active')
 
+class LikePostView(APIView):
+  
+  def post(self, request):
+    user_id = request.data['user_id']
+    post_id = request.data['post_id']
+
+    user = User.objects.get(pk=user_id)
+    post = Post.objects.get(pk=post_id)
+
+    if user in post.likes.all():
+      # Has it been liked before?
+      post.likes.remove(user)
+      return Response({"Message": "Post disliked"}, status=status.HTTP_200_OK)
+    else:
+      post.likes.add(user)
+      return Response({"Message": "Post liked"}, status=status.HTTP_200_OK)
