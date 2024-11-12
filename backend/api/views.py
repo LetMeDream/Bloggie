@@ -14,7 +14,10 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework.views import APIView 
 from rest_framework.permissions import AllowAny
-from api.models import User, Profile, Category, Post
+from api.models import User, Profile, Category, Post, Notification
+
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 
 
 # Create your views here.
@@ -102,7 +105,15 @@ class PostBySlugView(generics.ListAPIView):
     return Post.objects.filter(slug=post_slug, status='Active')
 
 class LikePostView(APIView):
-  
+  @swagger_auto_schema(
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'user_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                'post_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+            },
+        ),
+    )
   def post(self, request):
     user_id = request.data['user_id']
     post_id = request.data['post_id']
@@ -116,4 +127,6 @@ class LikePostView(APIView):
       return Response({"Message": "Post disliked"}, status=status.HTTP_200_OK)
     else:
       post.likes.add(user)
+      Notification.objects.create(author=post.user, from_user=user, post=post, type='Like')
+
       return Response({"Message": "Post liked"}, status=status.HTTP_200_OK)
