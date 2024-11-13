@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework.views import APIView 
 from rest_framework.permissions import AllowAny
-from api.models import User, Profile, Category, Post, Notification, Comment
+from api.models import User, Profile, Category, Post, Notification, Comment, Bookmark
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -144,29 +144,67 @@ class PostCommentView(APIView):
       ),
   )
   def post(self, request):
-      # Get data from request.data (frontend)
-      post_id = request.data['post_id']
-      name = request.data['name']
-      email = request.data['email']
-      comment = request.data['comment']
+    # Get data from request.data (frontend)
+    post_id = request.data['post_id']
+    name = request.data['name']
+    email = request.data['email']
+    comment = request.data['comment']
 
-      post = Post.objects.get(id=post_id)
+    post = Post.objects.get(id=post_id)
 
-      # Create Comment
-      Comment.objects.create(
-          post=post,
-          name=name,
-          email=email,
-          comment=comment,
+    # Create Comment
+    Comment.objects.create(
+        post=post,
+        name=name,
+        email=email,
+        comment=comment,
+    )
+
+    # Notification
+    Notification.objects.create(
+        author=post.user,
+        from_user=name,
+        post=post,
+        type="Comment",
+    )
+
+    # Return response back to the frontend
+    return Response({"message": "Comment Sent"}, status=status.HTTP_201_CREATED)
+
+class BookmarkPostView(APIView):
+  @swagger_auto_schema(
+    request_body=openapi.Schema(
+      type=openapi.TYPE_OBJECT,
+      properties={
+        'user_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+        'post_id': openapi.Schema(type=openapi.TYPE_STRING),
+      },
+    ),
+  )
+  
+  def post(self, request):
+    user_id = request.data['user_id']
+    post_id = request.data['post_id']
+
+    user = User.objects.get(id=user_id)
+    post = Post.objects.get(id=post_id)
+    bookmark = Bookmark.objects.filter(post=post, user=user).first()
+    
+    if bookmark:
+      # Remove post from bookmark
+      bookmark.delete()
+      return Response({"message": "Post Un-Bookmarked"}, status=status.HTTP_200_OK)
+    else:
+      Bookmark.objects.create(
+          user=user,
+          post=post
       )
 
       # Notification
       Notification.objects.create(
           author=post.user,
-          from_user=name,
+          from_user=user.username,
           post=post,
-          type="Comment",
+          type="Bookmark",
       )
-
-      # Return response back to the frontend
-      return Response({"message": "Commented Sent"}, status=status.HTTP_201_CREATED)
+      return Response({"message": "Post Bookmarked"}, status=status.HTTP_201_CREATED)
