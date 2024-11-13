@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from rest_framework.views import APIView 
 from rest_framework.permissions import AllowAny
-from api.models import User, Profile, Category, Post, Notification
+from api.models import User, Profile, Category, Post, Notification, Comment
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
@@ -130,3 +130,43 @@ class LikePostView(APIView):
       Notification.objects.create(author=post.user, from_user=user, post=post, type='Like')
 
       return Response({"Message": "Post liked"}, status=status.HTTP_200_OK)
+
+class PostCommentView(APIView):
+  @swagger_auto_schema(
+      request_body=openapi.Schema(
+          type=openapi.TYPE_OBJECT,
+          properties={
+              'post_id': openapi.Schema(type=openapi.TYPE_INTEGER),
+              'name': openapi.Schema(type=openapi.TYPE_STRING),
+              'email': openapi.Schema(type=openapi.TYPE_STRING),
+              'comment': openapi.Schema(type=openapi.TYPE_STRING),
+          },
+      ),
+  )
+  def post(self, request):
+      # Get data from request.data (frontend)
+      post_id = request.data['post_id']
+      name = request.data['name']
+      email = request.data['email']
+      comment = request.data['comment']
+
+      post = Post.objects.get(id=post_id)
+
+      # Create Comment
+      Comment.objects.create(
+          post=post,
+          name=name,
+          email=email,
+          comment=comment,
+      )
+
+      # Notification
+      Notification.objects.create(
+          author=post.user,
+          from_user=name,
+          post=post,
+          type="Comment",
+      )
+
+      # Return response back to the frontend
+      return Response({"message": "Commented Sent"}, status=status.HTTP_201_CREATED)

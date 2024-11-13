@@ -140,7 +140,6 @@ class Bookmark(models.Model):
     verbose_name_plural = "Bookmark"
     ordering = ['-date'] 
 
-
 class Notification(models.Model):
   NOTIFICATION_TYPE = (
     ('Like', 'Like'),

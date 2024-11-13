@@ -27,7 +27,8 @@ from api.views import (
     PostListView,
     PostView,
     PostBySlugView,
-    LikePostView
+    LikePostView,
+    PostCommentView
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -48,6 +49,7 @@ urlpatterns = [
     path('post/', PostListView.as_view()),
     path('post/<int:id>', PostView.as_view()),
     path('post/like-post', LikePostView.as_view()),
+    path('post/comment-post', PostCommentView.as_view()),
 
     # Misc
     path('profiles', ProfileListView.as_view()),
