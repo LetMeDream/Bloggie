@@ -29,7 +29,8 @@ from api.views import (
     PostBySlugView,
     LikePostView,
     PostCommentView,
-    BookmarkPostView
+    BookmarkPostView,
+    DashboardStats
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -52,6 +53,9 @@ urlpatterns = [
     path('post/like-post', LikePostView.as_view()),
     path('post/comment-post', PostCommentView.as_view()),
     path('post/bookmark-post', BookmarkPostView.as_view()),
+
+    # Dashboard Endpoits
+    path('author/dashboard/stats/<user_id>/', DashboardStats.as_view()),
 
     # Misc
     path('profiles', ProfileListView.as_view()),

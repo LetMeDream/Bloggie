@@ -8,7 +8,8 @@ from .serializer import (
     ExtendedUserSerializer,
     CategorySerializer,
     PostSerializer,
-    PostBySlugSerializer
+    PostBySlugSerializer,
+    AuthorSerializer
 )
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -18,6 +19,7 @@ from api.models import User, Profile, Category, Post, Notification, Comment, Boo
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
+from django.db.models import Sum 
 
 
 # Create your views here.
@@ -208,3 +210,25 @@ class BookmarkPostView(APIView):
           type="Bookmark",
       )
       return Response({"message": "Post Bookmarked"}, status=status.HTTP_201_CREATED)
+
+class DashboardStats(generics.ListAPIView):
+  serializer_class = AuthorSerializer
+
+  def get_queryset(self):
+    user_id = self.kwargs['user_id']
+    user = User.objects.get(id=user_id)
+
+    views = Post.objects.filter(user=user).aggregate(view=Sum("view"))['view']
+    posts = Post.objects.filter(user=user).count()
+    likes = Post.objects.filter(user=user).aggregate(total_likes=Sum("likes"))['total_likes']
+    # 'post__user' is called a 'lookup field'.
+    bookmarks = Bookmark.objects.filter(post__user=user).count() # 'post__user' refers to the user that authored the bookmarked posts.
+    # It does not refer to the user that authored the bookmark itself.
+
+    # Remember that ListAPIView MUST return an array list.
+    return ([{
+        "views": views,
+        "posts": posts,
+        "likes": likes,
+        "bookmarks": bookmarks,
+    }])
