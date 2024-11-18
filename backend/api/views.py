@@ -9,7 +9,9 @@ from .serializer import (
     CategorySerializer,
     PostSerializer,
     PostBySlugSerializer,
-    AuthorSerializer
+    AuthorSerializer,
+    CommentSerializer, 
+    NotificationSerializer
 )
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -232,3 +234,44 @@ class DashboardStats(generics.ListAPIView):
         "likes": likes,
         "bookmarks": bookmarks,
     }])
+
+class DashboardPostList(generics.ListAPIView):
+  serializer_class = PostSerializer
+
+  def get_queryset(self):
+    user_id = self.kwargs['user_id']
+    user = User.objects.get(pk=user_id) 
+    return Post.objects.filter(user=user).order_by('-id')
+
+class DashboardCommentList(generics.ListAPIView):
+  serializer_class = CommentSerializer
+
+  def get_queryset(self):
+    user_id = self.kwargs['user_id']
+    user = User.objects.get(pk=user_id) 
+    user_posts = Post.objects.filter(user=user)
+    comments = Comment.objects.filter(post__user=user)
+    return comments
+
+class DashboardNotificationList(generics.ListAPIView):
+  serializer_class = NotificationSerializer
+
+  def get_queryset(self):
+    user_id = self.kwargs['user_id']
+    user = User.objects.get(pk=user_id) 
+    user_posts = Post.objects.filter(user=user)
+    notifications = Notification.objects.filter(post__user=user)
+    return notifications
+
+class DashboardMarkNotificationAsSeen(APIView):
+
+  def post(self, request, *args, **kwargs):
+    # Info by request body
+    notification_id = request.data['notification_id']
+    notification = Notification.objects.filter(pk=notification_id).last()
+    if not notification.seen:
+      notification.seen = True
+      notification.save()
+      return Response({"message": "Notification marked as seen successfully"}, status=status.HTTP_200_OK)
+    else:
+      return Response({"message": "This notification had been seen already and will remain that way"}, status=status.HTTP_200_OK)
