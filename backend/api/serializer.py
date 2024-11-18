@@ -91,7 +91,7 @@ class UserSerializer(serializers.ModelSerializer):
 class MinifiedUserSerializer(serializers.ModelSerializer):
   class Meta:
     model = api_models.User
-    fields = ['id', 'full_name', 'email']
+    fields = ['full_name']
 
 class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
@@ -139,7 +139,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
   class Meta:
     model = api_models.Comment
-    fields = '__all__'
+    exclude = []
 
     def __init__(self, *args, **kwargs):
       super(CommentSerializer, self).__init__(*args, **kwargs)
@@ -154,7 +154,7 @@ class PostSerializer(serializers.ModelSerializer):
                            # returned inn /api/post/category/posts/<category-slug
   class Meta:
     model = api_models.Post
-    fields = '__all__'
+    exclude=['profile', 'date', 'image']
 
     def __init__(self, *args, **kwargs):
       super(PostSerializer, self).__init__(*args, **kwargs)
