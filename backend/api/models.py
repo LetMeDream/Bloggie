@@ -122,7 +122,7 @@ class Comment(models.Model):
   date = models.DateField(auto_now_add=True)
 
   def __str__(self):
-    return self.post.title
+    return self.comment
 
   class Meta:
     ordering = ['-date'] 
