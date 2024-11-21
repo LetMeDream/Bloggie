@@ -93,6 +93,12 @@ class MinifiedUserSerializer(serializers.ModelSerializer):
     model = api_models.User
     fields = ['full_name']
 
+# Not entended serializers
+class MinifiedCategorySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = api_models.Category
+    fields = ['title']
+
 class ProfileSerializer(serializers.ModelSerializer):
   class Meta:
     model = api_models.Profile
@@ -150,8 +156,8 @@ class CommentSerializer(serializers.ModelSerializer):
         self.Meta.depth = 1
 
 class PostSerializer(serializers.ModelSerializer):
-  user = MinifiedUserSerializer(read_only=True)  # Addding 'depth' to the 'user' property >
-                           # returned inn /api/post/category/posts/<category-slug
+  user = MinifiedUserSerializer(read_only=True)  # Adding 'depth' to the 'user' property
+  category = MinifiedCategorySerializer(read_only=True) # and 'categoty' property as well
   class Meta:
     model = api_models.Post
     exclude=['profile', 'date', 'image']
@@ -163,6 +169,16 @@ class PostSerializer(serializers.ModelSerializer):
         self.Meta.depth = 0
       else: 
         self.Meta.depth = 1
+
+  def to_representation(self, instance):
+    # Obtain the default serializer 'representation'
+    representation = super().to_representation(instance)
+    
+    # Modify desired fields; Stop representing them as an object. Use just a 'key' instead
+    representation['user'] = representation['user']['full_name'] if representation['user'] else None
+    representation['category'] = representation['category']['title'] if representation['category'] else None
+    
+    return representation
 
 class PostBySlugSerializer(serializers.ModelSerializer):
   class Meta:
