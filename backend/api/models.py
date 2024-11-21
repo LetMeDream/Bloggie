@@ -99,6 +99,7 @@ class Post(models.Model):
   view = models.IntegerField(default=0)
   likes = models.ManyToManyField(User, blank=True, related_name='likes_user')
   date = models.DateField(auto_now_add=True)
+  tags = models.CharField(max_length=100)
 
   def __str__(self):
     return self.title

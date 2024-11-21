@@ -23,7 +23,6 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from django.db.models import Sum 
 
-
 # Create your views here.
 # View for the Custom Login for admin
 class CustomAdminLoginView(LoginView):
@@ -92,11 +91,13 @@ class PostListView(generics.ListAPIView):
   queryset = Post.objects.all()
   serializer_class = PostSerializer
 
+# Get Post by giver id (does not count the view in the view counter)
 class PostView(generics.RetrieveUpdateAPIView):
   queryset = Post.objects.all()
   serializer_class = PostSerializer
   lookup_field = 'id'
 
+# Get Post by given slow (counts the view in the view counter)
 class PostBySlugView(generics.ListAPIView):
   serializer_class = PostBySlugSerializer
 
@@ -108,6 +109,7 @@ class PostBySlugView(generics.ListAPIView):
     # Return a queryset instead of a single instance
     return Post.objects.filter(slug=post_slug, status='Active')
 
+# Like a Post
 class LikePostView(APIView):
   @swagger_auto_schema(
         request_body=openapi.Schema(
@@ -126,7 +128,7 @@ class LikePostView(APIView):
     post = Post.objects.get(pk=post_id)
 
     if user in post.likes.all():
-      # Has it been liked before?
+      # Has it been liked by this user before?
       post.likes.remove(user)
       return Response({"Message": "Post disliked"}, status=status.HTTP_200_OK)
     else:
@@ -135,6 +137,7 @@ class LikePostView(APIView):
 
       return Response({"Message": "Post liked"}, status=status.HTTP_200_OK)
 
+# Create a Comment on a Post, alongide notification
 class PostCommentView(APIView):
   @swagger_auto_schema(
       request_body=openapi.Schema(
@@ -213,7 +216,7 @@ class BookmarkPostView(APIView):
       )
       return Response({"message": "Post Bookmarked"}, status=status.HTTP_201_CREATED)
 
-class DashboardStats(generics.ListAPIView):
+class DashboardStatsView(generics.ListAPIView):
   serializer_class = AuthorSerializer
 
   def get_queryset(self):
@@ -235,7 +238,7 @@ class DashboardStats(generics.ListAPIView):
         "bookmarks": bookmarks,
     }])
 
-class DashboardPostList(generics.ListAPIView):
+class DashboardPostListView(generics.ListAPIView):
   serializer_class = PostSerializer
 
   def get_queryset(self):
@@ -243,7 +246,7 @@ class DashboardPostList(generics.ListAPIView):
     user = User.objects.get(pk=user_id) 
     return Post.objects.filter(user=user).order_by('-id')
 
-class DashboardCommentList(generics.ListAPIView):
+class DashboardCommentListView(generics.ListAPIView):
   serializer_class = CommentSerializer
 
   def get_queryset(self):
@@ -253,7 +256,7 @@ class DashboardCommentList(generics.ListAPIView):
     comments = Comment.objects.filter(post__user=user)
     return comments
 
-class DashboardNotificationList(generics.ListAPIView):
+class DashboardNotificationListView(generics.ListAPIView):
   serializer_class = NotificationSerializer
 
   def get_queryset(self):
@@ -263,7 +266,7 @@ class DashboardNotificationList(generics.ListAPIView):
     notifications = Notification.objects.filter(post__user=user)
     return notifications
 
-class DashboardMarkNotificationAsSeen(APIView):
+class DashboardMarkNotificationAsSeenView(APIView):
 
   def post(self, request, *args, **kwargs):
     # Info by request body
@@ -275,3 +278,55 @@ class DashboardMarkNotificationAsSeen(APIView):
       return Response({"message": "Notification marked as seen successfully"}, status=status.HTTP_200_OK)
     else:
       return Response({"message": "This notification had been seen already and will remain that way"}, status=status.HTTP_200_OK)
+
+class DashboardPostCommentReplyView(APIView):
+
+  def post(self, request):
+    comment_id = request.data['comment_id']
+    reply = request.data['reply']
+
+    print("comment_id =======", comment_id)
+    print("reply ===========", reply)
+
+    comment = Comment.objects.get(pk=comment_id)
+    comment.reply = reply
+    comment.save()
+
+    return Response({"message": "Comment Response Sent"}, status=status.HTTP_201_CREATED)
+
+class DashboardPostCreateView(generics.CreateAPIView):
+  serializer_class = PostSerializer
+  permission_classes = [AllowAny]
+
+  def create(self, request, *args, **kwargs):
+    print(request.data)
+    user_id = request.data.get('user_id')
+    title = request.data.get('title')
+    image = request.data.get('image')
+    description = request.data.get('description')
+    tags = request.data.get('tags')
+    category_id = request.data.get('category')
+    post_status = request.data.get('post_status')
+
+    print(user_id)
+    print(title)
+    print(image)
+    print(description)
+    print(tags)
+    print(category_id)
+    print(post_status)
+
+    user = User.objects.get(id=user_id)
+    category = Category.objects.get(id=category_id)
+
+    post = Post.objects.create(
+      user=user,
+      title=title,
+      image=image,
+      description=description,
+      tags=tags,
+      category=category,
+      status=post_status
+    )
+
+    return Response({"message": "Post Created Successfully"}, status=status.HTTP_201_CREATED)

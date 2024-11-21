@@ -30,11 +30,13 @@ from api.views import (
     LikePostView,
     PostCommentView,
     BookmarkPostView,
-    DashboardStats,
-    DashboardPostList,
-    DashboardCommentList,
-    DashboardNotificationList,
-    DashboardMarkNotificationAsSeen
+    DashboardStatsView,
+    DashboardPostListView,
+    DashboardCommentListView,
+    DashboardNotificationListView,
+    DashboardMarkNotificationAsSeenView,
+    DashboardPostCommentReplyView,
+    DashboardPostCreateView
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -59,11 +61,13 @@ urlpatterns = [
     path('post/bookmark-post', BookmarkPostView.as_view()),
 
     # Dashboard Endpoits
-    path('author/dashboard/stats/<user_id>/', DashboardStats.as_view()),
-    path('author/dashboard/post/<user_id>/', DashboardPostList.as_view()),
-    path('author/dashboard/comment/<user_id>/', DashboardCommentList.as_view()),
-    path('author/dashboard/noti-list/<user_id>/', DashboardNotificationList.as_view()),
-    path('author/dashboard/noti-mark-seen', DashboardMarkNotificationAsSeen.as_view()),
+    path('author/dashboard/stats/<user_id>/', DashboardStatsView.as_view()),
+    path('author/dashboard/post/<user_id>/', DashboardPostListView.as_view()),
+    path('author/dashboard/comment/<user_id>/', DashboardCommentListView.as_view()),
+    path('author/dashboard/noti-list/<user_id>/', DashboardNotificationListView.as_view()),
+    path('author/dashboard/noti-mark-seen', DashboardMarkNotificationAsSeenView.as_view()),
+    path('author/dashboard/reply-comment', DashboardPostCommentReplyView.as_view()),
+    path('author/dashboard/post-create', DashboardPostCreateView.as_view()),
 
     # Misc
     path('profiles', ProfileListView.as_view()),
