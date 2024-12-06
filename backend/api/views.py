@@ -308,14 +308,6 @@ class DashboardPostCreateView(generics.CreateAPIView):
     category_id = request.data.get('category')
     post_status = request.data.get('post_status')
 
-    print(user_id)
-    print(title)
-    print(image)
-    print(description)
-    print(tags)
-    print(category_id)
-    print(post_status)
-
     user = User.objects.get(id=user_id)
     category = Category.objects.get(id=category_id)
 
@@ -330,3 +322,36 @@ class DashboardPostCreateView(generics.CreateAPIView):
     )
 
     return Response({"message": "Post Created Successfully"}, status=status.HTTP_201_CREATED)
+
+class DashboardPostEditView(generics.RetrieveUpdateDestroyAPIView):
+  serializer_class = PostSerializer
+
+  def get_object(self):
+    user_id = self.kwargs['user_id']
+    post_id = self.kwargs['post_id']
+    user = User.objects.get(id=user_id)
+    return Post.objects.get(user=user, id=post_id)
+
+  def update(self, request, *args, **kwargs):
+    post_instance = self.get_object()
+
+    title = request.data.get('title')
+    image = request.data.get('image')
+    description = request.data.get('description')
+    tags = request.data.get('tags')
+    category_id = request.data.get('category')
+    post_status = request.data.get('post_status')
+
+    # Since 'category' is a foreign key in Post, we'll need to use the  id sent  for  fetching the category first
+    category = Category.objects.get(id=category_id) # before actually assigning it 
+
+    post_instance.title = title
+    if image != "undefined":
+        post_instance.image = image
+    post_instance.description = description
+    post_instance.tags = tags
+    post_instance.category = category
+    post_instance.status = post_status
+    post_instance.save()
+
+    return Response({"message": "Post Updated Successfully"}, status=status.HTTP_200_OK)

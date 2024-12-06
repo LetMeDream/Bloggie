@@ -36,7 +36,8 @@ from api.views import (
     DashboardNotificationListView,
     DashboardMarkNotificationAsSeenView,
     DashboardPostCommentReplyView,
-    DashboardPostCreateView
+    DashboardPostCreateView,
+    DashboardPostEditView
 )
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -68,6 +69,7 @@ urlpatterns = [
     path('author/dashboard/noti-mark-seen', DashboardMarkNotificationAsSeenView.as_view()),
     path('author/dashboard/reply-comment', DashboardPostCommentReplyView.as_view()),
     path('author/dashboard/post-create', DashboardPostCreateView.as_view()),
+    path('author/dashboard/post-edit/<user_id>/<post_id>', DashboardPostEditView.as_view()),
 
     # Misc
     path('profiles', ProfileListView.as_view()),
