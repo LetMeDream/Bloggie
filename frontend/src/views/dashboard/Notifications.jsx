@@ -40,7 +40,7 @@ function Notifications() {
                                                             </span>
                                                         </p>
                                                         <p>
-                                                            <button class="btn btn-outline-secondary" type="button">
+                                                            <button className="btn btn-outline-secondary" type="button">
                                                                 Mark as Seen <i className="fas fa-check"></i>
                                                             </button>
                                                         </p>
@@ -69,7 +69,7 @@ function Notifications() {
                                                             </span>
                                                         </p>
                                                         <p>
-                                                            <button class="btn btn-outline-secondary" type="button">
+                                                            <button className="btn btn-outline-secondary" type="button">
                                                                 Mark as Seen <i className="fas fa-check"></i>
                                                             </button>
                                                         </p>

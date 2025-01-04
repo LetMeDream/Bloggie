@@ -54,21 +54,21 @@ function Comments() {
                                                             Thanks for the commment. Yes, it's an ideal stack for proficient development.
                                                         </p>
                                                         <p>
-                                                            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                            <button className="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                                 Send Response
                                                             </button>
                                                         </p>
-                                                        <div class="collapse" id="collapseExample">
-                                                            <div class="card card-body">
+                                                        <div className="collapse" id="collapseExample">
+                                                            <div className="card card-body">
                                                                 <form>
-                                                                    <div class="mb-3">
-                                                                        <label for="exampleInputEmail1" class="form-label">
+                                                                    <div className="mb-3">
+                                                                        <label htmlFor="exampleInputEmail1" className="form-label">
                                                                             Write Response
                                                                         </label>
                                                                         <textarea name="" id="" cols="30" className="form-control" rows="4"></textarea>
                                                                     </div>
 
-                                                                    <button type="submit" class="btn btn-primary">
+                                                                    <button type="submit" className="btn btn-primary">
                                                                         Send Response <i className="fas fa-paper-plane"> </i>
                                                                     </button>
                                                                 </form>

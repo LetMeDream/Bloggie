@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -24,7 +23,7 @@ function Header() {
                                 </form>
                             </div>
                         </div>
-                        <ul className="navbar-nav navbar-nav-scroll ms-auto">
+                        <ul className="navbar-nav navbar-nav-scroll ms-auto flex ">
                             <li className="nav-item dropdown">
                                 <Link className="nav-link active" to="/">
                                     Home
@@ -93,6 +92,8 @@ function Header() {
                                 <Link to={"/register/"} className="btn btn-success" href="dashboard.html">
                                     Register <i className="fas fa-user-plus"></i>
                                 </Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link to={"/login/"} className="btn btn-success ms-2" href="dashboard.html">
                                     Login <i className="fas fa-sign-in-alt"></i>
                                 </Link>

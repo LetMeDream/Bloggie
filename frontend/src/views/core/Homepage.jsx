@@ -1,13 +1,35 @@
+import React from "react";
 import Header from "../partials/Header";
 import Footer from "../partials/Footer";
 import { Link } from "react-router-dom";
+import apiInstance from "../../utils/axios";
+import Moment from "../../plugin/Moment";
+import Toast from "../../plugin/Toast";
+
 function Index() {
+    const [posts, setPosts] = React.useState([])
+    const [category, setCategory] = React.useState([])
+    
+    const fetchPosts = async () => {
+        try {
+            const response = await apiInstance.get('post')
+            setPosts(response.data)
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    React.useEffect(() => {
+         fetchPosts()
+    }, [])
+
     return (
         <div
         >
             <Header />
             <section className="p-0 ">
-                <div className="container border border-primary">
+                <div className="container">
                     <div className="row">
                         <div className="col">
                             <a href="#" className="d-block card-img-flash">
@@ -234,12 +256,12 @@ function Index() {
 
                                 <div className="mt-2">
                                     <div className="card bg-transparent">
-                                        <img
+                                        {/* <img
                                             className="card-img"
                                             src="https://www.realsimple.com/thmb/yla86Nr8GjRXe_9IyADQ638gPrg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/fashion-trends-GettyImages-1457816153-d2982e954afe4b42bf5587f087da90d4.jpg"
                                             style={{ width: "150px", height: "80px", objectFit: "cover" }}
                                             alt="card image"
-                                        />
+                                        /> */}
                                         <div className="d-flex flex-column align-items-center mt-3 pb-2">
                                             <h5 className="mb-0">Fashion</h5>
                                             <small>4 Articles</small>
