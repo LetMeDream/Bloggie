@@ -25,7 +25,9 @@ const MainWrapper = ({ children }) => {
     }, []);
 
     // Render content conditionally based on the 'loading' state
-    return <>{loading ? null : children}</>;
+    return <>{loading ? null : <div className='vh-100 d-flex flex-column'>
+        {children} 
+    </div>}</>;
 };
 
 export default MainWrapper;
