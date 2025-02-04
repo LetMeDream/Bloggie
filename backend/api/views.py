@@ -11,7 +11,8 @@ from .serializer import (
     PostBySlugSerializer,
     AuthorSerializer,
     CommentSerializer, 
-    NotificationSerializer
+    NotificationSerializer,
+    MinifiedPostSerializer
 )
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -22,6 +23,7 @@ from api.models import User, Profile, Category, Post, Notification, Comment, Boo
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from django.db.models import Sum 
+import pdb  # Imported for depuration
 
 # Create your views here.
 # View for the Custom Login for admin
@@ -295,24 +297,27 @@ class DashboardPostCommentReplyView(APIView):
     return Response({"message": "Comment Response Sent"}, status=status.HTTP_201_CREATED)
 
 class DashboardPostCreateView(generics.CreateAPIView):
-  serializer_class = PostSerializer
+  serializer_class = MinifiedPostSerializer
   permission_classes = [AllowAny]
 
   def create(self, request, *args, **kwargs):
     print(request.data)
-    user_id = request.data.get('user_id')
+    # pdb.set_trace()  # Pausar la ejecución aquí para depuración interactiva
+    user_id = request.data.get('user')
+    profile_id = request.data.get('profile')
     title = request.data.get('title')
     image = request.data.get('image')
     description = request.data.get('description')
     tags = request.data.get('tags')
     category_id = request.data.get('category')
-    post_status = request.data.get('post_status')
-
+    post_status = request.data.get('status')
     user = User.objects.get(id=user_id)
+    profile = Profile.objects.get(id=profile_id) if profile_id else Profile.objects.get(user_id=user_id)
     category = Category.objects.get(id=category_id)
 
     post = Post.objects.create(
       user=user,
+      profile=profile,
       title=title,
       image=image,
       description=description,
