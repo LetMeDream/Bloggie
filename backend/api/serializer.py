@@ -160,7 +160,7 @@ class PostSerializer(serializers.ModelSerializer):
   category = MinifiedCategorySerializer(read_only=True) # and 'categoty' property as well
   class Meta:
     model = api_models.Post
-    exclude=['profile', 'date', 'image']
+    exclude=['profile']
 
     def __init__(self, *args, **kwargs):
       super(PostSerializer, self).__init__(*args, **kwargs)
@@ -179,6 +179,11 @@ class PostSerializer(serializers.ModelSerializer):
     representation['category'] = representation['category']['title'] if representation['category'] else None
     
     return representation
+
+class MinifiedPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = api_models.Post
+        fields = ['title', 'description', 'image', 'status', 'tags', 'category', 'user']
 
 class PostBySlugSerializer(serializers.ModelSerializer):
   class Meta:
