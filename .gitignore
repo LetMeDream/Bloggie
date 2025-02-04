@@ -8,3 +8,4 @@ backend/backend/__pycache__/*.pyc
 venv/
 db.sqlite3
 .env
+backend/media
