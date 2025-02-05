@@ -45,3 +45,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),   # Custom login view
     path('api/', include('api.urls'))
 ]
+
+# Serves from `settings.XXXXX_ROOT` when accessed to `settings.XXXXX_URL`
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
