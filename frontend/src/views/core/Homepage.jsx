@@ -4,17 +4,36 @@ import Footer from "../partials/Footer";
 import { Link } from "react-router-dom";
 import apiInstance from "../../utils/axios";
 import Moment from "../../plugin/Moment";
-import Toast from "../../plugin/Toast";
+// import Toast from "../../plugin/Toast";
 
 function Index() {
     const [posts, setPosts] = React.useState([])
-    const [category, setCategory] = React.useState([])
+    const [, setCategory] = React.useState([])
     
     const fetchPosts = async () => {
         try {
-            const response = await apiInstance.get('post')
-            setPosts(response.data)
-            console.log(response)
+            const results = await Promise.allSettled([
+                apiInstance.get('post'),
+                apiInstance.get('post/category/list')
+            ]);
+    
+            const postsResult = results[0];
+            const categoriesResult = results[1];
+    
+            if (postsResult.status === 'fulfilled') {
+                setPosts(postsResult.value.data);
+                console.log(postsResult.value.data);
+            } else {
+                console.error('Error fetching posts:', postsResult.reason);
+            }
+    
+            if (categoriesResult.status === 'fulfilled') {
+                setCategory(categoriesResult.value.data);
+                console.log(categoriesResult.value.data);
+            } else {
+                console.error('Error fetching categories:', categoriesResult.reason);
+            }
+    
         } catch (error) {
             console.error(error)
         }
@@ -44,7 +63,47 @@ function Index() {
             <section className="pt-4 pb-0">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-6 col-lg-3">
+                        {posts.map((post) => {
+                            return(
+                            <div className="col-sm-6 col-lg-3" key={post?.id}>
+                                <div className="card mb-4">
+                                    <div className="card-fold position-relative">
+                                        <img className="card-img" style={{ width: "100%", height: "160px", objectFit: "cover" }} 
+                                        src={post?.image} alt="Card image" />
+                                    </div>
+                                    <div className="card-body px-3 pt-3">
+                                        <h4 className="card-title">
+                                            <Link to={`/7-common-mistakes-everyone-makes-while-travelling/`} className="btn-link text-reset stretched-link fw-bold text-decoration-none">
+                                                {post?.title}
+                                            </Link>
+                                        </h4>
+                                        <button style={{ border: "none", background: "none" }}>
+                                            <i className="fas fa-bookmark text-danger"></i>
+                                        </button>
+                                        <button style={{ border: "none", background: "none" }}>
+                                            <i className="fas fa-thumbs-up text-primary"></i>
+                                        </button>
+
+                                        <ul className="mt-3 list-style-none" style={{ listStyle: "none" }}>
+                                            <li>
+                                                <a href="#" className="text-dark text-decoration-none">
+                                                    <i className="fas fa-user"></i> {post?.user}
+                                                </a>
+                                            </li>
+                                            <li className="mt-2">
+                                                <i className="fas fa-calendar"></i> 
+                                                {Moment(post?.date)}
+                                            </li>
+                                            <li className="mt-2">
+                                                <i className="fas fa-eye"></i> {post?.view}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            )
+                        })}
+                        {/* <div className="col-sm-6 col-lg-3">
                             <div className="card mb-4">
                                 <div className="card-fold position-relative">
                                     <img className="card-img" style={{ width: "100%", height: "160px", objectFit: "cover" }} src="https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/kitchen-and-dining-room-P5JHHM6.jpg" alt="Card image" />
@@ -161,7 +220,7 @@ function Index() {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <nav className="d-flex mt-2">
                         <ul className="pagination">
