@@ -11,32 +11,20 @@ function Index() {
     const [, setCategory] = React.useState([])
     
     const fetchPosts = async () => {
+        let baseUrl = 'http://127.0.0.1:8000/api' 
         try {
-            const results = await Promise.allSettled([
-                apiInstance.get('post'),
-                apiInstance.get('post/category/list')
-            ]);
-    
-            const postsResult = results[0];
-            const categoriesResult = results[1];
-    
-            if (postsResult.status === 'fulfilled') {
-                setPosts(postsResult.value.data);
-                console.log(postsResult.value.data);
-            } else {
-                console.error('Error fetching posts:', postsResult.reason);
-            }
-    
-            if (categoriesResult.status === 'fulfilled') {
-                setCategory(categoriesResult.value.data);
-                console.log(categoriesResult.value.data);
-            } else {
-                console.error('Error fetching categories:', categoriesResult.reason);
-            }
-    
-        } catch (error) {
-            console.error(error)
-        }
+
+            const postsRes = await fetch(`${baseUrl}/post`); // Utilizar 'fetch' para llamas al endpoint
+            const postsData = await postsRes.json(); // Llevar datos a JSON
+            setPosts(postsData); // Guardar los datos en el estado de posts
+        
+            const categoriesRes = await fetch(`${baseUrl}/post/category/list`); // Utilizar 'fetch' para llamas al endpoint
+            const categoriesData = await categoriesRes.json(); // Llevar datos a JSON
+            setCategory(categoriesData); // Guardar los datos en el estado de categories
+
+          } catch (err) {
+            console.error('Error:', err);
+          }
     }
 
     React.useEffect(() => {
