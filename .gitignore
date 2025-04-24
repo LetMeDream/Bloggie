@@ -9,4 +9,3 @@ venv/
 db.sqlite3
 .env
 backend/media
-/node_modules
