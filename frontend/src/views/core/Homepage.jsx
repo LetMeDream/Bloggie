@@ -66,9 +66,10 @@ function Index () {
   return (
     <div>
       <Header />
-      <section className='p-0 '>
-        {/* ... (contenido existente de la sección del banner) ... */}
+
+      <section className='pt-4 pb-0 min-vh-100'>
         <div className='container'>
+
           <div className='row'>
             <div className='col'>
               <a href='#' className='d-block card-img-flash'>
@@ -77,11 +78,7 @@ function Index () {
               <h2 className='text-start d-block mt-1'>Trending Articles 🔥</h2>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className='pt-4 pb-0'>
-        <div className='container'>
           <div className='row'>
             {/* Renderizar solo los posts de la página actual */}
             {currentPosts.length > 0
