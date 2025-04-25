@@ -1,5 +1,5 @@
 import './App.css'
-import Homepage from './views/core/Homepage'
+import Homepage from './views/core/Homapage/Homepage'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import MainWrapper from './layouts/MainWrapper'
 import Detail from './views/core/Detail'

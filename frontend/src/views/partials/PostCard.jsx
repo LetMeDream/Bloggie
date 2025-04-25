@@ -25,10 +25,10 @@ const PostCard = ({ post }) => {
   };
 
   return (
-    <div className='col-12 col-md-6 col-lg-3'>
+    <div className='col-12 col-md-6 col-lg-3 mb-4'>
       {/* Card height: Removed fixed 50vh from here.
          The image container aspect ratio will help control card height partially. */}
-      <div className='card mb-4 d-flex flex-column'> {/* Added d-flex flex-column */}
+      <div className='card d-flex flex-column h-100'> {/* Added d-flex flex-column */}
         {/* Image Container: Added an aspect ratio class (example: ratio ratio-16x9)
            and removed position-relative if not strictly needed for child absolute positioning.
            Also removed fixed height style if it was there. */}

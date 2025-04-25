@@ -1,12 +1,14 @@
-import Header from '../partials/Header'
-import Footer from '../partials/Footer'
-import PostCard from '../partials/PostCard'
-import useHomePage from '../../hooks/useHomePage'
+import Header from '../../partials/Header'
+import Footer from '../../partials/Footer'
+import PostCard from '../../partials/PostCard'
+import useHomePage from '../../../hooks/useHomePage'
 // import apiInstance from '../../utils/axios'
 // import Toast from '../../plugin/Toast'
+import './Homepage.css'
 
 function Index () {
-const {currentPosts,
+const {
+    currentPosts,
     totalPages,
     currentPage,
     handlePrevPage,
@@ -19,10 +21,10 @@ const {currentPosts,
     <div>
       <Header />
 
-      <section className='pt-4 pb-0 min-vh-100'>
+      <section className='posts-section min-vh-100'>
         <div className='container'>
 
-          <div className='row'>
+          <div className='row pb-3'>
             <div className='col'>
               <a href='#' className='d-block card-img-flash'>
                 <img src='assets/images/adv-3.png' alt='' />
