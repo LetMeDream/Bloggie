@@ -15,6 +15,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.7.8",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
@@ -25,6 +26,7 @@
     "react-router-dom": "^7.0.1",
     "simple-zustand-devtools": "^1.1.0",
     "sweetalert2": "^11.14.5",
+    "tailwindcss": "^4.1.4",
     "zustand": "^5.0.1"
   },
   "devDependencies": {
