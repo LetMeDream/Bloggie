@@ -1,153 +1,87 @@
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { FaCode, FaChevronDown } from 'react-icons/fa'; // Iconos de ejemplo
 
-function Header () {
+const Navbar = () => {
+  const [isPagesOpen, setIsPagesOpen] = useState(false);
+  // Puedes añadir estados similares para otros dropdowns si es necesario
+  // const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+
   return (
-    <header className='navbar-dark bg-dark navbar-sticky header-static'>
-      <nav className='navbar navbar-expand-lg'>
-        <div className='container'>
-          <Link className='navbar-brand' to='/'>
-            <img
-              className='navbar-brand-item dark-mode-item'
-              src='https://i.postimg.cc/ZRNC1mhM/my-main-logo.png'
-              style={{ width: '200px' }}
-              alt='logo'
-            />
-          </Link>
-          <button
-            className='navbar-toggler ms-auto'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#navbarCollapse'
-            aria-controls='navbarCollapse'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span className='h6 d-none d-sm-inline-block text-white'>Menu</span>
-            <span className='navbar-toggler-icon' />
-          </button>
-          <div className='collapse navbar-collapse' id='navbarCollapse'>
-            <div className='nav mt-3 mt-lg-0 px-4 flex-nowrap align-items-center'>
-              <div className='nav-item w-100'>
-                <form className='rounded position-relative'>
-                  <input
-                    className='form-control pe-5 bg-light'
-                    type='search'
-                    placeholder='Search Articles'
-                    aria-label='Search'
-                  />
-                  <Link
-                    to='/search/'
-                    className='btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y'
-                    type='submit'
-                  >
-                    <i className='bi bi-search fs-5'> </i>
-                  </Link>
-                </form>
-              </div>
-            </div>
-            <ul className='navbar-nav navbar-nav-scroll ms-auto flex '>
-              <li className='nav-item dropdown'>
-                <Link className='nav-link active' to='/'>
-                  Home
-                </Link>
-              </li>
-              <li className='nav-item dropdown'>
-                <Link className='nav-link active' to='/category/'>
-                  Category
-                </Link>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle active'
-                  href='#'
-                  id='pagesMenu'
-                  data-bs-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Pages
-                </a>
-                <ul className='dropdown-menu' aria-labelledby='pagesMenu'>
-                  <li>
-                    <Link className='dropdown-item' to='/about/'>
-                      <i className='bi bi-person-lines-fill' /> About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/contact/'>
-                      <i className='bi bi-telephone-fill' /> Contact
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle active'
-                  href='#'
-                  id='pagesMenu'
-                  data-bs-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Dashboard
-                </a>
-                <ul className='dropdown-menu' aria-labelledby='pagesMenu'>
-                  <li>
-                    <Link className='dropdown-item' to='/dashboard/'>
-                      <i className='fas fa-user' /> Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/posts/'>
-                      <i className='bi bi-grid-fill' /> Posts
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/add-post/'>
-                      <i className='fas fa-plus-circle' /> Add Post
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/comments/'>
-                      <i className='bi bi-chat-left-quote-fill' /> Comments
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/notifications/'>
-                      <i className='fas fa-bell' /> Notifications
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/profile/'>
-                      <i className='fas fa-user-gear' /> Profile
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='/register/'
-                  className='btn btn-success'
-                  href='dashboard.html'
-                >
-                  Register <i className='fas fa-user-plus' />
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='/login/'
-                  className='btn btn-success ms-2'
-                  href='dashboard.html'
-                >
-                  Login <i className='fas fa-sign-in-alt' />
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-  )
-}
+    <nav className="bg-gray-800 text-white shadow-md">
+      <div className="container mx-auto px-4 flex items-center justify-between h-16"> {/* Ajusta h-16 (altura) si es necesario */}
 
-export default Header
+        {/* Logo y Nombre */}
+        <div className="flex items-center space-x-2">
+          {/* Reemplaza FaCode con tu logo SVG o componente de imagen */}
+          <FaCode className="h-8 w-8 text-purple-400" />
+          <span className="text-2xl font-bold">Desphixs</span>
+        </div>
+
+        {/* Search Bar */}
+        <div className="flex-1 mx-4 max-w-xs"> {/* Limita el ancho máximo */}
+           <input
+            type="text"
+            placeholder="Search Articles"
+            className="w-full px-4 py-2 rounded bg-white text-gray-900 placeholder-gray-500 focus:outline-none"
+          />
+        </div>
+
+        {/* Navigation Links & Dropdowns */}
+        <div className="hidden md:flex items-center space-x-4"> {/* Oculta en pantallas pequeñas, ajusta 'md' según necesites */}
+          <a href="#" className="hover:text-gray-300 px-3 py-2">Home</a>
+          <a href="#" className="hover:text-gray-300 px-3 py-2">Category</a>
+
+          {/* Pages Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setIsPagesOpen(true)}
+            onMouseLeave={() => setIsPagesOpen(false)}
+          >
+            <button className="flex items-center hover:text-gray-300 px-3 py-2 focus:outline-none">
+              Pages <FaChevronDown className="ml-1 h-3 w-3" />
+            </button>
+            {isPagesOpen && (
+              <div className="absolute left-0 mt-1 w-40 bg-white rounded-md shadow-lg py-1 z-20">
+                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">About</a>
+                <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Contact</a>
+              </div>
+            )}
+          </div>
+
+          {/* Dashboard Link (potencialmente otro dropdown) */}
+           <div className="relative"> {/* Añade lógica de dropdown similar si es necesario */}
+             <a href="#" className="flex items-center hover:text-gray-300 px-3 py-2">
+                Dashboard
+                {/* <FaChevronDown className="ml-1 h-3 w-3" />  Añade si es dropdown */}
+             </a>
+             {/* Aquí iría el menú dropdown del Dashboard si existe */}
+           </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="hidden md:flex items-center space-x-2"> {/* Oculta en pantallas pequeñas */}
+          <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition duration-150 ease-in-out">
+            Register
+          </button>
+          <button className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition duration-150 ease-in-out">
+            Login
+          </button>
+        </div>
+
+        {/* Botón para Menú Móvil (Opcional, necesitaría lógica adicional) */}
+        <div className="md:hidden">
+           {/* Aquí podrías añadir un botón tipo 'hamburguesa' para mostrar/ocultar el menú en móviles */}
+           <button className="text-white focus:outline-none">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+           </button>
+        </div>
+
+      </div>
+      {/* Aquí iría el contenedor del menú desplegable para móviles si implementas esa lógica */}
+    </nav>
+  );
+};
+
+export default Navbar;
