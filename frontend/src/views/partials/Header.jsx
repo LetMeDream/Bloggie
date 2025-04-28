@@ -1,153 +1,237 @@
-import { Link } from 'react-router-dom'
-
-function Header () {
+import { useState } from "react";
+import { Link } from "react-router-dom";
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
   return (
-    <header className='navbar-dark bg-dark navbar-sticky header-static'>
-      <nav className='navbar navbar-expand-lg'>
-        <div className='container'>
-          <Link className='navbar-brand' to='/'>
+    <header className="bg-gray-900 text-white z-50 relative">
+    <div className="container mx-auto flex flex-wrap justify-between items-center p-4">
+      {/* Logo */}
+      <div className="text-2xl font-bold">
+      <Link className='' to='/'>
             <img
-              className='navbar-brand-item dark-mode-item'
+              className=''
               src='https://i.postimg.cc/ZRNC1mhM/my-main-logo.png'
               style={{ width: '200px' }}
               alt='logo'
             />
-          </Link>
-          <button
-            className='navbar-toggler ms-auto'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#navbarCollapse'
-            aria-controls='navbarCollapse'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span className='h6 d-none d-sm-inline-block text-white'>Menu</span>
-            <span className='navbar-toggler-icon' />
-          </button>
-          <div className='collapse navbar-collapse' id='navbarCollapse'>
-            <div className='nav mt-3 mt-lg-0 px-4 flex-nowrap align-items-center'>
-              <div className='nav-item w-100'>
-                <form className='rounded position-relative'>
-                  <input
-                    className='form-control pe-5 bg-light'
-                    type='search'
-                    placeholder='Search Articles'
-                    aria-label='Search'
-                  />
-                  <Link
-                    to='/search/'
-                    className='btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y'
-                    type='submit'
-                  >
-                    <i className='bi bi-search fs-5'> </i>
-                  </Link>
-                </form>
-              </div>
-            </div>
-            <ul className='navbar-nav navbar-nav-scroll ms-auto flex '>
-              <li className='nav-item dropdown'>
-                <Link className='nav-link active' to='/'>
-                  Home
-                </Link>
-              </li>
-              <li className='nav-item dropdown'>
-                <Link className='nav-link active' to='/category/'>
+      </Link>
+      </div>
+      {/* Search Bar */}
+      <div className="w-full md:w-auto mt-2 md:mt-0 flex-grow md:flex-grow-0 md:mx-4">
+        <form className=''>
+          <input
+          className='w-full md:w-72 px-4 py-2 rounded-md bg-white text-black focus:outline-none'
+          type='search'
+          placeholder='Search Articles'
+          aria-label='Search'
+          />
+            <Link
+            to='/search/'
+            className=''
+            type='submit'
+            >
+            </Link>
+        </form>
+      </div>
+        <nav className="hidden md:block">
+          <ul className="flex items-center space-x-6">
+            <li>
+              <Link to="/"
+              className=" no-underline text-white hover:text-black focus:outline-none">
+              Home
+              </Link>
+            </li>
+            <li> 
+              <Link className='no-underline text-white hover:text-black focus:outline-none' 
+              to='/category/'>
                   Category
-                </Link>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle active'
-                  href='#'
-                  id='pagesMenu'
-                  data-bs-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Pages
-                </a>
-                <ul className='dropdown-menu' aria-labelledby='pagesMenu'>
-                  <li>
-                    <Link className='dropdown-item' to='/about/'>
-                      <i className='bi bi-person-lines-fill' /> About
+              </Link>
+            </li>
+            {/* Pages Dropdown */}
+            <li className="relative">
+              <button 
+                onClick={() => toggleDropdown('pages')}
+                className="hover:text-gray-300 focus:outline-none"
+              >
+                Pages ▾
+              </button>
+              {openDropdown === 'pages' && (
+                <ul className="absolute bg-white rounded shadow-md mt-2 w-40">
+                  <li className="">
+                    <Link className='text-black' to='/about/'>
+                      About
                     </Link>
                   </li>
-                  <li>
-                    <Link className='dropdown-item' to='/contact/'>
-                      <i className='bi bi-telephone-fill' /> Contact
+                  <li className="">
+                  <Link className='text-black' to='/contact/'>
+                      Contact
                     </Link>
                   </li>
+                  <li className=""><a href="#">FAQ</a></li>
                 </ul>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle active'
-                  href='#'
-                  id='pagesMenu'
-                  data-bs-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Dashboard
-                </a>
-                <ul className='dropdown-menu' aria-labelledby='pagesMenu'>
-                  <li>
-                    <Link className='dropdown-item' to='/dashboard/'>
-                      <i className='fas fa-user' /> Dashboard
+              )}
+            </li>
+            {/* Dashboard Dropdown */}
+            <li className="relative">
+              <button 
+                onClick={() => toggleDropdown('dashboard')}
+                className="hover:text-gray-300 focus:outline-none"
+              >
+                Dashboard ▾
+              </button>
+              {openDropdown === 'dashboard' && (
+                <ul className='absolute bg-white text-black rounded shadow-md mt-2 w-48'>
+                  <li className=''> 
+                  <Link className='text-black' to='/dashboard/'>
+                   Dashboard
+                  </Link>
+                  </li>
+                  <li className=''>
+                    <Link className='text-black' to='/posts/'>
+                    Posts
                     </Link>
                   </li>
-                  <li>
-                    <Link className='dropdown-item' to='/posts/'>
-                      <i className='bi bi-grid-fill' /> Posts
+                  <li className=''>
+                  <Link className='text-black' to='/add-post/'>
+                    Add Post
+                  </Link>
+                  </li>
+                  <li className=''>
+                    <Link className='text-black' to='/comments/'>
+                      Comments
                     </Link>
                   </li>
-                  <li>
-                    <Link className='dropdown-item' to='/add-post/'>
-                      <i className='fas fa-plus-circle' /> Add Post
+                  <li className=''>
+                    <Link className='text-black' to='/notifications/'>
+                      Notifications
                     </Link>
                   </li>
-                  <li>
-                    <Link className='dropdown-item' to='/comments/'>
-                      <i className='bi bi-chat-left-quote-fill' /> Comments
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/notifications/'>
-                      <i className='fas fa-bell' /> Notifications
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/profile/'>
-                      <i className='fas fa-user-gear' /> Profile
-                    </Link>
-                  </li>
+                  <li className=''>
+                    <Link className='text-black' to='/profile/'>
+                      Profile
+                    </Link></li>
                 </ul>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='/register/'
-                  className='btn btn-success'
-                  href='dashboard.html'
-                >
-                  Register <i className='fas fa-user-plus' />
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='/login/'
-                  className='btn btn-success ms-2'
-                  href='dashboard.html'
-                >
-                  Login <i className='fas fa-sign-in-alt' />
-                </Link>
-              </li>
-            </ul>
-          </div>
+              )}
+            </li>
+            <li>
+              <Link to="/register/"
+              className="inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
+              >
+              Register
+              </Link>
+            </li>
+            <li>
+              <Link to='/login/' 
+              className='inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              Login 
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        {/* Mobile menu button */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu} className="focus:outline-none text-2xl">
+            ☰
+          </button>
         </div>
-      </nav>
-    </header>
-  )
-}
+      </div>
 
-export default Header
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-gray-800">
+          <ul className="flex flex-col items-start p-4 space-y-4">
+            <li>
+              <Link to="/"
+              className=" no-underline text-white hover:text-black focus:outline-none">
+              Home
+              </Link>
+            </li>
+            <li> 
+              <Link to='/category/'
+              className='no-underline text-white hover:text-black focus:outline-none'>
+                  Category
+              </Link>
+            </li>
+            <li>
+              <button 
+                onClick={() => toggleDropdown('pages')}
+                className="hover:text-gray-300 w-full text-left"
+              >
+                Pages ▾
+              </button>
+              {openDropdown === 'pages' && (
+                <ul className="ml-4 mt-2 space-y-2 text-sm">
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li><a href="#">FAQ</a></li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <button 
+                onClick={() => toggleDropdown('dashboard')}
+                className="hover:text-gray-300 w-full text-left"
+              >
+                Dashboard ▾
+              </button>
+              {openDropdown === 'dashboard' && (
+                <ul className="ml-4 mt-2 space-y-2 text-sm">
+                  <li>
+                    <Link className='text-white' to='/dashboard/'>
+                    Dashboard
+                    </Link>
+                  </li>
+                  <li className=''>
+                    <Link className='text-white' to='/posts/'>
+                    Posts
+                    </Link>
+                  </li>
+                  <li className=''>
+                  <Link className='text-white' to='/add-post/'>
+                    Add Post
+                  </Link>
+                  </li>
+                  <li className=''>
+                    <Link className='text-white' to='/comments/'>
+                      Comments
+                    </Link>
+                  </li>
+                  <li className=''>
+                    <Link className='text-white' to='/notifications/'>
+                      Notifications
+                    </Link>
+                  </li>
+                  <li className=''>
+                    <Link className='text-white' to='/profile/'>
+                      Profile
+                    </Link></li>
+                </ul>
+              )}
+            </li>
+            <li><Link to="/register/"
+              className="inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
+              >
+              Register
+              </Link>
+            </li>
+            <li>
+              <Link to='/login/' 
+              className='inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              Login 
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
