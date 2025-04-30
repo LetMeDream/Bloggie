@@ -31,7 +31,7 @@ const Header = () => {
           </Link>
       </div>
       {/* Search Bar */}
-      <div className="hidden search-input w-full md:w-auto mt-2 md:mt-0 flex-grow md:flex-grow-0 md:mx-4">
+      <div className="hidden lg:block search-input w-full md:w-auto mt-2 md:mt-0 flex-grow md:flex-grow-0 md:mx-4">
       <form className=''>
           <input
           className='w-full md:w-60 px-4 py-2 rounded-md bg-white text-black focus:outline-none'
@@ -48,7 +48,7 @@ const Header = () => {
         </form>
       </div></div>
       
-        <nav className="nav-none items-center flex justify-center">
+        <nav className="hidden lg:flex items-center flex justify-center">
           <ul className="flex p-0 items-center justify-center space-x-4 nowrap">
             <li>
               <Link to="/"
@@ -144,7 +144,7 @@ const Header = () => {
           </ul>
         </nav>
         {/* Mobile menu button */}
-        <div className="menu-open flex justify-center w-full pt-3 ">
+        <div className="block lg:hidden flex justify-center w-full pt-3 ">
           <button onClick={toggleMenu} className="focus:outline-none text-2xl">
           <IoMenu  size={30}/>
           </button>
