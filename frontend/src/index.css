@@ -3,3 +3,21 @@
 a:link {
     text-decoration: none;
 }
+
+@media (min-width:992px) {
+    .menu-open{
+      display: none;
+    }
+    .search-input{
+        display:block;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav-none{
+        display: none;
+    }
+    .search-input{
+        display:none;
+    }
+}
