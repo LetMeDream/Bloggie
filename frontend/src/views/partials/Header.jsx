@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { IoMenu } from "react-icons/io5";
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -9,25 +11,30 @@ const Header = () => {
   const toggleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
+  const closeDropdown = () => {
+    setOpenDropdown(null);
+  };
+
   return (
-    <header className="bg-gray-900 text-white z-50 relative">
-    <div className="container mx-auto flex flex-wrap justify-between items-center p-4">
+    <header className="bg-gray-900 text-white z-50 relative flex items-center ">
+    <div className="container flex flex-nowrap justify-between items-center pt-4 pb-4 w-full">
       {/* Logo */}
-      <div className="text-2xl font-bold">
-      <Link className='' to='/'>
+      <div className="flex items-center">
+        <div className="">
+          <Link className='' to='/'>
             <img
               className=''
               src='https://i.postimg.cc/ZRNC1mhM/my-main-logo.png'
               style={{ width: '200px' }}
               alt='logo'
             />
-      </Link>
+          </Link>
       </div>
       {/* Search Bar */}
-      <div className="w-full md:w-auto mt-2 md:mt-0 flex-grow md:flex-grow-0 md:mx-4">
-        <form className=''>
+      <div className="hidden search-input w-full md:w-auto mt-2 md:mt-0 flex-grow md:flex-grow-0 md:mx-4">
+      <form className=''>
           <input
-          className='w-full md:w-72 px-4 py-2 rounded-md bg-white text-black focus:outline-none'
+          className='w-full md:w-60 px-4 py-2 rounded-md bg-white text-black focus:outline-none'
           type='search'
           placeholder='Search Articles'
           aria-label='Search'
@@ -39,9 +46,10 @@ const Header = () => {
             >
             </Link>
         </form>
-      </div>
-        <nav className="hidden md:block">
-          <ul className="flex items-center space-x-6">
+      </div></div>
+      
+        <nav className="nav-none items-center flex justify-center">
+          <ul className="flex p-0 items-center justify-center space-x-4 nowrap">
             <li>
               <Link to="/"
               className=" no-underline text-white hover:text-black focus:outline-none">
@@ -63,7 +71,7 @@ const Header = () => {
                 Pages ▾
               </button>
               {openDropdown === 'pages' && (
-                <ul className="absolute bg-white rounded shadow-md mt-2 w-40">
+                <ul onMouseLeave={closeDropdown} className="absolute text-left bg-white rounded shadow-md mt-2 w-30">
                   <li className="">
                     <Link className='text-black' to='/about/'>
                       About
@@ -87,7 +95,7 @@ const Header = () => {
                 Dashboard ▾
               </button>
               {openDropdown === 'dashboard' && (
-                <ul className='absolute bg-white text-black rounded shadow-md mt-2 w-48'>
+                <ul onMouseLeave={closeDropdown} className='absolute text-left bg-white text-black rounded shadow-md mt-2 w-40 '>
                   <li className=''> 
                   <Link className='text-black' to='/dashboard/'>
                    Dashboard
@@ -136,16 +144,16 @@ const Header = () => {
           </ul>
         </nav>
         {/* Mobile menu button */}
-        <div className="md:hidden">
+        <div className="menu-open flex justify-center w-full pt-3 ">
           <button onClick={toggleMenu} className="focus:outline-none text-2xl">
-            ☰
+          <IoMenu  size={30}/>
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-gray-800">
+        <div className="menu-open bg-gray-800">
           <ul className="flex flex-col items-start p-4 space-y-4">
             <li>
               <Link to="/"
@@ -156,7 +164,7 @@ const Header = () => {
             <li> 
               <Link to='/category/'
               className='no-underline text-white hover:text-black focus:outline-none'>
-                  Category
+              Category
               </Link>
             </li>
             <li>
