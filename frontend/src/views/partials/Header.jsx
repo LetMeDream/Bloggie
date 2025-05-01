@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
+import { IoMdArrowDropdown } from "react-icons/io";
+
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,10 +19,10 @@ const Header = () => {
 
   return (
     <header className="bg-gray-900 text-white z-50 relative flex items-center ">
-    <div className="container flex flex-nowrap justify-between items-center pt-4 pb-4 w-full">
+    <div className="container flex flex-nowrap justify-between items-center pt-2 pb-2 w-full">
       {/* Logo */}
       <div className="flex items-center">
-        <div className="">
+        <div className="mr-5">
           <Link className='' to='/'>
             <img
               className=''
@@ -31,10 +33,10 @@ const Header = () => {
           </Link>
       </div>
       {/* Search Bar */}
-      <div className="hidden lg:block search-input w-full md:w-auto mt-2 md:mt-0 flex-grow md:flex-grow-0 md:mx-4">
+      <div className="hidden lg:block search-input w-full md:w-auto  flex-grow md:flex-grow-0 md:mx-4">
       <form className=''>
           <input
-          className='w-full md:w-60 px-4 py-2 rounded-md bg-white text-black focus:outline-none'
+          className='w-full md:w-60 px-4 rounded-md pt-2 pb-2 bg-white text-black focus:outline-none'
           type='search'
           placeholder='Search Articles'
           aria-label='Search'
@@ -46,10 +48,11 @@ const Header = () => {
             >
             </Link>
         </form>
-      </div></div>
-      
-        <nav className="hidden lg:flex items-center flex justify-center">
-          <ul className="flex p-0 items-center justify-center space-x-4 nowrap">
+      </div>
+      </div>
+       
+        <nav className="hidden lg:flex items-center flex justify-center ">
+          <ul className="flex p-0 items-center justify-center space-x-3 nowrap h-full ">
             <li>
               <Link to="/"
               className=" no-underline text-white hover:text-black focus:outline-none">
@@ -66,18 +69,19 @@ const Header = () => {
             <li className="relative">
               <button 
                 onClick={() => toggleDropdown('pages')}
-                className="hover:text-gray-300 focus:outline-none"
+                className="flex items-center hover:text-gray-300 focus:outline-none"
               >
-                Pages ▾
+                Pages <IoMdArrowDropdown />
+
               </button>
               {openDropdown === 'pages' && (
-                <ul onMouseLeave={closeDropdown} className="absolute text-left bg-white rounded shadow-md mt-2 w-30">
-                  <li className="">
+                <ul onMouseLeave={closeDropdown} className="absolute text-left p-3 pt-2 bg-white rounded shadow-md mt-2 w-30">
+                  <li className="pb-2">
                     <Link className='text-black' to='/about/'>
                       About
                     </Link>
                   </li>
-                  <li className="">
+                  <li className="pb-2">
                   <Link className='text-black' to='/contact/'>
                       Contact
                     </Link>
@@ -90,33 +94,34 @@ const Header = () => {
             <li className="relative">
               <button 
                 onClick={() => toggleDropdown('dashboard')}
-                className="hover:text-gray-300 focus:outline-none"
+                className="flex items-center hover:text-gray-300 focus:outline-none"
               >
-                Dashboard ▾
+                Dashboard <IoMdArrowDropdown />
+
               </button>
               {openDropdown === 'dashboard' && (
-                <ul onMouseLeave={closeDropdown} className='absolute text-left bg-white text-black rounded shadow-md mt-2 w-40 '>
-                  <li className=''> 
+                <ul onMouseLeave={closeDropdown} className='absolute p-3 text-left bg-white text-black rounded shadow-md mt-2 w-40 '>
+                  <li className='pb-2'> 
                   <Link className='text-black' to='/dashboard/'>
                    Dashboard
                   </Link>
                   </li>
-                  <li className=''>
+                  <li className='pb-2'>
                     <Link className='text-black' to='/posts/'>
                     Posts
                     </Link>
                   </li>
-                  <li className=''>
+                  <li className='pb-2'>
                   <Link className='text-black' to='/add-post/'>
                     Add Post
                   </Link>
                   </li>
-                  <li className=''>
+                  <li className='pb-2'>
                     <Link className='text-black' to='/comments/'>
                       Comments
                     </Link>
                   </li>
-                  <li className=''>
+                  <li className='pb-2'>
                     <Link className='text-black' to='/notifications/'>
                       Notifications
                     </Link>
@@ -130,14 +135,14 @@ const Header = () => {
             </li>
             <li>
               <Link to="/register/"
-              className="inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
+              className="p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
               >
               Register
               </Link>
             </li>
             <li>
               <Link to='/login/' 
-              className='inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              className='p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
               Login 
               </Link>
             </li>
@@ -153,7 +158,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="menu-open bg-gray-800">
+        <div className="lg:hidden menu-open bg-gray-800 absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300">
           <ul className="flex flex-col items-start p-4 space-y-4">
             <li>
               <Link to="/"
@@ -224,14 +229,14 @@ const Header = () => {
               )}
             </li>
             <li><Link to="/register/"
-              className="inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
+              className="p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
               >
               Register
               </Link>
             </li>
             <li>
               <Link to='/login/' 
-              className='inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              className='p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
               Login 
               </Link>
             </li>
