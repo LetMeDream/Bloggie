@@ -90,7 +90,7 @@ class PostCategoryListView(generics.ListAPIView):
 
 # All Posts
 class PostListView(generics.ListAPIView):
-  queryset = Post.objects.all()
+  queryset = Post.objects.all().order_by('-id')
   serializer_class = PostSerializer
 
 # Get Post by giver id (does not count the view in the view counter)
@@ -360,3 +360,20 @@ class DashboardPostEditView(generics.RetrieveUpdateDestroyAPIView):
     post_instance.save()
 
     return Response({"message": "Post Updated Successfully"}, status=status.HTTP_200_OK)
+  
+class DashboardPostDeleteView(generics.DestroyAPIView):
+    serializer_class = PostSerializer
+
+    def get_object(self):
+        user_id = self.kwargs['user_id']
+        post_id = self.kwargs['post_id']
+        user = User.objects.get(id=user_id)
+        return Post.objects.get(user=user, id=post_id)
+
+    def destroy(self, request, *args, **kwargs):
+        post_instance = self.get_object()
+        post_instance.delete()
+        print(">>> Devolviendo respuesta 200 OK personalizada") # Línea de depuración
+        response = Response({"message": "Post Deleted Successfully"}, status=status.HTTP_200_OK)
+        print(f">>> Status code: {response.status_code}") # Otra línea útil
+        return response
