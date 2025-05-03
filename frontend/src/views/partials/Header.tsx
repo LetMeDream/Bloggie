@@ -25,7 +25,7 @@ function Header () {
             <span className='h6 d-none d-sm-inline-block text-white'>Menu</span>
             <span className='navbar-toggler-icon' />
           </button>
-          <div className='collapse navbar-collapse' id='navbarCollapse'>
+          <div className='navbar-collapse' id='navbarCollapse'>
             <div className='nav mt-3 mt-lg-0 px-4 flex-nowrap align-items-center'>
               <div className='nav-item w-100'>
                 <form className='rounded position-relative'>
