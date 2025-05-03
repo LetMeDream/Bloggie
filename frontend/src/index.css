@@ -2,8 +2,16 @@
 
 a:link {
     text-decoration: none;
+    color: rgba(85, 80, 80, 0.918);
 }
 
 ul{
     margin-bottom: 0;
+    padding: 10px 10px;
 }
+
+button{
+    padding: 4px 0px 4px 14px;
+    margin:0px;
+}
+

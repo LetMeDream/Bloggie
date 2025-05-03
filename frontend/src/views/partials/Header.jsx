@@ -18,16 +18,15 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 text-white z-50 relative flex items-center ">
-    <div className="container flex flex-nowrap justify-between items-center pt-2 pb-2 w-full">
+    <header className="bg-neutral-800 text-white z-50 relative flex items-center ">
+    <div className="container py-3 flex flex-nowrap justify-between items-center w-full">
       {/* Logo */}
       <div className="flex items-center">
-        <div className="mr-5">
+        <div className="mr-5 w-48">
           <Link className='' to='/'>
             <img
               className=''
               src='https://i.postimg.cc/ZRNC1mhM/my-main-logo.png'
-              style={{ width: '200px' }}
               alt='logo'
             />
           </Link>
@@ -135,108 +134,120 @@ const Header = () => {
             </li>
             <li>
               <Link to="/register/"
-              className="p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
+              className="p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none"
               >
               Register
               </Link>
             </li>
             <li>
               <Link to='/login/' 
-              className='p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
               Login 
               </Link>
             </li>
           </ul>
         </nav>
         {/* Mobile menu button */}
-        <div className="block lg:hidden flex justify-center w-full pt-3 ">
-          <button onClick={toggleMenu} className="focus:outline-none text-2xl">
-          <IoMenu  size={30}/>
+        <div className=" lg:hidden flex justify-end w-full  ">
+          <button onClick={toggleMenu} className="flex focus:outline-none font-semibold text-2xl border rounded">
+          Menu <IoMenu  size={30}/>
           </button>
         </div>
       </div>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="lg:hidden menu-open bg-gray-800 absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300">
-          <ul className="flex flex-col items-start p-4 space-y-4">
-            <li>
+        <div className="lg:hidden menu-open bg-neutral-800 absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300">
+           {/* Search Input */}
+    <div className="w-full px-4  flex justify-center">
+      <form className="w-full flex justify-center">
+        <input
+          className="md:w-[70%] w-[70%] min-w-[400px] min-w pl-3 py-2 rounded-md tex bg-white text-black focus:outline-none"
+          type="search"
+          placeholder="Search Articles"
+          aria-label="Search"
+        />
+      </form>
+    </div>
+          <ul className="font-semibold flex flex-col items-center justify-center p-2 space-y-4">
+            <li className="py-2 m-0">
               <Link to="/"
               className=" no-underline text-white hover:text-black focus:outline-none">
               Home
               </Link>
             </li>
-            <li> 
+            <li className="py-2 m-0"> 
               <Link to='/category/'
               className='no-underline text-white hover:text-black focus:outline-none'>
               Category
               </Link>
             </li>
-            <li>
+            <li className="py-2 m-0">
               <button 
                 onClick={() => toggleDropdown('pages')}
-                className="hover:text-gray-300 w-full text-left"
+                className="hover:text-gray-300 w-full"
               >
                 Pages ▾
               </button>
               {openDropdown === 'pages' && (
-                <ul className="ml-4 mt-2 space-y-2 text-sm">
+                <ul className="flex flex-col min-w-[420px] md:min-w-[700px] rounded  rounded text-gray-300 bg-white items-start mt-2 space-y-2 text-sm ">
                   <li><a href="#">About</a></li>
                   <li><a href="#">Contact</a></li>
                   <li><a href="#">FAQ</a></li>
                 </ul>
               )}
             </li>
-            <li>
+            <li className="py-2 m-0">
               <button 
                 onClick={() => toggleDropdown('dashboard')}
-                className="hover:text-gray-300 w-full text-left"
+                className="flex justify-center hover:text-gray-300 w-full text-left"
               >
                 Dashboard ▾
               </button>
               {openDropdown === 'dashboard' && (
-                <ul className="ml-4 mt-2 space-y-2 text-sm">
+                <ul className="flex flex-col min-w-[420px] md:min-w-[700px] rounded text-gray-300 bg-white items-start mt-2 space-y-2 text-sm">
                   <li>
-                    <Link className='text-white' to='/dashboard/'>
+                    <Link to='/dashboard/'>
                     Dashboard
                     </Link>
                   </li>
-                  <li className=''>
-                    <Link className='text-white' to='/posts/'>
+                  <li >
+                    <Link to='/posts/'>
                     Posts
                     </Link>
                   </li>
-                  <li className=''>
-                  <Link className='text-white' to='/add-post/'>
+                  <li >
+                  <Link to='/add-post/'>
                     Add Post
                   </Link>
                   </li>
-                  <li className=''>
-                    <Link className='text-white' to='/comments/'>
+                  <li>
+                    <Link to='/comments/'>
                       Comments
                     </Link>
                   </li>
-                  <li className=''>
-                    <Link className='text-white' to='/notifications/'>
+                  <li>
+                    <Link to='/notifications/'>
                       Notifications
                     </Link>
                   </li>
-                  <li className=''>
-                    <Link className='text-white' to='/profile/'>
+                  <li>
+                    <Link to='/profile/'>
                       Profile
                     </Link></li>
                 </ul>
               )}
             </li>
-            <li><Link to="/register/"
-              className="p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none"
+            <li className="py-2 m-0">
+              <Link to="/register/"
+              className="p-2 mb-0 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none"
               >
               Register
               </Link>
             </li>
-            <li>
+            <li className="py-2 m-0">
               <Link to='/login/' 
-              className='p-2 inline-flex items-center bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
               Login 
               </Link>
             </li>
