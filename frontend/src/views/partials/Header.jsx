@@ -52,12 +52,12 @@ const Header = () => {
           <ul className='flex items-center justify-center space-x-3 nowrap h-full'>
             <li>
               <Link to='/'
-              className='font-semibold no-underline text-white focus:outline-none hover:text-gray-300'>
+              className='font-semibold no-underline text-white focus:outline-none '>
               Home
               </Link>
             </li>
             <li> 
-              <Link className='font-semibold no-underline text-white hover:text-black focus:outline-none' 
+              <Link className='font-semibold no-underline text-white focus:outline-none' 
               to='/category/'>
                   Category
               </Link>
@@ -66,7 +66,7 @@ const Header = () => {
             <li className='relative'>
               <button 
                 onClick={() => toggleDropdown('pages')}
-                className='font-semibold flex items-center hover:text-gray-300 focus:outline-none'
+                className='font-semibold hover:text-gray-300 font-semibold flex items-center focus:outline-none'
               >
                 Pages <IoMdArrowDropdown />
 
@@ -132,14 +132,14 @@ const Header = () => {
             </li>
             <li>
               <Link to='/register/'
-              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none'
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none'
               >
               Register
               </Link>
             </li>
             <li>
               <Link to='/login/' 
-              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none' href='dashboard.html'>
               Login 
               </Link>
             </li>
@@ -170,13 +170,13 @@ const Header = () => {
           <ul className='flex flex-col items-center justify-center'>
             <li className='py-2 m-0'>
               <Link to='/'
-              className='font-semibold no-underline text-white hover:text-gray-300 focus:outline-none'>
+              className='font-semibold no-underline text-white focus:outline-none'>
               Home
               </Link>
             </li>
             <li className='font-semibold py-2 m-0'> 
               <Link to='/category/'
-              className='no-underline text-white hover:text-black focus:outline-none'>
+              className='no-underline text-white focus:outline-none'>
               Category
               </Link>
             </li>
@@ -247,14 +247,14 @@ const Header = () => {
             </li>
             <li className='py-2 m-0'>
               <Link to='/register/'
-              className='p-2 mb-0 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none'
+              className='p-2 mb-0 inline-flex items-center text-white bg-green-600 rounded hover:bg-green-700'
               >
               Register
               </Link>
             </li>
             <li className='py-2 m-0'>
               <Link to='/login/' 
-              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 hover:bg-green-600 focus:outline-none' href='dashboard.html'>
               Login 
               </Link>
             </li>
