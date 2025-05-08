@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+a:link {
+    text-decoration: none;
+}
+
+ul{
+    margin-bottom: 0;
+    padding: 0;
+}
+
+button{
+    padding: 4px 0px;
+    margin:0px;
+}
+
