@@ -70,7 +70,7 @@ const PostCard = ({ post }) => {
 
           {/* Details List: Use Flexbox for list items for better alignment */}
           {/* Added mt-auto to push this list to the bottom if card-body is flex column */}
-          <ul className='list-style-none mt-3 p-0 mt-auto' style={{ listStyle: 'none' }}> {/* p-0 removes default ul padding, mt-auto pushes it down */}
+          <ul className='list-style-none p-0 mt-auto' style={{ listStyle: 'none' }}> {/* p-0 removes default ul padding, mt-auto pushes it down */}
             {/* Each list item uses flexbox for icon/text alignment */}
             <li className='d-flex align-items-center mt-2'> {/* Added d-flex align-items-center */}
               <i className='fas fa-user me-2' /> {/* Added me-2 margin-right */}
