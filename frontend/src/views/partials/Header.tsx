@@ -1,153 +1,268 @@
-import { Link } from 'react-router-dom'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { IoMenu } from "react-icons/io5";
+import { IoMdArrowDropdown } from "react-icons/io";
 
-function Header () {
+
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
+  const closeDropdown = () => {
+    setOpenDropdown(null);
+  };
+
   return (
-    <header className='navbar-dark bg-dark navbar-sticky header-static'>
-      <nav className='navbar navbar-expand-lg'>
-        <div className='container'>
-          <Link className='navbar-brand' to='/'>
+    <header className="bg-neutral-800 text-white z-50 relative flex items-center ">
+      <div className="py-2 lg:py-0 container flex flex-nowrap justify-between items-center w-full">      {/* Logo */}
+      <div className="flex items-center">
+        <div className="mr-5 w-48">
+          <Link to='/'>
             <img
-              className='navbar-brand-item dark-mode-item'
-              src='https://i.postimg.cc/ZRNC1mhM/my-main-logo.png'
-              style={{ width: '200px' }}
-              alt='logo'
+              src="https://i.postimg.cc/ZRNC1mhM/my-main-logo.png"
+              alt="logo"
             />
           </Link>
-          <button
-            className='navbar-toggler ms-auto'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#navbarCollapse'
-            aria-controls='navbarCollapse'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span className='h6 d-none d-sm-inline-block text-white'>Menu</span>
-            <span className='navbar-toggler-icon' />
-          </button>
-          <div className='navbar-collapse' id='navbarCollapse'>
-            <div className='nav mt-3 mt-lg-0 px-4 flex-nowrap align-items-center'>
-              <div className='nav-item w-100'>
-                <form className='rounded position-relative'>
-                  <input
-                    className='form-control pe-5 bg-light'
-                    type='search'
-                    placeholder='Search Articles'
-                    aria-label='Search'
-                  />
-                  <Link
-                    to='/search/'
-                    className='btn bg-transparent border-0 px-2 py-0 position-absolute top-50 end-0 translate-middle-y'
-                    type='submit'
-                  >
-                    <i className='bi bi-search fs-5'> </i>
-                  </Link>
-                </form>
-              </div>
-            </div>
-            <ul className='navbar-nav navbar-nav-scroll ms-auto flex '>
-              <li className='nav-item dropdown'>
-                <Link className='nav-link active' to='/'>
-                  Home
-                </Link>
-              </li>
-              <li className='nav-item dropdown'>
-                <Link className='nav-link active' to='/category/'>
+      </div>
+      {/* Search Bar */}
+      <div className='hidden lg:block search-input w-full md:w-auto  flex-grow md:flex-grow-0 md:mx-4'>
+      <form>
+          <input
+          className='w-full md:w-60 px-4 rounded-md pt-2 pb-2 bg-white text-black focus:outline-none'
+          type="search"
+          placeholder="Search Articles"
+          aria-label="Search"
+          />
+            <Link
+            to='/search/'
+            className=''
+            type="submit"
+            >
+            </Link>
+        </form>
+      </div>
+      </div>
+       
+        <nav className='hidden lg:flex items-center flex justify-center'>
+          <ul className='flex items-center justify-center space-x-3 nowrap h-full'>
+            <li>
+              <Link to='/'
+              className='font-semibold no-underline text-white focus:outline-none '>
+              Home
+              </Link>
+            </li>
+            <li> 
+              <Link className='font-semibold no-underline text-white focus:outline-none' 
+              to='/category/'>
                   Category
-                </Link>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle active'
-                  href='#'
-                  id='pagesMenu'
-                  data-bs-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Pages
-                </a>
-                <ul className='dropdown-menu' aria-labelledby='pagesMenu'>
-                  <li>
-                    <Link className='dropdown-item' to='/about/'>
-                      <i className='bi bi-person-lines-fill' /> About
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/contact/'>
-                      <i className='bi bi-telephone-fill' /> Contact
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className='nav-item dropdown'>
-                <a
-                  className='nav-link dropdown-toggle active'
-                  href='#'
-                  id='pagesMenu'
-                  data-bs-toggle='dropdown'
-                  aria-haspopup='true'
-                  aria-expanded='false'
-                >
-                  Dashboard
-                </a>
-                <ul className='dropdown-menu' aria-labelledby='pagesMenu'>
-                  <li>
-                    <Link className='dropdown-item' to='/dashboard/'>
-                      <i className='fas fa-user' /> Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/posts/'>
-                      <i className='bi bi-grid-fill' /> Posts
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/add-post/'>
-                      <i className='fas fa-plus-circle' /> Add Post
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/comments/'>
-                      <i className='bi bi-chat-left-quote-fill' /> Comments
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/notifications/'>
-                      <i className='fas fa-bell' /> Notifications
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className='dropdown-item' to='/profile/'>
-                      <i className='fas fa-user-gear' /> Profile
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='/register/'
-                  className='btn btn-success'
-                  href='dashboard.html'
-                >
-                  Register <i className='fas fa-user-plus' />
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  to='/login/'
-                  className='btn btn-success ms-2'
-                  href='dashboard.html'
-                >
-                  Login <i className='fas fa-sign-in-alt' />
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-  )
-}
+              </Link>
+            </li>
+            {/* Pages Dropdown */}
+            <li className='relative'>
+              <button 
+                onClick={() => toggleDropdown('pages')}
+                className='font-semibold hover:text-gray-300 font-semibold flex items-center focus:outline-none'
+              >
+                Pages <IoMdArrowDropdown />
 
-export default Header
+              </button>
+              {openDropdown === 'pages' && (
+                <ul onMouseLeave={closeDropdown} className='absolute text-left py-2 !pl-2 bg-white rounded shadow-md mt-2 w-30'>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/about/'>
+                      About
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                  <Link className='text-black' to='/contact/'>
+                      Contact
+                    </Link>
+                  </li>
+                  <li><a href='#'>FAQ</a></li>
+                </ul>
+              )}
+            </li>
+            {/* Dashboard Dropdown */}
+            <li className="relative">
+              <button 
+                onClick={() => toggleDropdown('dashboard')}
+                className='font-semibold flex items-center hover:text-gray-300 focus:outline-none'
+              >
+                Dashboard <IoMdArrowDropdown />
+
+              </button>
+              {openDropdown === 'dashboard' && (
+                <ul onMouseLeave={closeDropdown} className='!pl-2 py-2 absolute text-left bg-white text-black rounded shadow-md mt-2 w-40'>
+                  <li className='pb-2'> 
+                  <Link className='text-black' to='/dashboard/'>
+                   Dashboard
+                  </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/posts/'>
+                    Posts
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                  <Link className='text-black' to='/add-post/'>
+                    Add Post
+                  </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/comments/'>
+                      Comments
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/notifications/'>
+                      Notifications
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/profile/'>
+                      Profile
+                    </Link></li>
+                </ul>
+              )}
+            </li>
+            <li>
+              <Link to='/register/'
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none'
+              >
+              Register
+              </Link>
+            </li>
+            <li>
+              <Link to='/login/' 
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none' href='dashboard.html'>
+              Login 
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        {/* Mobile menu button */}
+        <div className='lg:hidden flex items-center justify-center'>
+          <button onClick={toggleMenu} className='w-full px-2 py-1 focus:outline-none border rounded'>
+          <IoMenu  size={30}/>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {menuOpen && (
+        <div className='lg:hidden menu-open bg-neutral-800 absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300'>
+           {/* Search Input */}
+    <div className='w-full pt-2 px-4 flex justify-center'>
+      <form className='w-full flex justify-center'>
+        <input
+          className='w-[80%] max-w-[500px] px-4 py-2 rounded-md bg-white text-black focus:outline-none'
+          type="search"
+          placeholder="Search Articles"
+          aria-label="Search"
+        />
+      </form>
+    </div>
+          <ul className='flex flex-col items-center justify-center'>
+            <li className='py-2 m-0'>
+              <Link to='/'
+              className='font-semibold no-underline text-white focus:outline-none'>
+              Home
+              </Link>
+            </li>
+            <li className='font-semibold py-2 m-0'> 
+              <Link to='/category/'
+              className='no-underline text-white focus:outline-none'>
+              Category
+              </Link>
+            </li>
+            <li className='py-2 m-0 w-full flex flex-col justify-center items-center'>
+              <button 
+                onClick={() => toggleDropdown('pages')}
+                className='font-semibold hover:text-gray-300 w-full'
+              >
+                Pages ▾
+              </button>
+              {openDropdown === 'pages' && (
+                <ul className='!pl-3 py-2 flex flex-col w-[85%] max-w-[550px] rounded text-gray-300 bg-white items-start mt-2'>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/about/'>
+                      About
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                  <Link className='text-black' to='/contact/'>
+                      Contact
+                    </Link>
+                  </li>
+                  <li><a href='#'>FAQ</a></li>
+                </ul>
+              )}
+            </li>
+            <li className='py-2 m-0 flex w-full flex-col items-center justify-center'>
+              <button 
+                onClick={() => toggleDropdown('dashboard')}
+                className='font-semibold flex justify-center hover:text-gray-300 w-full text-left'
+              >
+                Dashboard ▾
+              </button>
+              {openDropdown === 'dashboard' && (
+                <ul className='!pl-3 py-2 flex flex-col w-[85%] max-w-[550px] rounded text-gray-300 bg-white items-start mt-2 py-2'>
+                 <li className='pb-2 hover:text-gray-300'> 
+                  <Link className='text-black' to='/dashboard/'>
+                   Dashboard
+                  </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/posts/'>
+                    Posts
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                  <Link className='text-black' to='/add-post/'>
+                    Add Post
+                  </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/comments/'>
+                      Comments
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/notifications/'>
+                      Notifications
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className='text-black' to='/profile/'>
+                      Profile
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+            <li className='py-2 m-0'>
+              <Link to='/register/'
+              className='p-2 mb-0 inline-flex items-center text-white bg-green-600 rounded hover:bg-green-700'
+              >
+              Register
+              </Link>
+            </li>
+            <li className='py-2 m-0'>
+              <Link to='/login/' 
+              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+              Login 
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
