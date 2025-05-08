@@ -5,6 +5,7 @@ import useHomePage from '../../../hooks/useHomePage'
 // import apiInstance from '../../utils/axios'
 // import Toast from '../../plugin/Toast'
 import './Homepage.css'
+import { Post } from '../../../types/posts'
 
 function Index () {
 const {
@@ -15,6 +16,14 @@ const {
     pageNumbers,
     paginate,
     handleNextPage
+}:{
+    currentPosts: Post[]
+    totalPages: number
+    currentPage: number
+    handlePrevPage: () => void
+    pageNumbers: number[]
+    paginate: (pageNumber: number) => void
+    handleNextPage: () => void
 } = useHomePage()
 
   return (
@@ -37,7 +46,7 @@ const {
             {/* Renderizar solo los posts de la página actual */}
             {currentPosts.length > 0
               ? (
-                  currentPosts.map((post) => (
+                  currentPosts.map((post: Post) => (
                     <PostCard
                       key={post?.id} // Asegúrate que post.id sea único
                       post={post}
