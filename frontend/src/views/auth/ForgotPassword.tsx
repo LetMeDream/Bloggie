@@ -1,7 +1,5 @@
-import React from 'react'
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
-import { Link } from 'react-router-dom'
 
 function ForgotPassword () {
   return (
@@ -17,9 +15,9 @@ function ForgotPassword () {
               <div className='card-body p-6'>
                 <div className='mb-4'>
                   <h1 className='mb-1 fw-bold'>Forgot Password</h1>
-                  <span>Let's help you get back into your account</span>
+                  <span>Let&apos;`s help you get back into your account</span>
                 </div>
-                <form className='needs-validation' noValidate=''>
+                <form className='needs-validation' noValidate={undefined}>
                   <div className='mb-3'>
                     <label htmlFor='email' className='form-label'>
                       Email Address
@@ -30,7 +28,7 @@ function ForgotPassword () {
                       className='form-control'
                       name='email'
                       placeholder='johndoe@gmail.com'
-                      required=''
+                      required={undefined}
                     />
                   </div>
 

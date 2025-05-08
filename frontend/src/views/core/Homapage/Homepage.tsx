@@ -5,6 +5,7 @@ import useHomePage from '../../../hooks/useHomePage'
 // import apiInstance from '../../utils/axios'
 // import Toast from '../../plugin/Toast'
 import './Homepage.css'
+import { Post } from '../../../types/posts'
 
 function Index () {
 const {
@@ -15,6 +16,14 @@ const {
     pageNumbers,
     paginate,
     handleNextPage
+}:{
+    currentPosts: Post[]
+    totalPages: number
+    currentPage: number
+    handlePrevPage: () => void
+    pageNumbers: number[]
+    paginate: (pageNumber: number) => void
+    handleNextPage: () => void
 } = useHomePage()
 
   return (
@@ -37,7 +46,7 @@ const {
             {/* Renderizar solo los posts de la página actual */}
             {currentPosts.length > 0
               ? (
-                  currentPosts.map((post) => (
+                  currentPosts.map((post: Post) => (
                     <PostCard
                       key={post?.id} // Asegúrate que post.id sea único
                       post={post}
@@ -142,7 +151,7 @@ const {
 
                 <div className='mt-2'>
                   <div className='card bg-transparent'>
-                    <img className='card-img' src='https://guardian.ng/wp-content/uploads/2019/03/sport-equipment-e1555707764770.jpeg' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
+                    <img className='card-img' src='' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
                     <div className='d-flex flex-column align-items-center mt-3 pb-2'>
                       <h5 className='mb-0'>Sports</h5>
                       <small>8 Articles</small>
@@ -172,7 +181,7 @@ const {
 
                 <div className='mt-2'>
                   <div className='card bg-transparent'>
-                    <img className='card-img' src='https://insight.ng/wp-content/uploads/2022/01/andrey-suslov-shutterstock-1199480788_w400-3.png' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
+                    <img className='card-img' src='' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
                     <div className='d-flex flex-column align-items-center mt-3 pb-2'>
                       <h5 className='mb-0'>Tech</h5>
                       <small>13 Articles</small>
