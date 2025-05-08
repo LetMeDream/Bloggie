@@ -1,4 +1,3 @@
-import React from 'react'
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
@@ -25,7 +24,7 @@ function Register () {
                   </span>
                 </div>
                 {/* Form */}
-                <form className='needs-validation' noValidate=''>
+                <form className='needs-validation' noValidate={undefined}>
                   {/* Username */}
                   <div className='mb-3'>
                     <label htmlFor='email' className='form-label'>
@@ -37,7 +36,7 @@ function Register () {
                       className='form-control'
                       name='full_name'
                       placeholder='John Doe'
-                      required=''
+                      required={undefined}
                     />
                   </div>
                   <div className='mb-3'>
@@ -50,7 +49,7 @@ function Register () {
                       className='form-control'
                       name='email'
                       placeholder='johndoe@gmail.com'
-                      required=''
+                      required={undefined}
                     />
                   </div>
 
@@ -65,7 +64,7 @@ function Register () {
                       className='form-control'
                       name='password'
                       placeholder='**************'
-                      required=''
+                      required={undefined}
                     />
                   </div>
                   <div className='mb-3'>
@@ -78,7 +77,7 @@ function Register () {
                       className='form-control'
                       name='password'
                       placeholder='**************'
-                      required=''
+                      required={undefined}
                     />
                   </div>
                   <div>

@@ -1,7 +1,5 @@
-import React from 'react'
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
-import { Link } from 'react-router-dom'
 
 function Category () {
   return (
@@ -15,8 +13,15 @@ function Category () {
                 <img src='assets/images/adv-3.png' alt='' />
               </a>
               <h2 className='text-start d-block mt-1'>
-                <i className='bi bi-grid-fill' /> LifeStyle (16 Articles)
+                <i className='fas fa-search' /> Search All Articles
               </h2>
+              <input
+                type='text'
+                className='form-control'
+                placeholder='Search All Articles'
+                name=''
+                id=''
+              />
             </div>
           </div>
         </div>
