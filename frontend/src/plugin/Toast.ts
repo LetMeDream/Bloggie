@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2'
+import { SweetAlertIcon } from 'sweetalert2'
 
-function Toast (icon, title, text) {
+function Toast ( icon?: SweetAlertIcon | undefined, title?: string | undefined, text?: string | undefined) {
   const Toast = Swal.mixin({
     toast: true,
     position: 'top',
