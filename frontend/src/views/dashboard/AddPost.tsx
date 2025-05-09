@@ -113,8 +113,8 @@ function AddPost () {
                           name=''
                           className='form-control'
                           id=''
-                          cols='30'
-                          rows='10'
+                          cols={30}
+                          rows={10}
                         />
                         <small>A brief summary of your posts.</small>
                       </div>
