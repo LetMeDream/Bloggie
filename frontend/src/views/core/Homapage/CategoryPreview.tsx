@@ -3,24 +3,35 @@ interface Category {
     title: string;
     image: string;
   }
-  
-  const CategoryPreview = ({ category }: { category: Category[] }) => {
-    return (
-        <>
-   {/* Aquí podrías mapear sobre el estado 'category' si quisieras hacerlo dinámico */}
-   {category.map((cat) => ( 
-    <div key={cat.id} className='mt-2 mr-3'>
-      <div className='card bg-transparent shadow-md rounded-lg flex flex-col justify-center align-center'>
-        <img className='card-img p-2 mx-auto' src={cat.image} style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt={cat.title} />
-        <div className='flex flex-col items-center mt-3 pb-2 px-2'>
-          <h5 className='mb-0'>{cat.title}</h5>
-          <small>1 article</small>
-        </div>
-      </div>
-    </div>
-    ))}
-        </>
-  )
-}
 
-export default CategoryPreview
+  const CategoryPreview = ({ category }: { category: Category[] }) => {
+  return (
+    <div className="w-full flex flex-row md:justify-start lg:justify-start flex-wrap gap-4 mt-3 mb-2 sm:flex-col items-center justify-center">
+      {category.map((cat) => (
+        <div
+          key={cat.id}
+          className="bg-transparent w-[215px] h-[190px] shadow-md rounded-lg flex-shrink flex flex-col items-center justify-between"
+        >
+          <div className="w-full min-w-[50%] h-[60%] rounded-t-lg">
+            <img
+              className="w-full h-full rounded-t-lg object-cover"
+              src={cat.image}
+              alt={cat.title}
+            />
+          </div>
+           {/* Contenido */}
+           <div className="w-full h-[40%] flex flex-col items-center justify-center bg-white rounded-b-lg">
+            <h5 className="text-center mt-3 mb-0">
+              {cat.title}
+            </h5>
+            <p className="text-center ">
+              1 article
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default CategoryPreview;
