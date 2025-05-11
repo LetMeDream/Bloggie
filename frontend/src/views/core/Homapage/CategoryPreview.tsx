@@ -10,7 +10,7 @@ interface Category {
       {category.map((cat) => (
         <div
           key={cat.id}
-          className="w-[175px] cursor-pointer h-[160px] border border-color-gray rounded-lg flex flex-col items-center bg-transparent justify-between transition-shadow duration-300 hover:shadow-lg"
+          className="w-[175px] cursor-pointer h-[160px] border border-color-gray rounded-lg flex flex-col items-center bg-transparent justify-between transition-shadow duration-300 hover:shadow-sm delay-50"
         >
           <div className="w-full rounded-t-lg">
             <img
