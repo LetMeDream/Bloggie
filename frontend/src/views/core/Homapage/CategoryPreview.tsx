@@ -6,7 +6,7 @@ interface Category {
 
   const CategoryPreview = ({ category }: { category: Category[] }) => {
   return (
-    <div className="w-full px-1 flex flex-row md:justify-start md:mx-auto content-center mx-auto lg:justify-start flex-wrap gap-3 mt-3 mb-2 sm:flex-col items-center justify-center">
+    <div className="w-full flex flex-row md:justify-start content-center mx-auto lg:justify-start flex-wrap gap-3 mt-3 mb-2 sm:flex-col items-center justify-center">
       {category.map((cat) => (
         <div
           key={cat.id}
