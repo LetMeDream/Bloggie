@@ -7,7 +7,7 @@ interface Category {
 
   const CategoryPreview = ({ category }: { category: Category[] }) => {
   return (
-    <div className="w-full grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))] md:place-items-center lg:place-items-center gap-3 md:gap-4 lg:gap-4">
+    <div className="w-full grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))] pb-4 pt-2 md:place-items-center lg:place-items-center gap-3 md:gap-4 lg:gap-4">
       {category.map((cat) => (
         <div
           key={cat.id}
