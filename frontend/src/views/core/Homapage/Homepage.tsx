@@ -6,28 +6,29 @@ import useHomePage from '../../../hooks/useHomePage'
 // import Toast from '../../plugin/Toast'
 import './Homepage.css'
 import { Post } from '../../../types/posts'
+import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
 
 function Index () {
 const {
-    currentPosts,
-    totalPages,
-    currentPage,
-    handlePrevPage,
-    pageNumbers,
-    paginate,
-    handleNextPage,
-    category
-}:{
-    currentPosts: Post[]
-    category: { id: number; post_count: number; title: string; image: string;}[];
-    totalPages: number
-    currentPage: number
-    handlePrevPage: () => void
-    pageNumbers: number[]
-    paginate: (pageNumber: number) => void
-    handleNextPage: () => void
-} = useHomePage()
+      currentPosts,
+      totalPages,
+      currentPage,
+      handlePrevPage,
+      pageNumbers,
+      paginate,
+      handleNextPage,
+      category
+  }:{
+      currentPosts: Post[]
+      category: CategoryType[];
+      totalPages: number
+      currentPage: number
+      handlePrevPage: () => void
+      pageNumbers: number[]
+      paginate: (pageNumber: number) => void
+      handleNextPage: () => void
+  } = useHomePage()
 
   return (
     <div>
