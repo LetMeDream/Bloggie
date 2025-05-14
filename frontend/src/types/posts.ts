@@ -12,4 +12,5 @@ export interface CategoryType {
   id: number;
   image: string;
   title: string;
+  post_count: number;
 }
