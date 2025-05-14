@@ -6,28 +6,23 @@ interface Category {
 
   const CategoryPreview = ({ category }: { category: Category[] }) => {
   return (
-    <div className="w-full flex flex-row md:justify-start content-center mx-auto lg:justify-start flex-wrap gap-3 mt-3 mb-2 sm:flex-col items-center justify-center">
+    <div className="w-full grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))] grid md:place-items-center lg:place-items-center gap-3 md:gap-4 lg:gap-4">
       {category.map((cat) => (
         <div
           key={cat.id}
-          className="w-[172px] md:w-[160px] lg:w-[172px] cursor-pointer h-[165px] border border-color-gray rounded-lg flex flex-col items-center bg-transparent justify-between transition-shadow duration-300 hover:shadow-sm delay-50"
-        >
-          <div className="w-full rounded-t-lg">
-            <img
-              className="w-full h-[90px] rounded-t-lg object-cover"
+          className="sm:w-[160px] h-40 cursor-pointer border border-color-gray rounded-lg flex flex-col items-center bg-transparent justify-between transition-shadow duration-300 hover:shadow-sm delay-50"
+        >     <img
+              className="w-full h-20 rounded-t-lg mb-1 object-cover"
               src={cat.image}
               alt={cat.title}
             />
-          </div>
            {/* Contenido */}
-            <div className="w-full h-[40%] flex flex-col items-center justify-center bg-white rounded-b-lg leading-tight">
-             <p className="text-center pt-1 leading-tight font-sans mb-0 text-base px-2 font-bold text-gray-800">
+             <p className="text-center leading-tight font-sans mb-0 text-base px-2 font-bold text-gray-800">
               {cat.title}
              </p>
              <p className="text-center ">
               1 article
              </p>
-            </div>
         </div>
       ))}
     </div>
