@@ -6,7 +6,7 @@ import useHomePage from '../../../hooks/useHomePage'
 // import Toast from '../../plugin/Toast'
 import './Homepage.css'
 import { Post } from '../../../types/posts'
-import CategoryPreview from './CategoryPreview'
+import Categories from '../../partials/Categories'
 
 function Index () {
 const {
@@ -107,27 +107,8 @@ const {
           )}
         </div>
       </section>
-      {/* --- Sección de Categorías (sin cambios en la lógica, solo mantenida) --- */}
-        <div className='container'>
-          <div className='row g-0'>
-            <div className='col-12 '>
-              <div className='mb-4'>
-                <h2>Categories</h2>
-              </div>
-              <div className='flex flex-wrap mb-4'>
-              {category?.length > 0 ? (
-              <CategoryPreview category={category || []} />
-               ) : (
-              <p>No categories found...</p>
-               )}          
-                 </div>
-            </div>
-          </div>
-        </div>
-      {/* --- Sección Latest Articles (Removida ya que ahora se pagina la sección anterior) --- */}
-      {/* Si quisieras mantener esta sección separada, necesitarías otra llamada a la API
-             o filtrar/ordenar los 'posts' de manera diferente aquí. Por simplicidad,
-             asumimos que la paginación aplica a la lista principal de posts. */}
+
+      <Categories category={category} />
 
       <Footer />
     </div>
