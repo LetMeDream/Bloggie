@@ -20,7 +20,7 @@ const {
     category
 }:{
     currentPosts: Post[]
-    category: { id: number; title: string; image: string;}[];
+    category: { id: number; post_count: number; title: string; image: string;}[];
     totalPages: number
     currentPage: number
     handlePrevPage: () => void

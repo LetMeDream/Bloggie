@@ -1,12 +1,13 @@
 interface Category {
     id: number;
+    post_count: number;
     title: string;
     image: string;
   }
 
   const CategoryPreview = ({ category }: { category: Category[] }) => {
   return (
-    <div className="w-full grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))] grid md:place-items-center lg:place-items-center gap-3 md:gap-4 lg:gap-4">
+    <div className="w-full grid grid-cols-[repeat(auto-fit,_minmax(160px,_1fr))] md:place-items-center lg:place-items-center gap-3 md:gap-4 lg:gap-4">
       {category.map((cat) => (
         <div
           key={cat.id}
@@ -20,8 +21,8 @@ interface Category {
              <p className="text-center leading-tight font-sans mb-0 text-base px-2 font-bold text-gray-800">
               {cat.title}
              </p>
-             <p className="text-center ">
-              1 article
+             <p className="text-center text-zinc-800">
+              {cat.post_count} articles
              </p>
         </div>
       ))}
