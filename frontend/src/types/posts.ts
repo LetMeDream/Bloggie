@@ -7,3 +7,9 @@ export interface Post {
   date?: string;
   view?: number;
 }
+
+export interface CategoryType {
+  id: number;
+  image: string;
+  title: string;
+}
