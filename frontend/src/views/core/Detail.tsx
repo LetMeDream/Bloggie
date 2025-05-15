@@ -1,8 +1,10 @@
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
+import useDetail from '../../hooks/useDetail';
 
 function Detail () {
+   useDetail();
   return (
     <>
       <Header />

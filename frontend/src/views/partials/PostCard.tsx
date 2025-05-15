@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom';
 import Moment from '../../plugin/Moment';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react'; // Import useEffect
-
-const PostCard = ({ post }) => {
-  const PLACEHOLDER_URL = 'https://placehold.co/600x400?text=Image+Not+Found&font=roboto';
+import { Post } from '../../types/posts';
+const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https://placehold.co/600x400?text=Image+Not+Found&font=roboto';
 
   // Use state to manage the image source, initializing with post image or placeholder
   const [currentSrc, setCurrentSrc] = useState(post?.image || PLACEHOLDER_URL);
@@ -48,7 +47,7 @@ const PostCard = ({ post }) => {
         <div className='card-body px-3 pt-3 d-flex flex-column flex-grow-1'> {/* Added d-flex flex-column flex-grow-1 */}
           <h4 className='card-title mb-2'> {/* Added mb-2 margin-bottom */}
             <Link
-              to={post?.link || '#'} // TODO: Make this dynamic based on post, use a fallback
+              to={`/:${post.slug}/`} // TODO: Make this dynamic based on post, use a fallback
               className='btn-link text-reset stretched-link fw-bold text-decoration-none text-truncate d-block' // Added text-truncate d-block
               style={{
                 maxWidth: '100%' // Ensure text-truncate works within container
@@ -79,7 +78,7 @@ const PostCard = ({ post }) => {
                  {post?.user || 'Usuario Desconocido'}
               </a>
             </li>
-            <li className='d-flex align-items-center mt-2'> {/* Added d-flex align-items-center */}
+            <li className='d-flex align-items-center mt-yh2'> {/* Added d-flex align-items-center */}
               <i className='fas fa-calendar me-2' /> {/* Added me-2 margin-right */}
               {/* Asegúrate de que Moment pueda manejar valores nulos o no válidos */}
               <span>{Moment(post?.date) || 'Fecha no disponible'}</span> {/* Wrap text in span for consistent alignment */}
