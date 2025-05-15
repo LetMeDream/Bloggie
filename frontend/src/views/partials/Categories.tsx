@@ -8,7 +8,7 @@ const Categories = ({category}: {
     <section className='container '>
         <div className='row g-0'>
           <div className='col-12 '>
-            <div className='mb-4'>
+            <div className='mb-4 pt-4 '>
               <h2>Categories</h2>
             </div>
             <div className='flex flex-wrap mb-4'>
