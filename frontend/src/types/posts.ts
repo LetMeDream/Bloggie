@@ -6,6 +6,7 @@ export interface Post {
   user?: string;
   date?: string;
   view?: number;
+  slug?: string;
 }
 
 export interface CategoryType {
