@@ -1,17 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-// Define la interfaz para los datos del post
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  author: string;
-  date: string;
-  image: string;
-}
-
-function useSlug() {
+function useDetail() {
   const { slug } = useParams<{ slug: string }>(); 
   const [currentPost, setCurrentPost] = useState([]);
   useEffect(() => {
@@ -36,4 +26,4 @@ function useSlug() {
 }, [currentPost]);
 }
 
-export default useSlug;
+export default useDetail;
