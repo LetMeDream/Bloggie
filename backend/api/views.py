@@ -105,11 +105,11 @@ class PostBySlugView(generics.ListAPIView):
 
   def get_queryset(self):
     post_slug = self.kwargs['post_slug']
-    post = Post.objects.get(slug=post_slug, status='Active')
+    post = Post.objects.get(slug=post_slug, status__iexact='Active')
     post.view += 1
     post.save()
     # Return a queryset instead of a single instance
-    return Post.objects.filter(slug=post_slug, status='Active')
+    return Post.objects.filter(slug=post_slug, status__iexact='Active')
 
 # Like a Post
 class LikePostView(APIView):
