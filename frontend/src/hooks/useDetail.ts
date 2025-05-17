@@ -1,13 +1,39 @@
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
+// Define la interfaz para los datos del post
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+  image: string;
+}
 
 function useSlug() {
-  const { slug } = useParams<{ slug: string }>();
-
+  const { slug } = useParams<{ slug: string }>(); 
+  const [currentPost, setCurrentPost] = useState([]);
   useEffect(() => {
-    console.log('Parámetro capturado:', slug);
-  }, [slug]);
+    const fetchDetail = async (apiurl: string) => {
+      try {
+        const response = await fetch(apiurl); 
+        const data = await response.json(); 
+        setCurrentPost(data);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      } 
+    };
+      const apiurl = `http://localhost:8000/api/post/detail/${slug}`;
+      fetchDetail(apiurl); 
+    
+  }, [slug]); 
 
+ useEffect(() => {
+  if (currentPost.length > 0) {
+    console.log('Datos del post:', currentPost);
+  }
+}, [currentPost]);
 }
 
 export default useSlug;

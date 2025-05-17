@@ -47,7 +47,7 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
         <div className='card-body px-3 pt-3 d-flex flex-column flex-grow-1'> {/* Added d-flex flex-column flex-grow-1 */}
           <h4 className='card-title mb-2'> {/* Added mb-2 margin-bottom */}
             <Link
-              to={`/:${post.slug}/`} // TODO: Make this dynamic based on post, use a fallback
+              to={`/${post.slug}`} // TODO: Make this dynamic based on post, use a fallback
               className='btn-link text-reset stretched-link fw-bold text-decoration-none text-truncate d-block' // Added text-truncate d-block
               style={{
                 maxWidth: '100%' // Ensure text-truncate works within container
