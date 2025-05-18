@@ -188,6 +188,7 @@ class MinifiedPostSerializer(serializers.ModelSerializer):
         fields = ['title', 'description', 'image', 'status', 'tags', 'category', 'user']
 
 class PostBySlugSerializer(serializers.ModelSerializer):
+  user = MinifiedUserSerializer(read_only=True)  # Adding 'depth' to the 'user' property
   class Meta:
     model = api_models.Post
     fields = '__all__'

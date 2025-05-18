@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
 import { Post } from '../../types/posts';
 function Detail () {
-   const {currentPost}:{currentPost:Post[]} = useDetail();
+  const {currentPost}:{currentPost:Post[]} = useDetail();
   return (
     <>
       <Header />
