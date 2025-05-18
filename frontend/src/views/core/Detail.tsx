@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
 
 function Detail () {
-   useDetail();
+  useDetail();
   return (
     <>
       <Header />
