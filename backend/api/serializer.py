@@ -127,6 +127,8 @@ class ExtendedUserSerializer(serializers.ModelSerializer):
     return response
 
 class CategorySerializer(serializers.ModelSerializer):
+  post_count = serializers.SerializerMethodField()  # Agregar el campo
+  
   class Meta:
     model = api_models.Category
     fields = '__all__'
