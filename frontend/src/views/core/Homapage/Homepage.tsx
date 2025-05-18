@@ -6,25 +6,29 @@ import useHomePage from '../../../hooks/useHomePage'
 // import Toast from '../../plugin/Toast'
 import './Homepage.css'
 import { Post } from '../../../types/posts'
+import { CategoryType } from '../../../types/posts'
+import Categories from '../../partials/Categories'
 
 function Index () {
 const {
-    currentPosts,
-    totalPages,
-    currentPage,
-    handlePrevPage,
-    pageNumbers,
-    paginate,
-    handleNextPage
-}:{
-    currentPosts: Post[]
-    totalPages: number
-    currentPage: number
-    handlePrevPage: () => void
-    pageNumbers: number[]
-    paginate: (pageNumber: number) => void
-    handleNextPage: () => void
-} = useHomePage()
+      currentPosts,
+      totalPages,
+      currentPage,
+      handlePrevPage,
+      pageNumbers,
+      paginate,
+      handleNextPage,
+      category
+  }:{
+      currentPosts: Post[]
+      category: CategoryType[];
+      totalPages: number
+      currentPage: number
+      handlePrevPage: () => void
+      pageNumbers: number[]
+      paginate: (pageNumber: number) => void
+      handleNextPage: () => void
+  } = useHomePage()
 
   return (
     <div>
@@ -105,99 +109,7 @@ const {
         </div>
       </section>
 
-      {/* --- Sección de Categorías (sin cambios en la lógica, solo mantenida) --- */}
-      <section className='bg-light pt-5 pb-5 mb-3 mt-3'>
-        <div className='container'>
-          <div className='row g-0'>
-            <div className='col-12 '>
-              <div className='mb-4'>
-                <h2>Categories</h2>
-              </div>
-              <div className='d-flex flex-wrap justify-content-between'>
-                {/* Aquí podrías mapear sobre el estado 'category' si quisieras hacerlo dinámico */}
-                <div className='mt-2'>
-                  <div className='card bg-transparent'>
-                    <img className='card-img' src='https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/father-son-1.jpg' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
-                    <div className='d-flex flex-column align-items-center mt-3 pb-2'>
-                      <h5 className='mb-0'>Life Style</h5>
-                      <small>3 Articles</small>
-                    </div>
-                  </div>
-                </div>
-                {/* ... otros divs de categoría estáticos ... */}
-                <div className='mt-2'>
-                  <div className='card bg-transparent'>
-                    <img className='card-img' src='https://assets.entrepreneur.com/content/3x2/2000/1599591949-GettyImages-1174414266.jpg' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
-                    <div className='d-flex flex-column align-items-center mt-3 pb-2'>
-                      <h5 className='mb-0'>Entertainment</h5>
-                      <small>1 Articles</small>
-                    </div>
-                  </div>
-                </div>
-                <div className='mt-2'>
-                  <div className='card bg-transparent'>
-                    <img
-                      className='card-img'
-                      src='https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960'
-                      style={{ width: '150px', height: '80px', objectFit: 'cover' }}
-                      alt='card image'
-                    />
-                    <div className='d-flex flex-column align-items-center mt-3 pb-2'>
-                      <h5 className='mb-0'>Cars</h5>
-                      <small>2 Articles</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='mt-2'>
-                  <div className='card bg-transparent'>
-                    <img className='card-img' src='' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
-                    <div className='d-flex flex-column align-items-center mt-3 pb-2'>
-                      <h5 className='mb-0'>Sports</h5>
-                      <small>8 Articles</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='mt-2'>
-                  <div className='card bg-transparent'>
-                    <img className='card-img' src='https://aliviohealth.com/wp-content/uploads/2022/07/Managing-Mental-Health-During-COVID-19.jpg' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
-                    <div className='d-flex flex-column align-items-center mt-3 pb-2'>
-                      <h5 className='mb-0'>Health</h5>
-                      <small>7 Articles</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='mt-2'>
-                  <div className='card bg-transparent'>
-                    {/* Imagen comentada original */}
-                    <div className='d-flex flex-column align-items-center mt-3 pb-2'>
-                      <h5 className='mb-0'>Fashion</h5>
-                      <small>4 Articles</small>
-                    </div>
-                  </div>
-                </div>
-
-                <div className='mt-2'>
-                  <div className='card bg-transparent'>
-                    <img className='card-img' src='' style={{ width: '150px', height: '80px', objectFit: 'cover' }} alt='card image' />
-                    <div className='d-flex flex-column align-items-center mt-3 pb-2'>
-                      <h5 className='mb-0'>Tech</h5>
-                      <small>13 Articles</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- Sección Latest Articles (Removida ya que ahora se pagina la sección anterior) --- */}
-      {/* Si quisieras mantener esta sección separada, necesitarías otra llamada a la API
-             o filtrar/ordenar los 'posts' de manera diferente aquí. Por simplicidad,
-             asumimos que la paginación aplica a la lista principal de posts. */}
+      <Categories category={category} />
 
       <Footer />
     </div>
