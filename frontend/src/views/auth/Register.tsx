@@ -1,8 +1,45 @@
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuthStore } from '../../store/auth'
+import { register } from '../../utils/auth'
+import { useState } from 'react'
+import Toast from '../../plugin/Toast'
 
 function Register () {
+  const [registerData, setRegisterData] = useState({ full_name: '', email: '', password: '', password2: '' })
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const handleRegisterDataChanege = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setRegisterData((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoading(true)
+    try {
+      const response = await register(registerData.full_name, registerData.email, registerData.password, registerData.password2)
+      if (response.status === 201) {
+        setIsLoading(false)
+        navigate('/login')
+      } else {
+        let err = Object.values(response?.error)[0]?.toString() || 'Something went wrong'
+        console.log(err)
+        setIsLoading(false)
+        Toast('error', 'Registration failed', err)
+      }
+    } catch (error) {
+      setIsLoading(false)
+      alert('An error occurred. Please try again.')
+    }
+  }
+
+
   return (
     <>
       <Header />
@@ -24,7 +61,12 @@ function Register () {
                   </span>
                 </div>
                 {/* Form */}
-                <form className='needs-validation' noValidate={undefined}>
+                <form 
+                  className='needs-validation' 
+                  noValidate={undefined} 
+                  autoComplete="off"
+                  onSubmit={handleRegister}
+                >
                   {/* Username */}
                   <div className='mb-3'>
                     <label htmlFor='email' className='form-label'>
@@ -37,6 +79,8 @@ function Register () {
                       name='full_name'
                       placeholder='John Doe'
                       required={undefined}
+                      onChange={handleRegisterDataChanege}
+                      autoComplete='off'
                     />
                   </div>
                   <div className='mb-3'>
@@ -50,6 +94,8 @@ function Register () {
                       name='email'
                       placeholder='johndoe@gmail.com'
                       required={undefined}
+                      onChange={handleRegisterDataChanege}
+                      autoComplete='off'
                     />
                   </div>
 
@@ -65,6 +111,8 @@ function Register () {
                       name='password'
                       placeholder='**************'
                       required={undefined}
+                      onChange={handleRegisterDataChanege}
+                      autoComplete='off'
                     />
                   </div>
                   <div className='mb-3'>
@@ -75,9 +123,11 @@ function Register () {
                       type='password'
                       id='password'
                       className='form-control'
-                      name='password'
+                      name='password2'
                       placeholder='**************'
                       required={undefined}
+                      onChange={handleRegisterDataChanege}
+                      autoComplete='off'
                     />
                   </div>
                   <div>
