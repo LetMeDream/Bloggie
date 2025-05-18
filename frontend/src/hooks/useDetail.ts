@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+import { Post } from '../types/posts'; // Asegúrate de que la ruta sea correcta
 function useDetail() {
   const { slug } = useParams<{ slug: string }>(); 
-  const [currentPost, setCurrentPost] = useState([]);
+  const [currentPost, setCurrentPost] = useState<Post[]>([]);
   useEffect(() => {
     const fetchDetail = async (apiurl: string) => {
       try {
@@ -19,11 +19,13 @@ function useDetail() {
     
   }, [slug]); 
 
- useEffect(() => {
-  if (currentPost.length > 0) {
-    console.log('Datos del post:', currentPost);
+  useEffect(() => {
+    if (currentPost.length > 0) {
+      console.log('Datos del post:', currentPost);
+    }
+  }, [currentPost]);
+  return {currentPost}
   }
-}, [currentPost]);
-}
+
 
 export default useDetail;

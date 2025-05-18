@@ -2,9 +2,9 @@ import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
-
+import { Post } from '../../types/posts';
 function Detail () {
-   useDetail();
+   const {currentPost}:{currentPost:Post[]} = useDetail();
   return (
     <>
       <Header />
@@ -17,6 +17,7 @@ function Detail () {
                 Lifestyle
               </a>
               <h1 className='text-center'>
+                {currentPost.length > 0 && currentPost[0].title}
                 10 tell-tale signs you need to get a new startup.
               </h1>
             </div>
