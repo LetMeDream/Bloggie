@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAuthStore } from '../store/auth';
+import { useBloggieStore } from '../store/store';
 
 function useDetail() {
   const { slug } = useParams<{ slug: string }>(); 
   const [currentPost, setCurrentPost] = useState([]);
-  const store = useAuthStore()
+  const store = useBloggieStore()
 
   useEffect(() => {
     const fetchDetail = async (apiurl: string) => {
