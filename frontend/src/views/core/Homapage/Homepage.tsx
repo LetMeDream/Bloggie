@@ -8,9 +8,11 @@ import './Homepage.css'
 import { Post } from '../../../types/posts'
 import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
+import { useBloggieStore } from '../../../store/store'
+import Loader from '../../pages/Loader/Loader' 
 
 function Index () {
-const {
+  const {
       currentPosts,
       totalPages,
       currentPage,
@@ -19,18 +21,19 @@ const {
       paginate,
       handleNextPage,
       category
-  }:{
-      currentPosts: Post[]
-      category: CategoryType[];
-      totalPages: number
-      currentPage: number
-      handlePrevPage: () => void
-      pageNumbers: number[]
-      paginate: (pageNumber: number) => void
-      handleNextPage: () => void
+    }:{
+        currentPosts: Post[]
+        category: CategoryType[];
+        totalPages: number
+        currentPage: number
+        handlePrevPage: () => void
+        pageNumbers: number[]
+        paginate: (pageNumber: number) => void
+        handleNextPage: () => void
   } = useHomePage()
+  const isLoading = useBloggieStore(state => state.loading)
 
-  return (
+  return isLoading ? <Loader/> : (
     <div>
       <Header />
 

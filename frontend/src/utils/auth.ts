@@ -1,5 +1,5 @@
 // Importing the useAuthStore hook from the '../store/auth' file to manage authentication state
-import { useAuthStore } from '../store/auth'
+import { useBloggieStore } from '../store/store'
 
 // Importing the axios library for making HTTP requests
 import axios from './axios'

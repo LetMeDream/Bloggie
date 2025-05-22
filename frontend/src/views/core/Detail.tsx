@@ -2,10 +2,15 @@ import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
+import { useBloggieStore } from '../../store/store';
+import Loader from '../pages/Loader/Loader';
 
 function Detail () {
-  useDetail();
-  return (
+  const isLoading = useBloggieStore(state => state.loading)
+  useDetail()
+  return (isLoading) ? (
+    <Loader />
+  ) : (
     <>
       <Header />
       <section className=' mt-5'>
