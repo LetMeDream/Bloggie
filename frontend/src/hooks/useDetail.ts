@@ -1,12 +1,12 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Post } from '../types/posts'; // Asegúrate de que la ruta sea correctaimport { useAuthStore } from '../store/auth';
-import { useAuthStore } from '../store/auth';
-
+import { useAuthStore } from '../store/auth'; 
 function useDetail() {
   const { slug } = useParams<{ slug: string }>(); 
   const [currentPost, setCurrentPost] = useState<Post[]>([]);
   const store = useAuthStore()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDetail = async (apiurl: string) => {
@@ -17,7 +17,8 @@ function useDetail() {
           const data = await response.json() 
           setCurrentPost(data)
         } catch (err) {
-          console.error('Error fetching data:', err)
+          console.error('Error fetching data:', err)          
+          navigate('/')
         } finally {
           await store.setLoading(false)
         }
@@ -34,7 +35,7 @@ function useDetail() {
       console.log('Datos del post:', currentPost)
     }
   }, [currentPost])
-  return {currentPost}
+  return { currentPost }
   }
 
 
