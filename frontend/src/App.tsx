@@ -19,16 +19,12 @@ import EditPost from './views/dashboard/EditPost'
 import Comments from './views/dashboard/Comments'
 import Notifications from './views/dashboard/Notifications'
 import Profile from './views/dashboard/Profile'
-import { useAuthStore } from './store/auth'
-import Loader from './views/pages/Loader/Loader'
 
 function App () {
-  const isLoading = useAuthStore(state => state.loading)
 
   return (
     <BrowserRouter>
       <MainWrapper>
-        {isLoading && <Loader />} {/* Muestra el Loader condicionalmente */}
 
         <Routes>
           <Route path='/' element={<Homepage />} />
@@ -56,6 +52,7 @@ function App () {
           <Route path='/about/' element={<About />} />
           <Route path='/contact/' element={<Contact />} />
         </Routes>
+
       </MainWrapper>
     </BrowserRouter>
   )
