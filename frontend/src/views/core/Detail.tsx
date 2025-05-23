@@ -1,12 +1,12 @@
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
 import useDetail from '../../hooks/useDetail';
 import { useBloggieStore } from '../../store/store';
 import Loader from '../pages/Loader/Loader';
-
+import { Post } from '../../types/posts'
 function Detail () {
+  const {currentPost}:{currentPost:Post[]} = useDetail()
   const isLoading = useBloggieStore(state => state.loading)
   useDetail()
   return (isLoading) ? (
