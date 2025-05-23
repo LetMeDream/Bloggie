@@ -1,10 +1,12 @@
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import useDetail from '../../hooks/useDetail';
 import { Post } from '../../types/posts';
 function Detail () {
   const {currentPost}:{currentPost:Post[]} = useDetail();
+
   return (
     <>
       <Header />
