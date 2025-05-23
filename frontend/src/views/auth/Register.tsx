@@ -1,7 +1,7 @@
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuthStore } from '../../store/auth'
+import { useBloggieStore } from '../../store/store'
 import { register } from '../../utils/auth'
 import { useState } from 'react'
 import Toast from '../../plugin/Toast'
