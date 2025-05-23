@@ -3,11 +3,15 @@ import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import useDetail from '../../hooks/useDetail';
-import { Post } from '../../types/posts';
-function Detail () {
-  const {currentPost}:{currentPost:Post[]} = useDetail();
+import { useBloggieStore } from '../../store/store';
+import Loader from '../pages/Loader/Loader';
 
-  return (
+function Detail () {
+  const isLoading = useBloggieStore(state => state.loading)
+  useDetail()
+  return (isLoading) ? (
+    <Loader />
+  ) : (
     <>
       <Header />
       <section className=' mt-5'>
