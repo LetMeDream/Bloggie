@@ -15,11 +15,12 @@ function useDetail() {
           const response = await fetch(apiurl) 
           const data = await response.json() 
           setCurrentPost(data)
+          if (data) {
+            await store.setLoading(false)
+          }
         } catch (err) {
           console.error('Error fetching data:', err)          
           navigate('/')
-        } finally {
-          await store.setLoading(false)
         }
       }, 600)
     };
