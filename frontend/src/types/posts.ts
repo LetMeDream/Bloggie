@@ -3,10 +3,13 @@ export interface Post {
   title: string;
   link: string;
   image: string;
-  user?: string;
+  user?: object;
   date?: string;
   view?: number;
   slug?: string;
+  tags?: string;
+  description?: string;
+  likes?: Array;
 }
 
 export interface CategoryType {
