@@ -8,13 +8,16 @@ import { Post } from '../../types/posts'
 function Detail () {
   const {currentPost}:{currentPost:Post[]} = useDetail()
   const isLoading = useBloggieStore(state => state.loading)
-  useDetail()
+                       {currentPost.length > 0 ? console.log(typeof currentPost[0].tags) : ''}
+                                              {currentPost.length > 0 ? console.log(currentPost[0].tags) : ''}
+
+
   return (isLoading) ? (
     <Loader />
   ) : (
     <>
       <Header />
-      <section className=' mt-5'>
+      <section className=' mt-2'>
         <div className='container'>
           <div className='row'>
             <div className='col-12'>
@@ -23,8 +26,7 @@ function Detail () {
                 Lifestyle
               </a>
               <h1 className='text-center'>
-                {currentPost.length > 0 && currentPost[0].title}
-                10 tell-tale signs you need to get a new startup.
+              {currentPost.length > 0 ? currentPost[0].title : ''}
               </h1>
             </div>
           </div>
@@ -51,15 +53,17 @@ function Detail () {
                         objectFit: 'cover',
                         borderRadius: '50%'
                       }}
-                      src='https://awcdn1.ahmad.works/writing/wp-content/uploads/2015/05/Author.jpg'
+                      src={currentPost.length > 0 ? currentPost[0].image : ''}
+
                       alt='avatar'
                     />
                   </div>
                   <a
                     href='#'
-                    className='h5 fw-bold text-dark text-decoration-none mt-2 mb-0 d-block'
+                    className='h5 fw-bold text-dark text-decoration-none mt-2 mb-1 d-block'
                   >
-                    Louis Ferguson
+                      {currentPost.length > 0 ? currentPost[0].user.full_name : ''}
+
                   </a>
                   <p>Writer at Desphixs</p>
                 </div>
@@ -68,7 +72,8 @@ function Detail () {
 
                 <ul className='list-inline list-unstyled'>
                   <li className='list-inline-item d-lg-block my-lg-2 text-start'>
-                    <i className='fas fa-calendar' /> Nov 15, 2022
+                    <i className='fas fa-calendar' />{currentPost.length > 0 ? currentPost[0].date : ''}
+
                   </li>
                   <li className='list-inline-item d-lg-block my-lg-2 text-start'>
                     <i className='fas fa-clock' /> 5 min read
@@ -77,105 +82,28 @@ function Detail () {
                     <a href='#' className='text-body'>
                       <i className='fas fa-heart me-1' />
                     </a>
-                    266 Likes
+                    {currentPost.length > 0 && currentPost[0].likes > 0 ? currentPost[0].likes + ' likes' : '0 likes'}
                   </li>
                   <li className='list-inline-item d-lg-block my-lg-2 text-start'>
                     <i className='fas fa-eye' />
-                    344 Views
+                    {currentPost.length > 0 ? currentPost[0].view + ' views': ''}
                   </li>
                 </ul>
                 {/* Tags */}
                 <ul className='list-inline text-primary-hover mt-0 mt-lg-3 text-start'>
-                  <li className='list-inline-item'>
-                    <a
-                      className='text-body text-decoration-none fw-bold'
-                      href='#'
-                    >
-                      #agency
-                    </a>
-                  </li>
-                  <li className='list-inline-item'>
-                    <a
-                      className='text-body text-decoration-none fw-bold'
-                      href='#'
-                    >
-                      #business
-                    </a>
-                  </li>
-                  <li className='list-inline-item'>
-                    <a
-                      className='text-body text-decoration-none fw-bold'
-                      href='#'
-                    >
-                      #theme
-                    </a>
-                  </li>
-                  <li className='list-inline-item'>
-                    <a
-                      className='text-body text-decoration-none fw-bold'
-                      href='#'
-                    >
-                      #bootstrap
-                    </a>
-                  </li>
-                  <li className='list-inline-item'>
-                    <a
-                      className='text-body text-decoration-none fw-bold'
-                      href='#'
-                    >
-                      #marketing
-                    </a>
+                  <li><a className='text-black' href="#"> {currentPost.length > 0 ? currentPost[0].tags : ''}</a>
                   </li>
                 </ul>
               </div>
             </div>
             {/* Left sidebar END */}
             {/* Main Content START */}
-            <div className='col-lg-10 mb-5'>
-              <p>
-                <b>Moonlight</b> newspaper up its enjoyment agreeable depending.
-                Timed voice share led him to widen noisy young. At weddings
-                believed laughing although the material does the exercise of. Up
-                attempt offered ye civilly so sitting to. She new course gets
-                living within Elinor joy. She rapturous suffering concealed.
+            <div className='col-lg-10 mb-5 '>
+              <div className='h-min-[600px]'>
+              <p className="min-h-[50vh] mt-1">
+                {currentPost.length > 0 ? currentPost[0].description : ''}
               </p>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Laborum est tenetur voluptatibus itaque dolor saepe mollitia et
-                ratione odio nisi! Explicabo quod tempore voluptatibus
-                perspiciatis, nihil dolorem magni, corrupti odio dignissimos ut
-                temporibus laboriosam dolore vero repudiandae asperiores
-                incidunt reiciendis corporis odit a maxime. Accusantium
-                excepturi ut aliquid accusamus necessitatibus minus odit,
-                assumenda rerum. Tempora deserunt officiis expedita, excepturi
-                nihil, velit similique necessitatibus natus explicabo veritatis,
-                vitae temporibus aliquam dicta ea. Nesciunt et fuga quis atque
-                debitis. Vero nihil aperiam voluptatibus. Architecto reiciendis
-                necessitatibus explicabo repellendus corrupti pariatur velit
-                aperiam! Ad, numquam expedita iste labore tempore necessitatibus
-                praesentium libero pariatur.
-              </p>
-              <p>
-                <b>
-                  <i>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Rerum totam quasi impedit nostrum hic consequatur! Tenetur
-                    dignissimos debitis ea ut magni laboriosam animi provident
-                    ab minima dolorem facilis minus amet culpa quam odio
-                    consectetur eos mollitia dolorum cumque at soluta atque nam,
-                    quia eaque! Sint quisquam fuga sapiente facilis provident,
-                    ullam officia! Alias voluptates officia natus eaque
-                    voluptate illum est.
-                  </i>
-                </b>
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Debitis, culpa mollitia nam, ipsum hic dolorum, beatae at quis
-                ea cum id temporibus? Asperiores, atque eos voluptatibus
-                explicabo cum voluptatum placeat.
-              </p>
-
+             </div>
               <div className='mt-5'>
                 <h2 className='my-3'>
                   <i className='bi bi-symmetry-vertical me-2' />
