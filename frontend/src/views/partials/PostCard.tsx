@@ -13,7 +13,7 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
       setCurrentSrc(post?.image || PLACEHOLDER_URL);
   }, [post?.image]); // Re-run effect if post.image changes
 
-  const handleError = () => {
+  const handlePlaceholderOnError = () => {
     // Only set placeholder if the current src is NOT the placeholder already
     // and if the error didn't already occur for this source
     // (We might need an additional state for error tracking if imageSrc itself changes,
@@ -39,7 +39,7 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
               objectFit: 'cover',
             }}
             src={currentSrc}
-            onError={handleError} // Set placeholder on error
+            onError={handlePlaceholderOnError} // Set placeholder on error
             alt='Card image'
           />
         </div>
