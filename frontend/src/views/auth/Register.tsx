@@ -5,6 +5,7 @@ import { useBloggieStore } from '../../store/store'
 import { register } from '../../utils/auth'
 import { useState } from 'react'
 import Toast from '../../plugin/Toast'
+import { handleAPIError } from '../../utils/shared'
 
 function Register () {
   const [registerData, setRegisterData] = useState({ full_name: '', email: '', password: '', password2: '' })
@@ -28,7 +29,10 @@ function Register () {
         setIsLoading(false)
         navigate('/login')
       } else {
-        let err = Object.values(response?.error)[0]?.toString() || 'Something went wrong'
+  
+        let err = handleAPIError(response?.error)
+        
+        //let err = response?.error?.length < 100 ? Object.values(response?.error)[0]?.toString() : 'Something went wrong'
         console.log(err)
         setIsLoading(false)
         Toast('error', 'Registration failed', err)
@@ -121,7 +125,7 @@ function Register () {
                     </label>
                     <input
                       type='password'
-                      id='password'
+                      id='password2'
                       className='form-control'
                       name='password2'
                       placeholder='**************'
