@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react'
 import { setUser } from '../utils/auth'
 import PropTypes from 'prop-types'
 
-const MainWrapper = ({ children }) => {
+import { ReactNode } from 'react'
+
+interface MainWrapperProps {
+  children: ReactNode
+}
+
+const MainWrapper = ({ children }: MainWrapperProps) => {
   // Initialize the 'loading' state variable and set its initial value to 'true'
   const [loading, setLoading] = useState(true)
 
