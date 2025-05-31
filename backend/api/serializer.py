@@ -69,6 +69,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     user = api_models.User.objects.create(
         full_name=validated_data['full_name'],
         email=validated_data['email'],
+        username=validated_data['email']
     )
     email_username, mobile = user.email.split('@')
     user.username = email_username
