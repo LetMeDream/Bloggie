@@ -2,63 +2,91 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoMdArrowDropdown } from "react-icons/io";
-
+import { IoPersonAddSharp } from "react-icons/io5";
+import { LuLogIn } from "react-icons/lu";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-  const toggleDropdown = (menu) => {
+  const toggleDropdown = (menu: string | null) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
   };
   const closeDropdown = () => {
     setOpenDropdown(null);
   };
 
+  const headerStyles = {
+    'outer-container': 'bg-neutral-800 text-white z-50 relative flex items-center',
+    'inner-container':'py-2 lg:py-0 container flex flex-nowrap justify-between items-center w-full',
+    'left-side': 'flex items-center',
+    'left-side-logo': 'mr-5 w-48',
+    'left-side-search-container': 'hidden lg:block search-input w-full md:w-auto  flex-grow md:flex-grow-0 md:mx-4',
+    'left-side-search': 'w-full md:w-60 px-4 rounded-md pt-2 pb-2 bg-white text-black focus:outline-none',
+    'navigation-container': 'hidden lg:flex items-center justify-center',
+    'navigation': 'flex items-center justify-center space-x-3 nowrap h-full',
+    'mobile-menu-button': 'lg:hidden flex items-center justify-center',
+    'responsive-menu-container': 'lg:hidden menu-open absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300',
+    'responsive-input': 'w-full pt-2 px-4 flex justify-center',
+    'responsive-navigation': 'flex flex-col items-center justify-center',
+    'responsive-search-container': 'w-full flex justify-center',
+    'responsive-search': 'w-[80%] max-w-[500px] px-4 py-2 rounded-md bg-white text-black focus:outline-none',
+    'link-btn': 'p-2 flex items-center gap-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none',
+    'li': 'py-2 m-0 w-full flex flex-col justify-center items-center hover:text-gray-300 no-underline text-white font-semibold',
+    'link': 'mr-2 text-white hover:!text-gray-300',
+    'dropdown-btn': 'font-semibold hover:text-gray-300 flex items-center'
+}
+
   return (
-    <header className="bg-neutral-800 text-white z-50 relative flex items-center ">
-      <div className="py-2 lg:py-0 container flex flex-nowrap justify-between items-center w-full">      {/* Logo */}
-      <div className="flex items-center">
-        <div className="mr-5 w-48">
-          <Link to='/'>
-            <img
-              src="https://i.postimg.cc/ZRNC1mhM/my-main-logo.png"
-              alt="logo"
-            />
-          </Link>
-      </div>
-      {/* Search Bar */}
-      <div className='hidden lg:block search-input w-full md:w-auto  flex-grow md:flex-grow-0 md:mx-4'>
-      <form>
-          <input
-          className='w-full md:w-60 px-4 rounded-md pt-2 pb-2 bg-white text-black focus:outline-none'
-          type="search"
-          placeholder="Search Articles"
-          aria-label="Search"
-          />
-            <Link
-            to='/search/'
-            className=''
-            type="submit"
-            >
+    <header className={headerStyles['outer-container']}>
+      <div className={headerStyles['inner-container']}>    
+        {/* Logo and Search Bar */}  
+        <div className={headerStyles['left-side']}>
+          {/* Logo */}
+          <div className={headerStyles['left-side-logo']}>
+            <Link to='/'>
+              <img
+                src="https://i.postimg.cc/ZRNC1mhM/my-main-logo.png"
+                alt="logo"
+              />
             </Link>
-        </form>
-      </div>
-      </div>
+          </div>
+          {/* Search Bar */}
+          <div className={headerStyles['left-side-search-container']}>
+            <form>
+              <input
+              className={headerStyles['left-side-search']}
+              placeholder="Search Articles"
+              aria-label="Search"
+              />
+                <Link
+                to='/search/'
+                className=''
+                type="submit"
+                >
+                </Link>
+            </form>
+          </div>
+        </div>
        
-        <nav className='hidden lg:flex items-center flex justify-center'>
-          <ul className='flex items-center justify-center space-x-3 nowrap h-full'>
-            <li>
-              <Link to='/'
-              className='font-semibold no-underline text-white focus:outline-none '>
-              Home
+        {/* Navigation Links */}
+        <nav className={headerStyles['navigation-container']}>
+          <ul className={headerStyles['navigation']}>
+            <li className={headerStyles[ 'li']}>
+              <Link 
+                to='/'
+                className={headerStyles['link']}
+              >
+                Home
               </Link>
             </li>
-            <li> 
-              <Link className='font-semibold no-underline text-white focus:outline-none' 
-              to='/category/'>
+            <li className={headerStyles[ 'li']}> 
+              <Link
+                to='/category/'
+                className={headerStyles['link']}
+              >
                   Category
               </Link>
             </li>
@@ -66,7 +94,7 @@ const Header = () => {
             <li className='relative'>
               <button 
                 onClick={() => toggleDropdown('pages')}
-                className='font-semibold hover:text-gray-300 font-semibold flex items-center focus:outline-none'
+                className={headerStyles['dropdown-btn']}
               >
                 Pages <IoMdArrowDropdown />
 
@@ -91,7 +119,7 @@ const Header = () => {
             <li className="relative">
               <button 
                 onClick={() => toggleDropdown('dashboard')}
-                className='font-semibold flex items-center hover:text-gray-300 focus:outline-none'
+                className={headerStyles['dropdown-btn']}
               >
                 Dashboard <IoMdArrowDropdown />
 
@@ -132,21 +160,26 @@ const Header = () => {
             </li>
             <li>
               <Link to='/register/'
-              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none'
+                className={headerStyles['link-btn']}
               >
-              Register
+                Register
+                <IoPersonAddSharp />
               </Link>
             </li>
             <li>
               <Link to='/login/' 
-              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none' href='dashboard.html'>
-              Login 
+                className={headerStyles['link-btn']}
+              >
+                Login 
+                <LuLogIn 
+                  className="font-bold"
+                />
               </Link>
             </li>
           </ul>
         </nav>
         {/* Mobile menu button */}
-        <div className='lg:hidden flex items-center justify-center'>
+        <div className={headerStyles['mobile-menu-button']}>
           <button onClick={toggleMenu} className='w-full px-2 py-1 focus:outline-none border rounded'>
           <IoMenu  size={30}/>
           </button>
@@ -155,32 +188,35 @@ const Header = () => {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className='lg:hidden menu-open bg-neutral-800 absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300'>
-           {/* Search Input */}
-    <div className='w-full pt-2 px-4 flex justify-center'>
-      <form className='w-full flex justify-center'>
-        <input
-          className='w-[80%] max-w-[500px] px-4 py-2 rounded-md bg-white text-black focus:outline-none'
-          type="search"
-          placeholder="Search Articles"
-          aria-label="Search"
-        />
-      </form>
-    </div>
-          <ul className='flex flex-col items-center justify-center'>
-            <li className='py-2 m-0'>
+        <div className={headerStyles['responsive-menu-container']}>
+          {/* Search Input */}
+          <div className={headerStyles['responsive-input']}>
+            <form className={headerStyles['responsive-search-container']}>
+              <input
+                className={headerStyles['responsive-search']}
+                type="search"
+                placeholder="Search Articles"
+                aria-label="Search"
+              />
+            </form>
+          </div>
+          {/* Navigation Links */}
+          <ul className={headerStyles['responsive-navigation']}>
+            <li className={headerStyles[ 'li']}>
               <Link to='/'
-              className='font-semibold no-underline text-white focus:outline-none'>
+               className='text-white focus:outline-none'>
               Home
               </Link>
             </li>
-            <li className='font-semibold py-2 m-0'> 
-              <Link to='/category/'
-              className='no-underline text-white focus:outline-none'>
-              Category
+            <li className={headerStyles[ 'li']}> 
+              <Link 
+                to='/category/'
+                className=' text-white '
+              >
+                  Category
               </Link>
             </li>
-            <li className='py-2 m-0 w-full flex flex-col justify-center items-center'>
+            <li className={headerStyles[ 'li']}>
               <button 
                 onClick={() => toggleDropdown('pages')}
                 className='font-semibold hover:text-gray-300 w-full'
@@ -203,7 +239,7 @@ const Header = () => {
                 </ul>
               )}
             </li>
-            <li className='py-2 m-0 flex w-full flex-col items-center justify-center'>
+            <li className={headerStyles[ 'li']}>
               <button 
                 onClick={() => toggleDropdown('dashboard')}
                 className='font-semibold flex justify-center hover:text-gray-300 w-full text-left'
@@ -211,10 +247,10 @@ const Header = () => {
                 Dashboard ▾
               </button>
               {openDropdown === 'dashboard' && (
-                <ul className='!pl-3 py-2 flex flex-col w-[85%] max-w-[550px] rounded text-gray-300 bg-white items-start mt-2 py-2'>
-                 <li className='pb-2 hover:text-gray-300'> 
+                <ul className='!pl-3 flex flex-col w-[85%] max-w-[550px] rounded text-gray-300 bg-white items-start mt-2 py-2'>
+                  <li className='pb-2 hover:text-gray-300'> 
                   <Link className='text-black' to='/dashboard/'>
-                   Dashboard
+                    Dashboard
                   </Link>
                   </li>
                   <li className='pb-2'>
@@ -247,15 +283,20 @@ const Header = () => {
             </li>
             <li className='py-2 m-0'>
               <Link to='/register/'
-              className='p-2 mb-0 inline-flex items-center text-white bg-green-600 rounded hover:bg-green-700'
+                className={headerStyles['link-btn']}
               >
-              Register
+                Register
+                <IoPersonAddSharp />
               </Link>
             </li>
             <li className='py-2 m-0'>
               <Link to='/login/' 
-              className='p-2 inline-flex items-center bg-green-600 text-white rounded hover:bg-green-700 hover:bg-green-600 focus:outline-none' href='dashboard.html'>
+                className={headerStyles['link-btn']}
+              >
               Login 
+              <LuLogIn 
+                className="font-bold"
+              />
               </Link>
             </li>
           </ul>
