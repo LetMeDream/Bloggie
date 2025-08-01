@@ -44,7 +44,7 @@ export const login = async (email: string, password: string) => {
 
     // Returning data and error information
     return { data, error: null }
-  } catch (error) {
+  } catch (error: any) {
     // Handling errors and returning data and error information
     return {
       data: null,
