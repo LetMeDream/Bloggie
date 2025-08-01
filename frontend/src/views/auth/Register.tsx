@@ -48,8 +48,7 @@ function Register () {
     <>
       <Header />
       <section
-        className='container d-flex flex-column vh-100'
-        style={{ marginTop: '150px' }}
+        className='container d-flex flex-column vh-100 lg:mt-[150px]'
       >
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
           <div className='col-lg-5 col-md-8 py-8 py-xl-0'>

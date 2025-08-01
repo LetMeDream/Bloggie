@@ -6,7 +6,7 @@ function Login () {
   return (
     <>
       <Header className='flex-none' />
-      <section className='container flex-grow-1' style={{ marginTop: '150px' }}>
+      <section className='container flex-grow-1 lg:mt-[150px]'>
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
           <div className='col-lg-5 col-md-8 py-8 py-xl-0'>
             <div className='card shadow'>
