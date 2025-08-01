@@ -1,4 +1,4 @@
-// Importing the useAuthStore hook from the '../store/auth' file to manage authentication state
+// Importing the useBloggieStore hook from the '../store/auth' file to manage authentication state
 import { useBloggieStore } from '../store/store'
 
 // Importing the axios library for making HTTP requests
@@ -23,7 +23,7 @@ const Toast = Swal.mixin({
 })
 
 // Function to handle user login
-export const login = async (email, password) => {
+export const login = async (email: string, password: string) => {
   try {
     // Making a POST request to obtain user tokens
     const { data, status } = await axios.post('user/token/', {
@@ -54,7 +54,7 @@ export const login = async (email, password) => {
 }
 
 // Function to handle user registration
-export const register = async (full_name, email, password, password2) => {
+export const register = async (full_name: string, email: string, password: string, password2: string) => {
   try {
     // Making a POST request to register a new user
     const { data, status } = await axios.post('user/register/', {
@@ -75,7 +75,7 @@ export const register = async (full_name, email, password, password2) => {
 
     // Returning data and error information
     return { data, error: null, status }
-  } catch (error) {
+  } catch (error: any) {
     // Handling errors and returning data and error information
     return {
       data: null,
@@ -89,7 +89,7 @@ export const logout = () => {
   // Removing access and refresh tokens from cookies, resetting user state, and displaying success toast
   Cookies.remove('access_token')
   Cookies.remove('refresh_token')
-  useAuthStore.getState().setUser(null)
+  useBloggieStore.getState().setUser(null)
 
   // Displaying a success toast notification
   Toast.fire({
@@ -101,27 +101,37 @@ export const logout = () => {
 // Function to set the authenticated user on page load
 export const setUser = async () => {
   // Retrieving access and refresh tokens from cookies
-  const accessToken = Cookies.get('access_token')
-  const refreshToken = Cookies.get('refresh_token')
+  try {
+    const accessToken = Cookies.get('access_token')
+    const refreshToken = Cookies.get('refresh_token')
 
-  // Checking if tokens are present
-  if (!accessToken || !refreshToken) {
-    console.info("setUset didn't find neither 'access' nor 'refresh' token")
+    // Checking if tokens are present
+    if (!accessToken || !refreshToken) {
+      console.info("setUset didn't find neither 'access' nor 'refresh' token")
+      return
+    }
+    
+    // If access token is expired, refresh it; otherwise, set the authenticated user
+    if (isAccessTokenExpired(accessToken)) {
+      // debugger
+      const response = await getRefreshToken()
+      setAuthUser(response.access, response.refresh)
+    } else {
+      setAuthUser(accessToken, refreshToken)
+    }
+    
+  } catch (error) {
+    console.error('Error setting user:', error)
     return
-  }
-
-  // If access token is expired, refresh it; otherwise, set the authenticated user
-  if (isAccessTokenExpired(accessToken)) {
-    const response = await getRefreshToken(refreshToken)
-    setAuthUser(response.access, response.refresh)
-  } else {
-    setAuthUser(accessToken, refreshToken)
+    
   }
 }
 
 // Function to set the authenticated user and update user state
-export const setAuthUser = (access_token, refresh_token) => {
+export const setAuthUser = (access_token: string, refresh_token: string) => {
   // Setting access and refresh tokens in cookies with expiration dates
+  var in15Second = new Date(new Date().getTime() + (0.25) * 60 * 1000);
+
   Cookies.set('access_token', access_token, {
     expires: 1, // Access token expires in 1 day
     secure: true
@@ -133,13 +143,17 @@ export const setAuthUser = (access_token, refresh_token) => {
   })
 
   // Decoding access token to get user information
-  const user = jwtDecode(access_token) ?? null
+  let decoded: any = jwtDecode(access_token)
 
-  // If user information is present, update user state; otherwise, set loading state to false
-  if (user) {
-    useAuthStore.getState().setUser(user)
+  // If user information is present, extract user_id and username and update user state; otherwise, set loading state to false
+  if (decoded && decoded.user_id && decoded.username) {
+    const user = {
+      user_id: decoded.user_id,
+      username: decoded.username
+    }
+    useBloggieStore.getState().setUser(user)
   }
-  useAuthStore.getState().setLoading(false)
+  useBloggieStore.getState().setLoading(false)
 }
 
 // Function to refresh the access token using the refresh token
@@ -155,11 +169,13 @@ export const getRefreshToken = async () => {
 }
 
 // Function to check if the access token is expired
-export const isAccessTokenExpired = (accessToken) => {
+export const isAccessTokenExpired = (accessToken: string) => {
   try {
     // Decoding the access token and checking if it has expired
     const decodedToken = jwtDecode(accessToken)
-    return decodedToken.exp < Date.now() / 1000
+    if (decodedToken.exp) {
+      return decodedToken.exp < Date.now() / 1000
+    }
   } catch (err) {
     // Returning true if the token is invalid or expired
     console.error(err)

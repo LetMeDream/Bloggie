@@ -1,3 +1,4 @@
+import { JwtPayload } from 'jwt-decode';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware'
 
@@ -13,11 +14,11 @@ type BaseState = {
 }
 
 type AuthState = {
-  allUserData: User | null;
+  allUserData: User | null ;
   userLoading: boolean;
   setUserLoading: (userLoading: boolean) => void;
   user: () => User;
-  setUser: (user: User) => void;
+  setUser: (user: User | null) => void;
   isLoggedIn: () => boolean;
 }
 
@@ -51,7 +52,7 @@ const createAuthSlice = (
       }),
 
       // Define a function 'setUser' that allows setting the 'allUserData' state.
-      setUser: (user: User) => set({ allUserData: user }),
+      setUser: (user: User | null) => set({ allUserData: user }),
 
       // Define a function 'setLoading' that allows setting the 'loading' state.
       setUserLoading: (userLoading) => set({ userLoading }),
