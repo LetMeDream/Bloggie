@@ -255,3 +255,10 @@ AUTHENTICATION_BACKENDS = [
     'api.backends.UsernameOrEmailBackend',  # Replace 'yourapp' with the name of your app
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+### JWT Configuration
+SIMPLE_JWT = {
+    # ... other settings like ACCESS_TOKEN_LIFETIME
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True, # Important for security!
+}
