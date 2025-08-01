@@ -4,6 +4,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoPersonAddSharp } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,6 +18,8 @@ const Header = () => {
   const closeDropdown = () => {
     setOpenDropdown(null);
   };
+  const location = useLocation();
+  const path = location.pathname
 
   const headerStyles = {
     'outer-container': 'bg-neutral-800 text-white z-50 relative flex items-center',
@@ -41,8 +44,8 @@ const Header = () => {
 
   return (
     <header className={headerStyles['outer-container']}>
-      <div className={headerStyles['inner-container']}>    
-        {/* Logo and Search Bar */}  
+      <div className={headerStyles['inner-container']}>
+        {/* Logo and Search Bar */}
         <div className={headerStyles['left-side']}>
           {/* Logo */}
           <div className={headerStyles['left-side-logo']}>
@@ -57,47 +60,46 @@ const Header = () => {
           <div className={headerStyles['left-side-search-container']}>
             <form>
               <input
-              className={headerStyles['left-side-search']}
-              placeholder="Search Articles"
-              aria-label="Search"
+                className={headerStyles['left-side-search']}
+                placeholder="Search Articles"
+                aria-label="Search"
               />
-                <Link
+              <Link
                 to='/search/'
                 className=''
                 type="submit"
-                >
-                </Link>
+              >
+              </Link>
             </form>
           </div>
         </div>
-       
+
         {/* Navigation Links */}
         <nav className={headerStyles['navigation-container']}>
           <ul className={headerStyles['navigation']}>
-            <li className={headerStyles[ 'li']}>
-              <Link 
+            <li className={headerStyles['li']}>
+              <Link
                 to='/'
                 className={headerStyles['link']}
               >
                 Home
               </Link>
             </li>
-            <li className={headerStyles[ 'li']}> 
+            <li className={headerStyles['li']}>
               <Link
                 to='/category/'
                 className={headerStyles['link']}
               >
-                  Category
+                Category
               </Link>
             </li>
             {/* Pages Dropdown */}
             <li className='relative'>
-              <button 
+              <button
                 onClick={() => toggleDropdown('pages')}
                 className={headerStyles['dropdown-btn']}
               >
                 Pages <IoMdArrowDropdown />
-
               </button>
               {openDropdown === 'pages' && (
                 <ul onMouseLeave={closeDropdown} className='absolute text-left py-2 !pl-2 bg-white rounded shadow-md mt-2 w-30'>
@@ -107,7 +109,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li className='pb-2'>
-                  <Link className='text-black' to='/contact/'>
+                    <Link className='text-black' to='/contact/'>
                       Contact
                     </Link>
                   </li>
@@ -117,29 +119,28 @@ const Header = () => {
             </li>
             {/* Dashboard Dropdown */}
             <li className="relative">
-              <button 
+              <button
                 onClick={() => toggleDropdown('dashboard')}
                 className={headerStyles['dropdown-btn']}
               >
                 Dashboard <IoMdArrowDropdown />
-
               </button>
               {openDropdown === 'dashboard' && (
                 <ul onMouseLeave={closeDropdown} className='!pl-2 py-2 absolute text-left bg-white text-black rounded shadow-md mt-2 w-40'>
-                  <li className='pb-2'> 
-                  <Link className='text-black' to='/dashboard/'>
-                   Dashboard
-                  </Link>
-                  </li>
                   <li className='pb-2'>
-                    <Link className='text-black' to='/posts/'>
-                    Posts
+                    <Link className='text-black' to='/dashboard/'>
+                      Dashboard
                     </Link>
                   </li>
                   <li className='pb-2'>
-                  <Link className='text-black' to='/add-post/'>
-                    Add Post
-                  </Link>
+                    <Link className='text-black' to='/posts/'>
+                      Posts
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/add-post/'>
+                      Add Post
+                    </Link>
                   </li>
                   <li className='pb-2'>
                     <Link className='text-black' to='/comments/'>
@@ -154,34 +155,40 @@ const Header = () => {
                   <li className='pb-2'>
                     <Link className='text-black' to='/profile/'>
                       Profile
-                    </Link></li>
+                    </Link>
+                  </li>
                 </ul>
               )}
             </li>
-            <li>
-              <Link to='/register/'
-                className={headerStyles['link-btn']}
-              >
-                Register
-                <IoPersonAddSharp />
-              </Link>
-            </li>
-            <li>
-              <Link to='/login/' 
-                className={headerStyles['link-btn']}
-              >
-                Login 
-                <LuLogIn 
-                  className="font-bold"
-                />
-              </Link>
-            </li>
+            {/* Register y Login condicionales */}
+            {path !== '/register/' && (
+              <li>
+                <Link to='/register/'
+                  className={headerStyles['link-btn']}
+                >
+                  Register
+                  <IoPersonAddSharp />
+                </Link>
+              </li>
+            )}
+            {path !== '/login/' && (
+              <li>
+                <Link to='/login/'
+                  className={headerStyles['link-btn']}
+                >
+                  Login
+                  <LuLogIn
+                    className="font-bold"
+                  />
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
         {/* Mobile menu button */}
         <div className={headerStyles['mobile-menu-button']}>
           <button onClick={toggleMenu} className='w-full px-2 py-1 focus:outline-none border rounded'>
-          <IoMenu  size={30}/>
+            <IoMenu size={30} />
           </button>
         </div>
       </div>
@@ -202,22 +209,22 @@ const Header = () => {
           </div>
           {/* Navigation Links */}
           <ul className={headerStyles['responsive-navigation']}>
-            <li className={headerStyles[ 'li']}>
+            <li className={headerStyles['li']}>
               <Link to='/'
-               className='text-white focus:outline-none'>
-              Home
+                className='text-white focus:outline-none'>
+                Home
               </Link>
             </li>
-            <li className={headerStyles[ 'li']}> 
-              <Link 
+            <li className={headerStyles['li']}>
+              <Link
                 to='/category/'
                 className=' text-white '
               >
-                  Category
+                Category
               </Link>
             </li>
-            <li className={headerStyles[ 'li']}>
-              <button 
+            <li className={headerStyles['li']}>
+              <button
                 onClick={() => toggleDropdown('pages')}
                 className='font-semibold hover:text-gray-300 w-full'
               >
@@ -231,7 +238,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li className='pb-2'>
-                  <Link className='text-black' to='/contact/'>
+                    <Link className='text-black' to='/contact/'>
                       Contact
                     </Link>
                   </li>
@@ -239,8 +246,8 @@ const Header = () => {
                 </ul>
               )}
             </li>
-            <li className={headerStyles[ 'li']}>
-              <button 
+            <li className={headerStyles['li']}>
+              <button
                 onClick={() => toggleDropdown('dashboard')}
                 className='font-semibold flex justify-center hover:text-gray-300 w-full text-left'
               >
@@ -248,20 +255,20 @@ const Header = () => {
               </button>
               {openDropdown === 'dashboard' && (
                 <ul className='!pl-3 flex flex-col w-[85%] max-w-[550px] rounded text-gray-300 bg-white items-start mt-2 py-2'>
-                  <li className='pb-2 hover:text-gray-300'> 
-                  <Link className='text-black' to='/dashboard/'>
-                    Dashboard
-                  </Link>
-                  </li>
-                  <li className='pb-2'>
-                    <Link className='text-black' to='/posts/'>
-                    Posts
+                  <li className='pb-2 hover:text-gray-300'>
+                    <Link className='text-black' to='/dashboard/'>
+                      Dashboard
                     </Link>
                   </li>
                   <li className='pb-2'>
-                  <Link className='text-black' to='/add-post/'>
-                    Add Post
-                  </Link>
+                    <Link className='text-black' to='/posts/'>
+                      Posts
+                    </Link>
+                  </li>
+                  <li className='pb-2'>
+                    <Link className='text-black' to='/add-post/'>
+                      Add Post
+                    </Link>
                   </li>
                   <li className='pb-2'>
                     <Link className='text-black' to='/comments/'>
@@ -281,24 +288,29 @@ const Header = () => {
                 </ul>
               )}
             </li>
-            <li className='py-2 m-0'>
-              <Link to='/register/'
-                className={headerStyles['link-btn']}
-              >
-                Register
-                <IoPersonAddSharp />
-              </Link>
-            </li>
-            <li className='py-2 m-0'>
-              <Link to='/login/' 
-                className={headerStyles['link-btn']}
-              >
-              Login 
-              <LuLogIn 
-                className="font-bold"
-              />
-              </Link>
-            </li>
+            {/* Register y Login condicionales en menú móvil */}
+            {path !== '/register/' && (
+              <li className='py-2 m-0'>
+                <Link to='/register/'
+                  className={headerStyles['link-btn']}
+                >
+                  Register
+                  <IoPersonAddSharp />
+                </Link>
+              </li>
+            )}
+            {path !== '/login/' && (
+              <li className='py-2 m-0'>
+                <Link to='/login/'
+                  className={headerStyles['link-btn']}
+                >
+                  Login
+                  <LuLogIn
+                    className="font-bold"
+                  />
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       )}
