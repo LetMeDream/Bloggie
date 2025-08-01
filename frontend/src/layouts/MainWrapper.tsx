@@ -16,14 +16,20 @@ const MainWrapper = ({ children }: MainWrapperProps) => {
   useEffect(() => {
     // Define an asynchronous function 'handler'
     const handler = async () => {
-      // Set the 'loading' state to 'true' to indicate the component is loading
-      setLoading(true)
-
-      // Perform an asynchronous user authentication action
-      await setUser()
-
-      // Set the 'loading' state to 'false' to indicate the loading process has completed
-      setLoading(false)
+      try {
+        // Set the 'loading' state to 'true' to indicate the component is loading
+        setLoading(true)
+  
+        // Perform an asynchronous user authentication action
+        await setUser() // -> FALLANDO TEMA COOKIES REFRESH
+  
+        // Set the 'loading' state to 'false' to indicate the loading process has completed
+        setLoading(false)
+        
+      } catch (error) {
+        console.error('Error during authentication:', error)
+        
+      }
     }
 
     // Call the 'handler' function immediately after the component is mounted
