@@ -10,6 +10,7 @@ import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
 import { useBloggieStore } from '../../../store/store'
 import Loader from '../../pages/Loader/Loader' 
+import { useEffect, useState } from 'react'
 
 function Index () {
   const {
@@ -31,14 +32,33 @@ function Index () {
         paginate: (pageNumber: number) => void
         handleNextPage: () => void
   } = useHomePage()
-  const isLoading = useBloggieStore(state => state.loading)
+
+   const isLoading = useBloggieStore(state => state.loading)
+
+  const [extraDistance, setExtraDistance] = useState(0)
+  useEffect(() => {
+    const header = document.getElementById('header')
+    if (header) {
+      if (window.matchMedia('(max-width: 768px)').matches) { 
+        setExtraDistance(header.offsetHeight)
+      }
+      if (window.matchMedia('(max-width: 1024px)').matches) { 
+        setExtraDistance(header.offsetHeight/2)
+      }
+    }
+  }, [])
+
+  useEffect(() => console.log(extraDistance), [extraDistance])
 
   return isLoading ? <Loader/> : (
     <div>
-      <Header />
+      <Header/>
 
-      <section className='posts-section min-vh-100'>
-        <div className='container'>
+      <section className='posts-section min-vh-100 border'>
+        <div 
+          className='container relative md-top-extraDistance'
+          style={{ '--extra-distance': `${extraDistance}px` } as React.CSSProperties}
+        >
 
           <div className='row pb-3'>
             <div className='col'>

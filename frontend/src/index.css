@@ -14,3 +14,12 @@ button{
     margin:0px;
 }
 
+@media (min-width: 768px) {
+  .md-top-extraDistance {
+    top: var(--extra-distance, 0px);
+    position: relative;
+  }
+}
+
+
+
