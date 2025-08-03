@@ -42,7 +42,7 @@ const useHomePage = () => {
       const categoryData = await categoryRes.json()
       // Asegúrate de que postsData sea siempre un array
       setCategory(categoryData)
-      console.log(categoryData)
+      // console.log(categoryData)
     } catch (err) {
       console.error('Error fetching data:', err)
       setPosts([]) 
@@ -58,9 +58,7 @@ const useHomePage = () => {
   /* Quitar loader sólo cuando ambos; Post y Categories, hayan sido cargados */
   useEffect(() => {
     if (!areCategoriesLoading && !arePostsLoading) {
-      setTimeout(() => {
-        baseStore.setLoading(false)
-      }, 600)
+      baseStore.setLoading(false)
     }
   }, [areCategoriesLoading, arePostsLoading])
 
