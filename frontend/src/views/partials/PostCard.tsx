@@ -81,7 +81,7 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
             <li className='d-flex align-items-center mt-yh2'> {/* Added d-flex align-items-center */}
               <i className='fas fa-calendar me-2' /> {/* Added me-2 margin-right */}
               {/* Asegúrate de que Moment pueda manejar valores nulos o no válidos */}
-              <span>{Moment(post?.date) || 'Fecha no disponible'}</span> {/* Wrap text in span for consistent alignment */}
+              <span>{post?.date ? Moment(post?.date) : 'Fecha no disponible'}</span> {/* Wrap text in span for consistent alignment */}
             </li>
             <li className='d-flex align-items-center mt-2'> {/* Added d-flex align-items-center */}
               <i className='fas fa-eye me-2' /> {/* Added me-2 margin-right */}
