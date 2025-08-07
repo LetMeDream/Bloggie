@@ -35,8 +35,12 @@ function useDetail() {
       console.log('Datos del post:', currentPost)
     }
   }, [currentPost])
-  return { currentPost }
+
+  return { 
+    currentPost
   }
+
+}
 
 
 export default useDetail

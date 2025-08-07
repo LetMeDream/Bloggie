@@ -5,17 +5,20 @@ import useDetail from '../../hooks/useDetail';
 import { useBloggieStore } from '../../store/store';
 import Loader from '../pages/Loader/Loader';
 import { Post } from '../../types/posts'
+
 function Detail () {
-  const {currentPost}:{currentPost:Post[]} = useDetail()
+  const  {currentPost }: { currentPost:Post[] } = useDetail()
   const isLoading = useBloggieStore(state => state.loading)
-  useDetail()
   return (isLoading) ? (
     <Loader />
   ) : (
     <>
       <Header />
-      <section className=' mt-5'>
-        <div className='container'>
+      <section className=' mt-28'
+      >
+        <div 
+          className='container'
+        >
           <div className='row'>
             <div className='col-12'>
               <a href='#' className='badge bg-danger mb-2 text-decoration-none'>
@@ -31,7 +34,9 @@ function Detail () {
         </div>
       </section>
 
-      <section className='pt-0'>
+      <section className='pt-0'
+      
+      >
         <div className='container position-relative' data-sticky-container=''>
           <div className='row'>
             <div className='col-lg-2'>
