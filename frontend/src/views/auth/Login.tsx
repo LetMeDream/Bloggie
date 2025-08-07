@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function Login () {
   return (
     <>
-      <Header className='flex-none' />
+      <Header />
       <section className='container flex-grow-1 mt-[40px]'>
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
           <div className='col-lg-5 col-md-8 py-8 py-xl-0'>
@@ -21,7 +21,7 @@ function Login () {
                   </span>
                 </div>
                 {/* Form */}
-                <form className='needs-validation' noValidate=''>
+                <form className='needs-validation'>
                   {/* Username */}
                   <div className='mb-3'>
                     <label htmlFor='email' className='form-label'>
@@ -33,7 +33,7 @@ function Login () {
                       className='form-control'
                       name='email'
                       placeholder='johndoe@gmail.com'
-                      required=''
+                      required
                     />
                     <div className='invalid-feedback'>
                       Please enter valid username.
@@ -50,7 +50,7 @@ function Login () {
                       className='form-control'
                       name='password'
                       placeholder='**************'
-                      required=''
+                      required
                     />
                     <div className='invalid-feedback'>
                       Please enter valid password.
@@ -63,7 +63,7 @@ function Login () {
                         type='checkbox'
                         className='form-check-input'
                         id='rememberme'
-                        required=''
+                        required
                       />
                       <label className='form-check-label' htmlFor='rememberme'>
                         Remember me
@@ -89,7 +89,7 @@ function Login () {
           </div>
         </div>
       </section>
-      <Footer className='flex-none' />
+      <Footer />
     </>
   )
 }
