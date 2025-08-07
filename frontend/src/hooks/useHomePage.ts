@@ -14,7 +14,9 @@ const useHomePage = () => {
     handlePrevPage,
     pageNumbers,
     paginate,
-    handleNextPage 
+    handleNextPage,
+    isFirstPage,
+    isLastPage
   } = usePagination({ elements: posts })
   const baseStore =  useBloggieStore()
 
@@ -71,6 +73,8 @@ const useHomePage = () => {
     paginate,
     handleNextPage,
     category,
+    isFirstPage,
+    isLastPage
   }
 // --- Fin Lógica de Paginación ---
 }

@@ -40,6 +40,9 @@ export const usePagination = ({
     pageNumbers.push(i)
   }
 
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === totalPages;
+
   return {
     currentPosts,
     totalPages,
@@ -47,6 +50,8 @@ export const usePagination = ({
     handlePrevPage,
     pageNumbers,
     paginate,
-    handleNextPage
+    handleNextPage,
+    isFirstPage,
+    isLastPage
   }
 }
