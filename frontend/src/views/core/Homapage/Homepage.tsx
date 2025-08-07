@@ -1,4 +1,5 @@
 import Header from '../../partials/Header'
+import Cn from 'classnames'
 import Footer from '../../partials/Footer'
 import PostCard from '../../partials/PostCard'
 import useHomePage from '../../../hooks/useHomePage'
@@ -10,7 +11,6 @@ import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
 import { useBloggieStore } from '../../../store/store'
 import Loader from '../../pages/Loader/Loader' 
-import { useEffect, useState } from 'react'
 
 function Index () {
   const {
@@ -21,7 +21,9 @@ function Index () {
       pageNumbers,
       paginate,
       handleNextPage,
-      category
+      category,
+      isFirstPage,
+      isLastPage
     }:{
         currentPosts: Post[]
         category: CategoryType[];
@@ -30,25 +32,12 @@ function Index () {
         handlePrevPage: () => void
         pageNumbers: number[]
         paginate: (pageNumber: number) => void
-        handleNextPage: () => void
+        handleNextPage: () => void,
+        isFirstPage: boolean,
+        isLastPage: boolean
   } = useHomePage()
 
-   const isLoading = useBloggieStore(state => state.loading)
-
-  const [extraDistance, setExtraDistance] = useState(0)
-  useEffect(() => {
-    const header = document.getElementById('header')
-    if (header) {
-      if (window.matchMedia('(max-width: 768px)').matches) { 
-        setExtraDistance(header.offsetHeight)
-      }
-      if (window.matchMedia('(max-width: 1024px)').matches) { 
-        setExtraDistance(header.offsetHeight/2)
-      }
-    }
-  }, [])
-
-  useEffect(() => console.log(extraDistance), [extraDistance])
+  const isLoading = useBloggieStore(state => state.loading)
 
   return isLoading ? <Loader/> : (
     <div>
@@ -56,8 +45,7 @@ function Index () {
 
       <section className='posts-section min-vh-100 border'>
         <div 
-          className='container relative md-top-extraDistance'
-          style={{ '--extra-distance': `${extraDistance}px` } as React.CSSProperties}
+          className='container relative md:mt-28'
         >
 
           <div className='row pb-3'>
@@ -87,14 +75,14 @@ function Index () {
           </div>
 
           {/* Controles de Paginación */}
-          {totalPages > 1 && ( // Solo muestra la paginación si hay más de 1 página
-            <nav className='d-flex mt-4 justify-content-center'> {/* Centrar paginación */}
-              <ul className='pagination mb-0'> {/* Quitar margen inferior si no es necesario */}
-                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+          {totalPages > 1 && (
+            <nav className='d-flex mt-4 justify-content-center'>
+              <ul className='pagination mb-0'>
+                <li className={Cn('page-item', { disabled: isFirstPage })}>
                   <button
-                    onClick={handlePrevPage}
-                    className='page-link text-dark fw-bold me-1 rounded'
-                    disabled={currentPage === 1} // Desactivar botón
+                    onClick={handlePrevPage}text-gray-500
+                    className={Cn('page-link text-dark fw-bold me-1 rounded caret-transparent ', { '!text-gray-300': isFirstPage })}
+                    disabled={isFirstPage}
                     aria-label='Previous'
                   >
                     <i className='fas fa-arrow-left me-2' />
@@ -102,12 +90,12 @@ function Index () {
                   </button>
                 </li>
               </ul>
-              <ul className='pagination mb-0 mx-1'> {/* Añadir margen horizontal */}
+              <ul className='pagination mb-0 mx-1'>
                 {pageNumbers.map(number => (
-                  <li key={number} className={`page-item ${currentPage === number ? 'active' : ''} ms-1`}>
+                  <li key={number} className={Cn('page-item ms-1', { active: currentPage === number })}>
                     <button
                       onClick={() => paginate(number)}
-                      className='page-link text-dark fw-bold rounded'
+                      className={Cn('page-link text-dark fw-bold rounded')}
                     >
                       {number}
                     </button>
@@ -115,11 +103,11 @@ function Index () {
                 ))}
               </ul>
               <ul className='pagination mb-0'>
-                <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                <li className={Cn('page-item', { 'disabled': isLastPage })}>
                   <button
                     onClick={handleNextPage}
-                    className='page-link text-dark fw-bold ms-1 rounded'
-                    disabled={currentPage === totalPages} // Desactivar botón
+                    className={Cn('page-link text-dark fw-bold ms-1 rounded caret-transparent ', { '!text-gray-300': isLastPage })}
+                    disabled={isLastPage}
                     aria-label='Next'
                   >
                     Next
