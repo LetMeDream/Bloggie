@@ -6,7 +6,7 @@ function Login () {
   return (
     <>
       <Header />
-      <section className='container flex-grow-1 mt-[40px]'>
+      <section className='min-h-[100dvh] flex-grow-1 mt-[40px] parallax-bg'>
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
           <div className='col-lg-5 col-md-8 py-8 py-xl-0'>
             <div className='card shadow'>
@@ -15,7 +15,7 @@ function Login () {
                   <h1 className='mb-1 fw-bold'>Sign in</h1>
                   <span>
                     Don’t have an account?
-                    <Link to='/register/' className='ms-1'>
+                    <Link to='/register/' className='ms-1 link-secondary !underline'>
                       Sign up
                     </Link>
                   </span>
@@ -73,12 +73,12 @@ function Login () {
                       </div>
                     </div>
                     <div>
-                      <Link to='/forgot-password/'>Forgot your password?</Link>
+                      <Link to='/forgot-password/' className='link-secondary !underline'>Forgot your password?</Link>
                     </div>
                   </div>
                   <div>
                     <div className='d-grid'>
-                      <button type='submit' className='btn btn-primary'>
+                      <button type='submit' className='btn btn-secondary'>
                         Sign in <i className='fas fa-sign-in-alt' />
                       </button>
                     </div>

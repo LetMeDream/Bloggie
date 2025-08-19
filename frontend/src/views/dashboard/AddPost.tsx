@@ -1,17 +1,24 @@
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 function AddPost () {
+  const methods = useForm({
+    defaultValues: {
+      
+    }
+  })
+
   return (
     <>
       <Header />
-      <section className='pt-5 pb-5'>
+      <section className='pt-5 pb-5 parallax-bg'>
         <div className='container'>
           <div className='row mt-0 mt-md-4'>
             <div className='col-lg-12 col-md-8 col-12'>
-              <>
-                <section className='py-4 py-lg-6 bg-primary rounded-3'>
+              <form>
+                <section className='py-4 py-lg-6 bg-primarys/80 rounded-3 mt-10'>
                   <div className='container'>
                     <div className='row'>
                       <div className='offset-lg-1 col-lg-10 col-md-12 col-12'>
@@ -81,7 +88,7 @@ function AddPost () {
                           type='file'
                         />
                       </div>
-
+                      {/* Title start */}
                       <div className='mb-3'>
                         <label className='form-label'>Title</label>
                         <input
@@ -91,6 +98,8 @@ function AddPost () {
                         />
                         <small>Write a 60 character post title.</small>
                       </div>
+                      {/* Title end */}
+                      {/* Category start */}
                       <div className='mb-3'>
                         <label className='form-label'>Posts category</label>
                         <select className='form-select'>
@@ -106,7 +115,9 @@ function AddPost () {
                           that represent your post.
                         </small>
                       </div>
+                      {/* Category end */}
 
+                      {/* Description start */}
                       <div className='mb-3'>
                         <label className='form-label'>Post Description</label>
                         <textarea
@@ -118,22 +129,28 @@ function AddPost () {
                         />
                         <small>A brief summary of your posts.</small>
                       </div>
-                      <label className='form-label'>Tag</label>
-                      <input
-                        className='form-control'
-                        type='number'
-                        placeholder='health, medicine, fitness'
-                      />
+                      {/* Description end */}
+
+                      {/* Tag start */}
+                      <div className='mb-3'>
+                        <label className='form-label'>Tag</label>
+                        <input
+                          className='form-control'
+                          type='number'
+                          placeholder='health, medicine, fitness'
+                        />
+                      </div>
+                      {/* Tag end */}
                     </div>
                   </div>
                   <button
-                    className='btn btn-lg btn-success w-100 mt-2'
+                    className='btn btn-lg !bg-primarys hover:!bg-primarys-hover w-100 mt-2'
                     type='button'
                   >
                     Create Post <i className='fas fa-check-circle' />
                   </button>
                 </section>
-              </>
+              </form>
             </div>
           </div>
         </div>
