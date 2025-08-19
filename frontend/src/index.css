@@ -1,5 +1,42 @@
 @import "tailwindcss";
 
+@theme {
+  --color-secondary: #576a7a;
+  --color-primarys: #CBB9A8;
+  --color-primarys-hover: #c1ac97
+}
+
+.libertinus-sans-regular, * {
+  font-family: "Libertinus Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.libertinus-sans-bold {
+  font-family: "Libertinus Sans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.libertinus-sans-regular-italic {
+  font-family: "Libertinus Sans", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+* {
+  caret-color: transparent;
+}
+
+/* Parallax background effect for posts-section */
+.parallax-bg {
+  background-image: url('/bg3.jpg'); /* Cambia la ruta si quieres otra imagen */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 a:link {
     text-decoration: none;
 }
