@@ -48,7 +48,7 @@ function Register () {
     <>
       <Header />
       <section
-        className='container d-flex flex-column vh-100 mt-[40px]'
+        className='min-h-[100dvh] d-flex flex-column vh-100 mt-[40px] parallax-bg'
       >
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
           <div className='col-lg-5 col-md-8 py-8 py-xl-0'>
@@ -58,7 +58,7 @@ function Register () {
                   <h1 className='mb-1 fw-bold'>Sign up</h1>
                   <span>
                     Already have an account?
-                    <Link to='/login/' className='ms-1'>
+                    <Link to='/login/' className='ms-1 text-secondary !underline'>
                       Sign In
                     </Link>
                   </span>
@@ -135,7 +135,7 @@ function Register () {
                   </div>
                   <div>
                     <div className='d-grid'>
-                      <button type='submit' className='btn btn-primary'>
+                      <button type='submit' className='btn btn-secondary '>
                         Sign Up <i className='fas fa-user-plus' />
                       </button>
                     </div>

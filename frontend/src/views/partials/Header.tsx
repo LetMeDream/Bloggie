@@ -27,7 +27,7 @@ const Header = () => {
   const isLogged = isLoggedIn();
 
   const headerStyles = {
-    'outer-container': 'bg-[#fcfcfc] text-[#576a7a] z-50 relative flex items-center',
+    'outer-container': 'bg-[#fcfcfc] text-secondary z-50 relative flex items-center',
     'inner-container':'!py-[8.5px] lg:py-0 container flex flex-nowrap justify-between items-center w-full',
     'left-side': 'flex items-center',
     'left-side-logo': 'mr-5 w-48',
@@ -41,17 +41,17 @@ const Header = () => {
     'responsive-navigation': 'flex flex-col items-center justify-center',
     'responsive-search-container': 'w-full flex justify-center',
     'responsive-search': 'w-[80%] max-w-[500px] px-4 py-2 rounded-md bg-white text-black focus:outline-none',
-    'link-btn': 'p-2 flex items-center gap-2 !text-[#576a7a] rounded focus:outline-none',
+    'link-btn': 'p-2 flex items-center gap-2 !text-secondary rounded focus:outline-none',
     'li': 'py-2 m-0 w-full flex flex-col justify-center items-center hover:text-gray-300 no-underline text-white',
-    'link': 'mr-2 !text-[#576a7a] hover:!text-gray-300',
+    'link': 'mr-2 !text-secondary hover:!text-gray-300',
     'dropdown-btn': ' hover:text-gray-300 flex items-center',
     'social-media': 'hidden lg:flex items-center gap-2 ',
-    'social-media-link': 'text-2xl text-[#576a7a] hover'
+    'social-media-link': 'text-2xl text-secondary hover'
   }
 
   return (
     /* Header */
-    <header className='bg-[#fcfcfc] fixed top-0 left-0 w-full z-50 text-[#576a7a]' id='header'>
+    <header className='bg-[#fcfcfc] fixed top-0 left-0 w-full z-50 text-secondary caret-transparent' id='header'>
       <div className={headerStyles['outer-container']}>
         <div className={headerStyles['inner-container']}>
           {/* Logo and Search Bar */}
@@ -59,8 +59,8 @@ const Header = () => {
             {/* Logo */}
             <div className={headerStyles['left-side-logo']}>
               <Link to='/' className="flex items-center gap-2">
-                <GiAtomicSlashes className='text-7xl text-[#576a7a] ' />
-                <div className="text-2xl font-bold text-[#576a7a] libertinus-sans-bold">
+                <GiAtomicSlashes className='text-7xl text-secondary ' />
+                <div className="text-2xl font-bold text-secondary libertinus-sans-bold">
                   Bloggie
                 </div>
               </Link>
@@ -185,15 +185,17 @@ const Header = () => {
 
           {/* Social Media Links */}
           <div className={headerStyles['social-media']}>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <IoLogoTwitter className='text-2xl text-[#576a7a]' />
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <IoLogoFacebook className='text-2xl text-[#576a7a]' />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <IoLogoInstagram className='text-2xl text-[#576a7a]' />
-            </a>
+            {/* Beutifully styled input */}
+            <button
+              className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm bg-transparent relative text-stone-700 hover:text-stone-700 border-stone-500 hover:bg-transparent duration-150 hover:border-stone-600 !rounded-full hover:opacity-60 hover:shadow-none"
+            >
+              <Link
+                to='/add-post/'
+                className="text-secondary flex items-center gap-2"
+              >
+              Write...
+              </Link>
+            </button>
           </div>
 
           {/* Mobile menu button */}

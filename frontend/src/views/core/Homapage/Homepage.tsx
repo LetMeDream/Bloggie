@@ -43,7 +43,7 @@ function Index () {
     <div>
       <Header/>
 
-      <section className='posts-section min-vh-100 border'>
+      <section className='posts-section min-vh-100 border parallax-bg'>
         <div 
           className='container relative md:mt-28'
         >
@@ -80,7 +80,7 @@ function Index () {
               <ul className='pagination mb-0'>
                 <li className={Cn('page-item', { disabled: isFirstPage })}>
                   <button
-                    onClick={handlePrevPage}text-gray-500
+                    onClick={handlePrevPage}
                     className={Cn('page-link text-dark fw-bold me-1 rounded caret-transparent ', { '!text-gray-300': isFirstPage })}
                     disabled={isFirstPage}
                     aria-label='Previous'
