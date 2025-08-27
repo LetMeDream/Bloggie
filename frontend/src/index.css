@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-secondary: #576a7a;
@@ -24,8 +25,24 @@
   font-style: italic;
 }
 
-* {
+.MDX-toolbar {
   caret-color: transparent;
+  z-index: 9999 !important;
+  overflow: visible !important;
+  justify-content: center;
+}
+
+/* src/styles/mdxeditor-custom.css */
+.mdxeditor {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  background: #fcfcfc;
+  min-height: 50dvh;
+  resize: block !important;
+}
+.mdxeditor ul {
+  list-style-type: circle;
+  list-style-position: inside;
 }
 
 /* Parallax background effect for posts-section */
