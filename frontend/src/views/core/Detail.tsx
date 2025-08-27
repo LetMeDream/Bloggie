@@ -16,9 +16,7 @@ function Detail () {
       <Header />
       <section className=' pt-28 parallax-bg'
       >
-        <div 
-          className='container'
-        >
+        <div className='container'>
           <div className='row'>
             <div className='col-lg-2'>
               <div
@@ -115,8 +113,8 @@ function Detail () {
                 </ul>
               </div>
             </div>
-            {/* Left sidebar START */}
-            <div className='col-10'>
+            {/* Left sidebar END */}
+            <div className='col-10 bg-primarys p-4 py-6 rounded'>
               <a href='#' className='badge bg-danger mb-2 text-decoration-none'>
                 <i className='small fw-bold ' />
                 Lifestyle
