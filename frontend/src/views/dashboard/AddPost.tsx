@@ -2,13 +2,26 @@ import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-
+import MDXEditory from './MDXEditor/MDXEditor'
 function AddPost () {
   const methods = useForm({
     defaultValues: {
-      
+      title: '',
+      description: '',
+      status: 'draft',
+      tags: [],
+      category: '',
+      user: '',
+      image: ''
     }
   })
+
+  const { handleSubmit, register } = methods
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+    // Here you would typically send the data to your backend
+  } 
 
   return (
     <>
@@ -17,7 +30,7 @@ function AddPost () {
         <div className='container'>
           <div className='row mt-0 mt-md-4'>
             <div className='col-lg-12 col-md-8 col-12'>
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <section className='py-4 py-lg-6 bg-primarys/80 rounded-3 mt-10'>
                   <div className='container'>
                     <div className='row'>
@@ -60,34 +73,24 @@ function AddPost () {
                 <section className='pb-8 mt-5'>
                   <div className='card mb-3'>
                     {/* Basic Info Section */}
-                    <div className='card-header border-bottom px-4 py-3'>
+                    <div className='card-header px-4 py-3'>
                       <h4 className='mb-0'>Basic Information</h4>
                     </div>
                     <div className='card-body'>
-                      <label htmlFor='postTHumbnail' className='form-label'>
-                        Preview
-                      </label>
-                      <img
-                        style={{
-                          width: '100%',
-                          height: '330px',
-                          objectFit: 'cover',
-                          borderRadius: '10px'
-                        }}
-                        className='mb-4'
-                        src='https://www.eclosio.ong/wp-content/uploads/2018/08/default.png'
-                        alt=''
-                      />
+                      {/* Description start */}
                       <div className='mb-3'>
-                        <label htmlFor='postTHumbnail' className='form-label'>
-                          Thumbnail
-                        </label>
-                        <input
-                          id='postTHumbnail'
-                          className='form-control'
-                          type='file'
-                        />
+                          <label className='form-label'>Post:</label>
+                          {/* <textarea
+                            name=''
+                            className='form-control'
+                            id=''
+                            cols={30}
+                            rows={10}
+                          /> */}
+                          <MDXEditory />
                       </div>
+                      {/* Description end */}
+                      
                       {/* Title start */}
                       <div className='mb-3'>
                         <label className='form-label'>Title</label>
@@ -116,21 +119,6 @@ function AddPost () {
                         </small>
                       </div>
                       {/* Category end */}
-
-                      {/* Description start */}
-                      <div className='mb-3'>
-                        <label className='form-label'>Post Description</label>
-                        <textarea
-                          name=''
-                          className='form-control'
-                          id=''
-                          cols={30}
-                          rows={10}
-                        />
-                        <small>A brief summary of your posts.</small>
-                      </div>
-                      {/* Description end */}
-
                       {/* Tag start */}
                       <div className='mb-3'>
                         <label className='form-label'>Tag</label>
@@ -141,11 +129,43 @@ function AddPost () {
                         />
                       </div>
                       {/* Tag end */}
+
+                      {/* Thumbnail Preview */}
+                      <label htmlFor='postTHumbnail' className='form-label'>
+                        Preview
+                      </label>
+                      <img
+                        style={{
+                          maxWidth: '100%',
+                          height: '330px',
+                          objectFit: 'fill',
+                          borderRadius: '10px',
+                          margin: '0 auto'
+                        }}
+                        className='mb-4'
+                        src='https://www.eclosio.ong/wp-content/uploads/2018/08/default.png'
+                        alt=''
+                      />
+                      {/* Thumbnail Preview End */}
+                      {/* Input Image */}
+                      <div className='mb-3'>
+                        <label htmlFor='postTHumbnail' className='form-label'>
+                          Thumbnail
+                        </label>
+                        <input
+                          id='postTHumbnail'
+                          className='form-control'
+                          type='file'
+                          accept='image/*'
+                          {...register('image')}
+                        />
+                      </div>
+                      {/* Input Image End */}
                     </div>
                   </div>
                   <button
                     className='btn btn-lg !bg-primarys hover:!bg-primarys-hover w-100 mt-2'
-                    type='button'
+                    type='submit'
                   >
                     Create Post <i className='fas fa-check-circle' />
                   </button>
