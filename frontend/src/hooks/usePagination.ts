@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Post } from "../types/posts"
 
 export const usePagination = ({
     elements
