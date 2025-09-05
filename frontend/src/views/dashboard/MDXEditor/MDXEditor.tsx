@@ -11,66 +11,57 @@ import {
   linkPlugin, 
   listsPlugin, 
   headingsPlugin,
-  codeBlockPlugin, CodeBlockEditorDescriptor,
+  codeBlockPlugin, CodeBlockEditorDescriptor, Select,
   AdmonitionDirectiveDescriptor, directivesPlugin, CreateLink, linkDialogPlugin
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 import { useState, useRef } from 'react'
+import { UseFormSetValue } from 'react-hook-form'
+import { AddPostForm } from '../../../types/posts'
+
+type MDXEditoryProps = {
+  setValue: UseFormSetValue<AddPostForm>
+}
 
 function AdmonitionDropdown({ editorRef }: { editorRef: React.RefObject<any> }) {
-  const [open, setOpen] = useState(false)
+  const [selected, setSelected] = useState('')
 
-  const insert = (type: string) => {
-    editorRef.current?.insertMarkdown?.(`\n:::${type}\n\n:::\n`)
-    setOpen(false)
+  const handleChange = (type: string) => {
+    setSelected(type)
+    if (type) {
+      editorRef.current?.insertMarkdown?.(`\n:::${type}\n\n:::\n`)
+    }
   }
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block', zIndex: 9999 }}>
-      <button
-        type="button"
-        className="mdxeditor-toolbar-button"
-        title="Insertar admonition"
-        onClick={() => setOpen((v) => !v)}
-      >
-        Admonitions ▼
-      </button>
-      {open && (
-        <div
-          style={{
-            position: 'absolute',
-            zIndex: 10,
-            background: '#fff',
-            border: '1px solid #ccc',
-            minWidth: 120,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-          }}
-        >
-          {['note', 'tip', 'info', 'caution', 'danger'].map((type) => (
-            <button
-              key={type}
-              className="mdxeditor-toolbar-button hover:bg-primarys-hover"
-              style={{ display: 'block', width: '100%', textAlign: 'left', padding: '4px 8px' }}
-              onClick={() => insert(type)}
-              type="button"
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    <Select
+      value={selected}
+      onChange={handleChange}
+      triggerTitle="Admonitions"
+      placeholder="Admonitions..."
+      items={[
+        { value: 'note', label: 'Note' },
+        { value: 'tip', label: 'Tip' },
+        { value: 'info', label: 'Info' },
+        { value: 'caution', label: 'Caution' },
+        { value: 'danger', label: 'Danger' }
+      ]}
+    />
   )
 }
 
-function MDXEditory() {
+function MDXEditory({ setValue }: MDXEditoryProps) {
   const [markdown, setMarkdown] = useState<string>('')
   const editorRef = useRef<any>(null)
 
   return (
     <MDXEditor
       ref={editorRef}
-      onChange={setMarkdown}
+      onChange={(value) => {
+        console.log(value)
+        setMarkdown(value)
+        setValue('description', value)
+      }}
       markdown={markdown}
       className=''
       spellCheck={false}
