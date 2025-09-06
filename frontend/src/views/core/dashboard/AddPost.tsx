@@ -1,10 +1,13 @@
-import Header from '../partials/Header'
-import Footer from '../partials/Footer'
+import Header from '../../partials/Header'
+import Footer from '../../partials/Footer'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import MDXEditory from './MDXEditor/MDXEditor'
+import CreatableSelect from 'react-select/creatable';
+import { AddPostForm } from '../../../types/posts'
+
 function AddPost () {
-  const methods = useForm({
+  const methods = useForm<AddPostForm>({
     defaultValues: {
       title: '',
       description: '',
@@ -16,12 +19,18 @@ function AddPost () {
     }
   })
 
-  const { handleSubmit, register } = methods
+  const { handleSubmit, register, setValue } = methods
 
   const onSubmit = (data: any) => {
     console.log(data)
     // Here you would typically send the data to your backend
   } 
+
+  const selectableOptions = [
+    { value: 'health', label: 'Health' },
+    { value: 'medicine', label: 'Medicine' },
+    { value: 'fitness', label: 'Fitness' }
+  ]
 
   return (
     <>
@@ -31,6 +40,7 @@ function AddPost () {
           <div className='row mt-0 mt-md-4'>
             <div className='col-lg-12 col-md-8 col-12'>
               <form onSubmit={handleSubmit(onSubmit)}>
+                {/* Header/Hero */}
                 <section className='py-4 py-lg-6 bg-primarys/80 rounded-3 mt-10'>
                   <div className='container'>
                     <div className='row'>
@@ -70,6 +80,7 @@ function AddPost () {
                     </div>
                   </div>
                 </section>
+                {/* Fields down here */}
                 <section className='pb-8 mt-5'>
                   <div className='card mb-3'>
                     {/* Basic Info Section */}
@@ -80,14 +91,9 @@ function AddPost () {
                       {/* Description start */}
                       <div className='mb-3'>
                           <label className='form-label'>Post:</label>
-                          {/* <textarea
-                            name=''
-                            className='form-control'
-                            id=''
-                            cols={30}
-                            rows={10}
-                          /> */}
-                          <MDXEditory />
+                          <MDXEditory 
+                            setValue={setValue}
+                          />
                       </div>
                       {/* Description end */}
                       
@@ -98,6 +104,7 @@ function AddPost () {
                           className='form-control'
                           type='text'
                           placeholder=''
+                          {...register('title')}
                         />
                         <small>Write a 60 character post title.</small>
                       </div>
@@ -105,9 +112,9 @@ function AddPost () {
                       {/* Category start */}
                       <div className='mb-3'>
                         <label className='form-label'>Posts category</label>
-                        <select className='form-select'>
+                        <select className='form-select' {...register('category')}>
                           <option value=''>-------------</option>
-                          <option value='React'>Lifstyle</option>
+                          <option value='React'>Lifestyle</option>
                           <option value='Javascript'>Fashion</option>
                           <option value='HTML'>Tech</option>
                           <option value='Vue'>Health</option>
@@ -122,10 +129,18 @@ function AddPost () {
                       {/* Tag start */}
                       <div className='mb-3'>
                         <label className='form-label'>Tag</label>
-                        <input
-                          className='form-control'
-                          type='number'
-                          placeholder='health, medicine, fitness'
+                        <CreatableSelect 
+                          isClearable
+                          isMulti
+                          options={selectableOptions}
+                          onChange={(selected) => {
+                            let values: string[] = []
+                            selected.forEach((item) => {
+                              values.push(item.value)
+                            })
+                            setValue('tags', values);
+                            console.log('Selected tags:', selected);
+                          }}
                         />
                       </div>
                       {/* Tag end */}
