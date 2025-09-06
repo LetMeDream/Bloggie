@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../partials/Header'
-import Footer from '../partials/Footer'
+import Header from '../../partials/Header'
+import Footer from '../../partials/Footer'
 import { Link } from 'react-router-dom'
 
 function AddPost () {
@@ -112,8 +112,8 @@ function AddPost () {
                           name=''
                           className='form-control'
                           id=''
-                          cols='30'
-                          rows='10'
+                          cols={30}
+                          rows={10}
                         />
                         <small>A brief summary of your posts.</small>
                       </div>

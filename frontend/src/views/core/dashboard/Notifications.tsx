@@ -1,5 +1,5 @@
-import Header from '../partials/Header'
-import Footer from '../partials/Footer'
+import Header from '../../partials/Header'
+import Footer from '../../partials/Footer'
 
 function Notifications () {
   return (

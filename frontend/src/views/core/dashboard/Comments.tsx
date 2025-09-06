@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../partials/Header'
-import Footer from '../partials/Footer'
+import Header from '../../partials/Header'
+import Footer from '../../partials/Footer'
 import { Link } from 'react-router-dom'
 
 function Comments () {
@@ -97,9 +97,9 @@ function Comments () {
                                     <textarea
                                       name=''
                                       id=''
-                                      cols='30'
+                                      cols={30}
                                       className='form-control'
-                                      rows='4'
+                                      rows={4}
                                     />
                                   </div>
 

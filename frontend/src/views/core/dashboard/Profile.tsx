@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../partials/Header'
-import Footer from '../partials/Footer'
+import Header from '../../partials/Header'
+import Footer from '../../partials/Footer'
 import { Link } from 'react-router-dom'
 
 function Profile () {
@@ -66,7 +66,7 @@ function Profile () {
                           id='fname'
                           className='form-control'
                           placeholder="What's your full name?"
-                          required=''
+                          required
                         />
                         <div className='invalid-feedback'>
                           Please enter first name.
@@ -81,7 +81,7 @@ function Profile () {
                           id='fname'
                           className='form-control'
                           placeholder='Write a catchy bio!'
-                          required=''
+                          required
                         />
                         <div className='invalid-feedback'>
                           Please enter first name.
@@ -95,8 +95,8 @@ function Profile () {
                           placeholder='Tell us about yourself...'
                           name=''
                           id=''
-                          cols='30'
-                          rows='5'
+                          cols={30}
+                          rows={5}
                           className='form-control'
                         />
                         <div className='invalid-feedback'>
@@ -113,7 +113,7 @@ function Profile () {
                           id='country'
                           className='form-control'
                           placeholder='What country are you from?'
-                          required=''
+                          required
                         />
                         <div className='invalid-feedback'>
                           Please choose country.
