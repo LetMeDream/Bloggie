@@ -10,7 +10,7 @@ import { Post } from '../../../types/posts'
 import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
 import { useBloggieStore } from '../../../store/store'
-import Loader from '../../pages/Loader/Loader' 
+import Loader from '../../core/Loader/Loader' 
 
 function Index () {
   const {
