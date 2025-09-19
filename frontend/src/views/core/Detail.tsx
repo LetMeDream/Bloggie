@@ -3,7 +3,7 @@ import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
 import { useBloggieStore } from '../../store/store';
-import Loader from '../pages/Loader/Loader';
+import Loader from '../core/Loader/Loader';
 import { Post } from '../../types/posts'
 
 function Detail () {
