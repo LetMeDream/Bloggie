@@ -44,7 +44,7 @@ function Notifications () {
                             </p>
                             <p>
                               <button
-                                className='btn btn-outline-secondary'
+                                className='btn btn-outline-secondarys'
                                 type='button'
                               >
                                 Mark as Seen <i className='fas fa-check' />
@@ -81,7 +81,7 @@ function Notifications () {
                             </p>
                             <p>
                               <button
-                                className='btn btn-outline-secondary'
+                                className='btn btn-outline-secondarys'
                                 type='button'
                               >
                                 Mark as Seen <i className='fas fa-check' />

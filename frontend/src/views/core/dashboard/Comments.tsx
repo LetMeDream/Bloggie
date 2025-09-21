@@ -74,7 +74,7 @@ function Comments () {
                             </p>
                             <p>
                               <button
-                                className='btn btn-outline-secondary'
+                                className='btn btn-outline-secondarys'
                                 type='button'
                                 data-bs-toggle='collapse'
                                 data-bs-target='#collapseExample'

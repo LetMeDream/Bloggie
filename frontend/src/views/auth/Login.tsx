@@ -15,7 +15,7 @@ function Login () {
                   <h1 className='mb-1 fw-bold'>Sign in</h1>
                   <span>
                     Don’t have an account?
-                    <Link to='/register/' className='ms-1 link-secondary !underline'>
+                    <Link to='/register/' className='ms-1 link-secondarys !underline'>
                       Sign up
                     </Link>
                   </span>
@@ -73,12 +73,12 @@ function Login () {
                       </div>
                     </div>
                     <div>
-                      <Link to='/forgot-password/' className='link-secondary !underline'>Forgot your password?</Link>
+                      <Link to='/forgot-password/' className='link-secondarys !underline'>Forgot your password?</Link>
                     </div>
                   </div>
                   <div>
                     <div className='d-grid'>
-                      <button type='submit' className='btn btn-secondary'>
+                      <button type='submit' className='btn btn-secondarys'>
                         Sign in <i className='fas fa-sign-in-alt' />
                       </button>
                     </div>
