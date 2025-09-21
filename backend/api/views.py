@@ -23,6 +23,9 @@ from api.models import User, Profile, Category, Post, Notification, Comment, Boo
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from django.db.models import Sum 
+from django.views.decorators.cache import cache_control
+from django.utils.decorators import method_decorator
+
 import pdb  # Imported for depuration
 
 # Create your views here.
@@ -89,6 +92,7 @@ class PostCategoryListView(generics.ListAPIView):
     return Post.objects.filter(category=category, status='Active')
 
 # All Posts
+@method_decorator(cache_control(max_age=31536000), name='dispatch')  
 class PostListView(generics.ListAPIView):
   queryset = Post.objects.all().order_by('-id')
   serializer_class = PostSerializer
