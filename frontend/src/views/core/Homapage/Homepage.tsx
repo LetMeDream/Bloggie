@@ -120,7 +120,9 @@ function Index () {
         </div>
       </section>
 
-      <Categories category={category} />
+      <section className='bg-gray-50'>
+        <Categories category={category} />
+      </section>
 
       <Footer />
     </div>

@@ -1,10 +1,10 @@
-import Header from '../../partials/Header'
-import Footer from '../../partials/Footer'
+import Header from '../../../partials/Header'
+import Footer from '../../../partials/Footer'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import MDXEditory from './MDXEditor/MDXEditor'
 import CreatableSelect from 'react-select/creatable';
-import { AddPostForm } from '../../../types/posts'
+import { AddPostForm } from '../../../../types/posts'
 
 function AddPost () {
   const methods = useForm<AddPostForm>({
