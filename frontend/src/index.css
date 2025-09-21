@@ -1,8 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@plugin "daisyui";
 
 @theme {
-  --color-secondary: #576a7a;
+  --color-secondarys: #576a7a;
   --color-primarys: #CBB9A8;
   --color-primarys-hover: #c1ac97
 }
