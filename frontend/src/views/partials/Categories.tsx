@@ -5,7 +5,7 @@ const Categories = ({category}: {
   category: CategoryType[];
 }) => {
   return (
-    <section className='container '>
+    <section className='container'>
         <div className='row g-0'>
           <div className='col-12 '>
             <div className='mb-4 pt-4 '>
