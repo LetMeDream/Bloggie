@@ -6,7 +6,6 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 import { GiAtomicSlashes } from "react-icons/gi";
-import { IoLogoTwitter, IoLogoFacebook, IoLogoInstagram } from "react-icons/io5";
 import { useBloggieStore } from "../../store/store";
 
 const Header = () => {
