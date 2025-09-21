@@ -7,50 +7,21 @@ import { LuLogIn } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 import { GiAtomicSlashes } from "react-icons/gi";
 import { useBloggieStore } from "../../store/store";
+import useHeader from "../../hooks/useHeader";
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-  const toggleDropdown = (menu: string | null) => {
-    setOpenDropdown(openDropdown === menu ? null : menu);
-  };
-  const closeDropdown = () => {
-    setOpenDropdown(null);
-  };
+
   const location = useLocation();
   const path = location.pathname
   const { isLoggedIn } = useBloggieStore();
   const isLogged = isLoggedIn();
 
-  const headerStyles = {
-    'outer-container': 'bg-[#fcfcfc] text-secondary z-50 relative flex items-center',
-    'inner-container':'!py-[8.5px] lg:py-0 container flex flex-nowrap justify-between items-center w-full',
-    'left-side': 'flex items-center',
-    'left-side-logo': 'mr-5 w-48',
-    'left-side-search-container': 'hidden lg:block search-input w-full md:w-auto  flex-grow md:flex-grow-0 md:mx-4',
-    'left-side-search': 'w-full border md:w-60 px-4 rounded-md pt-2 pb-2 bg-white text-black focus:outline-none',
-    'navigation-container': 'hidden lg:flex items-center justify-center libertinus-sans-regular',
-    'navigation': 'flex items-center justify-center space-x-3 nowrap h-full',
-    'mobile-menu-button': 'lg:hidden flex items-center justify-center',
-    'responsive-menu-container': 'lg:hidden menu-open absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300',
-    'responsive-input': 'w-full pt-2 px-4 flex justify-center',
-    'responsive-navigation': 'flex flex-col items-center justify-center',
-    'responsive-search-container': 'w-full flex justify-center',
-    'responsive-search': 'w-[80%] max-w-[500px] px-4 py-2 rounded-md bg-white text-black focus:outline-none',
-    'link-btn': 'p-2 flex items-center gap-2 !text-secondary rounded focus:outline-none',
-    'li': 'py-2 m-0 w-full flex flex-col justify-center items-center hover:text-gray-300 no-underline text-white',
-    'link': 'mr-2 !text-secondary hover:!text-gray-300',
-    'dropdown-btn': ' hover:text-gray-300 flex items-center',
-    'social-media': 'hidden lg:flex items-center gap-2 ',
-    'social-media-link': 'text-2xl text-secondary hover'
-  }
+
+  const { headerStyles, toggleMenu, toggleDropdown, closeDropdown, openDropdown, menuOpen } = useHeader();
 
   return (
     /* Header */
-    <header className='bg-[#fcfcfc] fixed top-0 left-0 w-full z-50 text-secondary caret-transparent' id='header'>
+    <header className='bg-[#fcfcfc] fixed top-0 left-0 w-full z-50 text-secondarys caret-transparent' id='header'>
       <div className={headerStyles['outer-container']}>
         <div className={headerStyles['inner-container']}>
           {/* Logo and Search Bar */}
@@ -58,8 +29,8 @@ const Header = () => {
             {/* Logo */}
             <div className={headerStyles['left-side-logo']}>
               <Link to='/' className="flex items-center gap-2">
-                <GiAtomicSlashes className='text-7xl text-secondary ' />
-                <div className="text-2xl font-bold text-secondary libertinus-sans-bold">
+                <GiAtomicSlashes className='text-7xl text-secondarys ' />
+                <div className="text-2xl font-bold text-secondarys libertinus-sans-bold">
                   Bloggie
                 </div>
               </Link>
@@ -157,7 +128,7 @@ const Header = () => {
               </li>)
               }
               {/* Register y Login condicionales */}
-              {path !== '/register/' && (
+              {path !== '/register/' && !isLogged && (
                 <li>
                   <Link to='/register/'
                     className={headerStyles['link-btn']}
@@ -167,7 +138,7 @@ const Header = () => {
                   </Link>
                 </li>
               )}
-              {path !== '/login/' && (
+              {path !== '/login/' && !isLogged && (
                 <li>
                   <Link to='/login/'
                     className={headerStyles['link-btn']}
@@ -182,7 +153,7 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* Social Media Links */}
+          {/* WRITE */}
           <div className={headerStyles['social-media']}>
             {/* Beutifully styled input */}
             <button
@@ -190,7 +161,7 @@ const Header = () => {
             >
               <Link
                 to='/add-post/'
-                className="text-secondary flex items-center gap-2"
+                className="!text-secondarys flex items-center gap-2"
               >
               Write...
               </Link>
@@ -301,7 +272,7 @@ const Header = () => {
                 )}
               </li>
               {/* Register y Login condicionales en menú móvil */}
-              {path !== '/register/' && (
+              {path !== '/register/' && !isLogged && (
                 <li className='py-2 m-0'>
                   <Link to='/register/'
                     className={headerStyles['link-btn']}
@@ -311,9 +282,10 @@ const Header = () => {
                   </Link>
                 </li>
               )}
-              {path !== '/login/' && (
+              {path !== '/login/' && !isLogged && (
                 <li className='py-2 m-0'>
-                  <Link to='/login/'
+                  <Link 
+                    to='/login/'
                     className={headerStyles['link-btn']}
                   >
                     Login
@@ -323,6 +295,12 @@ const Header = () => {
                   </Link>
                 </li>
               )}
+              {/* Create, if logged in */}
+              {isLogged && (
+                <CreateBtn 
+                  className={"mb-3 "} 
+                />
+              )}
             </ul>
           </div>
         )}
@@ -331,5 +309,27 @@ const Header = () => {
     </header>
   );
 };
+
+/* Btn for creating posts; Takes to /add-post/ */
+const CreateBtn: React.FC<{ className: string }> = ({ className }) => {
+  return (
+    <>
+      <div className={className}>
+        {/* Beutifully styled input */}
+        <button
+          className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all ease-in focus:shadow-none text-sm py-2 px-4 shadow-sm bg-gray-100 relative text-stone-700 hover:text-stone-700 border-stone-500 hover:bg-gray-50 duration-150 hover:border-stone-600 !rounded-full hover:shadow-none"
+        >
+          <Link
+            to='/add-post/'
+            className="!text-secondarys flex items-center gap-2"
+          >
+          Write...
+          </Link>
+        </button>
+      </div>
+    </>
+  )
+}
+
 
 export default Header;
