@@ -58,7 +58,7 @@ function Register () {
                   <h1 className='mb-1 fw-bold'>Sign up</h1>
                   <span>
                     Already have an account?
-                    <Link to='/login/' className='ms-1 text-secondary !underline'>
+                    <Link to='/login/' className='ms-1 text-secondarys !underline'>
                       Sign In
                     </Link>
                   </span>
@@ -135,7 +135,7 @@ function Register () {
                   </div>
                   <div>
                     <div className='d-grid'>
-                      <button type='submit' className='btn btn-secondary '>
+                      <button type='submit' className='btn btn-secondarys '>
                         Sign Up <i className='fas fa-user-plus' />
                       </button>
                     </div>
