@@ -81,7 +81,7 @@ function MDXEditory({ setValue }: MDXEditoryProps) {
           <MDXEditor
             ref={normalEditorRef}
             onChange={(value) => {
-              console.log(value)
+              // console.log(value)
               setMarkdown(value)
               setValue('description', value)
             }}
@@ -121,8 +121,8 @@ function MDXEditory({ setValue }: MDXEditoryProps) {
             style={{ width: size.width, height: size.height, resize: 'none' }}
             className='!border-primarys border rounded-lg pt-10 pl-4 text-gray-500 caret-transparent focus:outline-none'
             value={markdown}
+            readOnly
           >
-            {markdown}
           </textarea>
           
         </div>
