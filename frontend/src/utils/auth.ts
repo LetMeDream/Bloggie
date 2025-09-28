@@ -16,7 +16,7 @@ import Swal from 'sweetalert2'
 // Configuring global toast notifications using Swal.mixin
 const Toast = Swal.mixin({
   toast: true,
-  position: 'top',
+  position: 'top-start',
   showConfirmButton: false,
   timer: 1500,
   timerProgressBar: true
