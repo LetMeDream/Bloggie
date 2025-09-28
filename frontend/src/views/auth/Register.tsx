@@ -12,7 +12,7 @@ function Register () {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
-  const handleRegisterDataChanege = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRegisterDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setRegisterData((prevState) => ({
       ...prevState,
@@ -82,7 +82,7 @@ function Register () {
                       name='full_name'
                       placeholder='John Doe'
                       required={undefined}
-                      onChange={handleRegisterDataChanege}
+                      onChange={handleRegisterDataChange}
                       autoComplete='off'
                     />
                   </div>
@@ -97,7 +97,7 @@ function Register () {
                       name='email'
                       placeholder='johndoe@gmail.com'
                       required={undefined}
-                      onChange={handleRegisterDataChanege}
+                      onChange={handleRegisterDataChange}
                       autoComplete='off'
                     />
                   </div>
@@ -114,7 +114,7 @@ function Register () {
                       name='password'
                       placeholder='**************'
                       required={undefined}
-                      onChange={handleRegisterDataChanege}
+                      onChange={handleRegisterDataChange}
                       autoComplete='off'
                     />
                   </div>
@@ -129,7 +129,7 @@ function Register () {
                       name='password2'
                       placeholder='**************'
                       required={undefined}
-                      onChange={handleRegisterDataChanege}
+                      onChange={handleRegisterDataChange}
                       autoComplete='off'
                     />
                   </div>
