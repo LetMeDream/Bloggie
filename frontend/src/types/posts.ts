@@ -24,7 +24,7 @@ export type AddPostForm = {
   description: string
   status: 'draft' | 'published'
   tags: string[]
-  category: string
+  category: string | number
   user: string
   image: string
 }
