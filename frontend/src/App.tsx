@@ -14,11 +14,12 @@ import Logout from './views/auth/Logout'
 import ForgotPassword from './views/auth/ForgotPassword'
 import CreatePassword from './views/auth/CreatePassword'
 import Dashboard from './views/core/dashboard/Dashboard'
-import AddPost from './views/core/dashboard/AddPost'
+import AddPost from './views/core/dashboard/AddPost/AddPost'
 import EditPost from './views/core/dashboard/EditPost'
 import Comments from './views/core/dashboard/Comments'
 import Notifications from './views/core/dashboard/Notifications'
 import Profile from './views/core/dashboard/Profile'
+import PrivateRoute from './layouts/PrivateRoute'
 
 function App () {
 
@@ -42,7 +43,10 @@ function App () {
           {/* Dashboard */}
           <Route path='/dashboard/' element={<Dashboard />} />
           <Route path='/posts/' element={<Posts />} />
-          <Route path='/add-post/' element={<AddPost />} />
+          <Route path='/add-post/' element={
+              <PrivateRoute><AddPost /></PrivateRoute>
+            } 
+          />
           <Route path='/edit-post/:id/' element={<EditPost />} />
           <Route path='/comments/' element={<Comments />} />
           <Route path='/notifications/' element={<Notifications />} />
