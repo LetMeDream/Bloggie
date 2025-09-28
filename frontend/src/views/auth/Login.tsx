@@ -1,8 +1,45 @@
+import { useState } from 'react'
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
+import { login } from '../../utils/auth'
+import Toast from '../../plugin/Toast'
+import { useNavigate } from 'react-router-dom'
 
 function Login () {
+  const [loginData, setLoginData] = useState({ email: '', password: '' })
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const handleLoginDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setLoginData((prevState) => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(loginData)
+    setIsLoading(true)
+    // Handle login logic here
+    try {
+      const response = await login(loginData.email, loginData.password)
+      if (!response.error) {
+        // Login successful
+        navigate('/homepage')
+      } else {
+        // Handle login error
+        Toast('error', 'Login failed', response.error)
+        setIsLoading(false)
+      }
+    } catch (error) {
+      Toast('error', 'Login failed', error as string)
+      setIsLoading(false)
+    }
+  }
+
   return (
     <>
       <Header />
@@ -21,7 +58,10 @@ function Login () {
                   </span>
                 </div>
                 {/* Form */}
-                <form className='needs-validation'>
+                <form 
+                  className='needs-validation'
+                  onSubmit={handleLogin}
+                >
                   {/* Username */}
                   <div className='mb-3'>
                     <label htmlFor='email' className='form-label'>
@@ -34,6 +74,7 @@ function Login () {
                       name='email'
                       placeholder='johndoe@gmail.com'
                       required
+                      onChange={handleLoginDataChange}
                     />
                     <div className='invalid-feedback'>
                       Please enter valid username.
@@ -51,6 +92,7 @@ function Login () {
                       name='password'
                       placeholder='**************'
                       required
+                      onChange={handleLoginDataChange}
                     />
                     <div className='invalid-feedback'>
                       Please enter valid password.
