@@ -1,23 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { IoPersonAddSharp } from "react-icons/io5";
+import { IoPersonAddSharp, IoLogOut } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 import { GiAtomicSlashes } from "react-icons/gi";
 import { useBloggieStore } from "../../store/store";
 import useHeader from "../../hooks/useHeader";
+import { logout } from "../../utils/auth";
+/* Route for default user image */
+const defaultImage = "https://raw.githubusercontent.com/LetMeDream/Bloggie/master/frontend/public/user.png"
+
 
 const Header = () => {
 
   const location = useLocation();
   const path = location.pathname
-  const { isLoggedIn } = useBloggieStore();
-  const isLogged = isLoggedIn();
+  const { isLoggedIn, user, allUserData } = useBloggieStore();
+  const [isLogged, setIsLogged] = useState(isLoggedIn());
 
 
   const { headerStyles, toggleMenu, toggleDropdown, closeDropdown, openDropdown, menuOpen } = useHeader();
+
+  useEffect(() => {
+    setIsLogged(isLoggedIn());
+  }, [isLoggedIn, allUserData])
 
   return (
     /* Header */
@@ -123,6 +131,12 @@ const Header = () => {
                         Profile
                       </Link>
                     </li>
+                    <li className="pb-2">
+                      <button onClick={logout} className="text-black w-full text-left">
+                        Logout
+                        <IoLogOut className="inline ml-1" />
+                      </button>
+                    </li>
                   </ul>
                 )}
               </li>)
@@ -156,16 +170,26 @@ const Header = () => {
           {/* WRITE */}
           <div className={headerStyles['social-media']}>
             {/* Beutifully styled input */}
-            <button
-              className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed focus:shadow-none text-sm py-2 px-4 shadow-sm bg-transparent relative text-stone-700 hover:text-stone-700 border-stone-500 hover:bg-transparent duration-150 hover:border-stone-600 !rounded-full hover:opacity-60 hover:shadow-none"
-            >
-              <Link
-                to='/add-post/'
-                className="!text-secondarys flex items-center gap-2"
-              >
-              Write...
-              </Link>
-            </button>
+            <div className="flex items-center gap-2">
+              {/* User */}
+              {  isLogged && (
+                <>
+                  <div className='flex gap-2 items-center text-sm'>
+                    <span>
+                      { user()?.username }
+                    </span>
+
+                    <div className="avatar">
+                      <div className="w-8 rounded-full">
+                        <img src={defaultImage} />
+                      </div>  
+                    </div>
+
+                  </div>
+                </>
+              )}
+              <CreateBtn />
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -297,9 +321,9 @@ const Header = () => {
               )}
               {/* Create, if logged in */}
               {isLogged && (
-                <CreateBtn 
-                  className={"mb-3 "} 
-                />
+                  <CreateBtn 
+                    className={"mb-3 "} 
+                  />
               )}
             </ul>
           </div>
@@ -311,21 +335,21 @@ const Header = () => {
 };
 
 /* Btn for creating posts; Takes to /add-post/ */
-const CreateBtn: React.FC<{ className: string }> = ({ className }) => {
+const CreateBtn: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <>
       <div className={className}>
         {/* Beutifully styled input */}
-        <button
+        <Link
           className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all ease-in focus:shadow-none text-sm py-2 px-4 shadow-sm bg-gray-100 relative text-stone-700 hover:text-stone-700 border-stone-500 hover:bg-gray-50 duration-150 hover:border-stone-600 !rounded-full hover:shadow-none"
+          to='/add-post/'
         >
-          <Link
-            to='/add-post/'
+          <div
             className="!text-secondarys flex items-center gap-2"
           >
           Write...
-          </Link>
-        </button>
+          </div>
+        </Link>
       </div>
     </>
   )
