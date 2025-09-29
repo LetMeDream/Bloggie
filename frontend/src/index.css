@@ -31,6 +31,15 @@
   z-index: 10 !important;
   overflow: visible !important;
   justify-content: center;
+  display: flex;
+  flex-direction: column !important;
+}
+
+/* Media query to activate in screens bigger than 768px */
+@media (min-width: 768px) {
+  .MDX-toolbar {
+    flex-direction: row !important;
+  }
 }
 
 /* src/styles/mdxeditor-custom.css */

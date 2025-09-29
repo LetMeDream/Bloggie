@@ -16,14 +16,14 @@ const useHeader = () => {
 
   const headerStyles = {
     'outer-container': 'bg-[#fcfcfc] text-secondarys z-50 relative flex items-center',
-    'inner-container':'!py-[8.5px] lg:py-0 container flex flex-nowrap justify-between items-center w-full',
+    'inner-container':'!py-[8.5px] lg:py-0 container flex flex-nowrap justify-between items-center w-[100vw]',
+    'mobile-menu-button': 'lg:hidden flex items-center justify-center',
     'left-side': 'flex items-center',
     'left-side-logo': 'mr-5 w-48',
     'left-side-search-container': 'hidden lg:block search-input w-full md:w-auto  flex-grow md:flex-grow-0 md:mx-4',
     'left-side-search': 'w-full border md:w-60 px-4 rounded-md pt-2 pb-2 bg-white text-black focus:outline-none',
     'navigation-container': 'hidden lg:flex items-center justify-center libertinus-sans-regular',
     'navigation': 'flex items-center justify-center space-x-3 nowrap h-full',
-    'mobile-menu-button': 'lg:hidden flex items-center justify-center',
     'responsive-menu-container': 'lg:hidden menu-open absolute top-full left-0 w-full bg-gray-800 shadow-md transition-all duration-300',
     'responsive-input': 'w-full pt-2 px-4 flex justify-center',
     'responsive-navigation': 'flex flex-col items-center justify-center',
