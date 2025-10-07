@@ -16,11 +16,12 @@ import {
 } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
 import { useState, useRef, useEffect } from 'react'
-import { UseFormSetValue } from 'react-hook-form'
+import { set, UseFormSetValue } from 'react-hook-form'
 import { AddPostForm } from '../../../../../types/posts'
 
 type MDXEditoryProps = {
-  setValue: UseFormSetValue<AddPostForm>
+  setValue: UseFormSetValue<AddPostForm>,
+  defaultValue: String
 }
 
 function AdmonitionDropdown({ editorRef }: { editorRef: React.RefObject<any> }) {
@@ -50,7 +51,7 @@ function AdmonitionDropdown({ editorRef }: { editorRef: React.RefObject<any> }) 
   )
 }
 
-function MDXEditory({ setValue }: MDXEditoryProps) {
+function MDXEditory({ setValue, defaultValue }: MDXEditoryProps) {
   const [markdown, setMarkdown] = useState<string>('')
   const normalEditorRef = useRef<any>(null)
   const previewEditorRef = useRef<any>(null)
@@ -58,6 +59,17 @@ function MDXEditory({ setValue }: MDXEditoryProps) {
   const normalEditorWrapperRef = useRef<HTMLDivElement>(null)
   const [size, setSize] = useState({ width: 0, height: 0 })
 
+  /* set value for the MDXEditor, if any */
+  useEffect(() => {
+    setTimeout(() => {
+      if (defaultValue) {
+        normalEditorRef.current?.setMarkdown?.(defaultValue as string || '')
+        setMarkdown(defaultValue as string || '')
+      }
+    }, 200);
+  }, [])
+
+  /* This useEffect updates the size of the preview, with the value of the 'normal' editor */
   useEffect(() => {
     const updateSize = () => {
       setSize({
