@@ -10,12 +10,12 @@ import Select from '../../Inputs/Select'
 function AddPost () {
   const methods = useForm<AddPostForm>({
     defaultValues: {
-      title: '',
-      description: '',
+      title: 'Test Post',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       status: 'draft',
-      tags: [],
-      category: '',
-      user: '',
+      tags: ['health', 'fitness'],
+      category: 5,
+      user: '67',
       image: ''
     }
   })
@@ -33,13 +33,22 @@ function AddPost () {
     { value: 'fitness', label: 'Fitness' }
   ]
 
+  /* Default value for the MDX editor, here we are able to use all of the special Markdown syntaxes */
+  const defaultValue = `
+    # Titleless?
+    ---
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    #### Lets list:
+    - One
+  `
+
   return (
     <>
       <Header />
       <section className='pt-5 pb-5 parallax-bg'>
         <div className='container'>
           <div className='row mt-0 mt-md-4'>
-            <div className='col-lg-12 col-md-8 col-12'>
+            <div className='col-12'>
               <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* Header/Hero */}
@@ -107,6 +116,7 @@ function AddPost () {
                         <div className='mb-3'>
                             <label className='form-label'>Post:</label>
                             <MDXEditory 
+                              defaultValue={defaultValue}
                               setValue={setValue}
                             />
                         </div>
