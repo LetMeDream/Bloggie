@@ -2,10 +2,18 @@
 @plugin "@tailwindcss/typography";
 @plugin "daisyui";
 
+* {
+  /* Crear variables css */
+  --color-primary: #CBB9A8;
+  --color-primary-hover: #c1ac97;
+  --color-secondary: #576a7a;
+}
+
 @theme {
-  --color-secondarys: #576a7a;
-  --color-primarys: #CBB9A8;
-  --color-primarys-hover: #c1ac97
+  /* Reemplazar hardcoded value con variables css */
+  --color-secondarys: var(--color-secondary);
+  --color-primarys: var(--color-primary);
+  --color-primarys-hover: var(--color-primary-hover);
 }
 
 .libertinus-sans-regular, * {
@@ -87,3 +95,22 @@ button{
 
 
 
+/* Override browser autofill styling for .form-control inputs (Chrome/Chromium) */
+input.form-control:-webkit-autofill,
+textarea.form-control:-webkit-autofill,
+select.form-control:-webkit-autofill,
+input.form-control:-internal-autofill-selected,
+textarea.form-control:-internal-autofill-selected,
+select.form-control:-internal-autofill-selected {
+  -webkit-text-fill-color: #111 !important;               /* text */
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important; /* white bg */
+  box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  transition: background-color 5000s ease-in-out 0s;      /* avoid flicker */
+}
+
+/* If using a different color for inputs, change it here: */
+input.form-control:-webkit-autofill,
+input.form-control:-internal-autofill-selected {
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+}
