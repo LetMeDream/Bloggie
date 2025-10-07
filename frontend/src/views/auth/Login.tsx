@@ -105,7 +105,6 @@ function Login () {
                         type='checkbox'
                         className='form-check-input'
                         id='rememberme'
-                        required
                       />
                       <label className='form-check-label' htmlFor='rememberme'>
                         Remember me
