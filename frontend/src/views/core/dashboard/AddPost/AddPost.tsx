@@ -20,7 +20,7 @@ function AddPost () {
     }
   })
 
-  const { handleSubmit, register, setValue } = methods
+  const { handleSubmit, register, setValue, getValues } = methods
 
   const onSubmit = (data: any) => {
     console.log(data)
@@ -129,6 +129,10 @@ function AddPost () {
                             register={register}
                             name={'category'}
                             setValue={setValue}
+                            getValues={getValues}
+                            fetchable={true}
+                            url={'/post/category/list'}
+                            // options={[{ title: <string>, id: <number> }]}
                           />
                           <small>
                             Help people find your posts by choosing categories

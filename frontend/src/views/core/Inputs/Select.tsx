@@ -1,28 +1,36 @@
 import { useEffect, useState } from 'react'
-import { UseFormRegister, SetFieldValue, useWatch } from 'react-hook-form';
+import { UseFormRegister, SetFieldValue, useWatch, useFormContext } from 'react-hook-form';
 
 interface SelectProps {
   register: UseFormRegister<any>;
   name: string;
   setValue?: SetFieldValue<any>;
+  getValues?: (name: string) => any;
+  fetchable?: boolean;
+  url?: string;
+  options?: { id: number; title: string }[];
 }
 
 const Select: React.FC<SelectProps> = ({
   register,
   name, 
-  setValue
+  setValue,
+  getValues,
+  fetchable = true,
+  url = '',
+  options: selectableOptions = []
 }) => {
   const [options, setOptions] = useState<any[]>([])
-  const watchedValue = useWatch({ name })
 
+  /* Fetches options if fetchable */
   useEffect(() => {
     const fetchOptions = async () => {
       const baseUrl = 'http://127.0.0.1:8000/api'
       try {
-        const response = await fetch(`${baseUrl}/post/category/list`)
-        // if (!response.ok) throw new Error('Network response was not ok')
+        const response = await fetch(`${baseUrl}${url}`)
+        if (!response.ok) throw new Error('Network response was not ok')
         const optionsData = await response.json()
-        console.log(optionsData)
+        // console.log(optionsData)
         setOptions(optionsData)
       } catch (error) {
         console.error('Error fetching categories:', error)
@@ -30,18 +38,23 @@ const Select: React.FC<SelectProps> = ({
       }
     }
 
-    fetchOptions()
+    if (fetchable) {
+      fetchOptions()
+    } else {
+      setOptions(selectableOptions)
+    }
   }, [])
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (options.length) console.log('Fetched options:', options)
-  }, [options])
+  }, [options]) */
 
+  /* Sets default value, defined in Form, in the Select */
   useEffect(() => {
     setTimeout(() => {
-      setValue(name, 6)
-    }, 100)
-  }, [name, setValue, watchedValue])
+      setValue(name, getValues ? getValues(name) : '')
+    }, 10)
+  }, [name, setValue, options])
 
 
   return (
