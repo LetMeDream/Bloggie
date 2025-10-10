@@ -20,44 +20,48 @@ import Comments from './views/core/dashboard/Comments'
 import Notifications from './views/core/dashboard/Notifications'
 import Profile from './views/core/dashboard/Profile'
 import PrivateRoute from './layouts/PrivateRoute'
+import { Provider } from 'react-redux'
+import { newStore } from './store/newStore'
 
 function App () {
 
   return (
     <BrowserRouter>
-      <MainWrapper>
+      <Provider store={newStore}>
+        <MainWrapper>
 
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/:slug' element={<Detail />} />
-          <Route path='/category/:slug/' element={<Category />} />
-          <Route path='/search/' element={<Search />} />
+          <Routes>
+            <Route path='/' element={<Homepage />} />
+            <Route path='/:slug' element={<Detail />} />
+            <Route path='/category/:slug/' element={<Category />} />
+            <Route path='/search/' element={<Search />} />
 
-          {/* Authentication */}
-          <Route path='/register/' element={<Register />} />
-          <Route path='/login/' element={<Login />} />
-          <Route path='/logout/' element={<Logout />} />
-          <Route path='/forgot-password/' element={<ForgotPassword />} />
-          <Route path='/create-password/' element={<CreatePassword />} />
+            {/* Authentication */}
+            <Route path='/register/' element={<Register />} />
+            <Route path='/login/' element={<Login />} />
+            <Route path='/logout/' element={<Logout />} />
+            <Route path='/forgot-password/' element={<ForgotPassword />} />
+            <Route path='/create-password/' element={<CreatePassword />} />
 
-          {/* Dashboard */}
-          <Route path='/dashboard/' element={<Dashboard />} />
-          <Route path='/posts/' element={<Posts />} />
-          <Route path='/add-post/' element={
-              <PrivateRoute><AddPost /></PrivateRoute>
-            } 
-          />
-          <Route path='/edit-post/:id/' element={<EditPost />} />
-          <Route path='/comments/' element={<Comments />} />
-          <Route path='/notifications/' element={<Notifications />} />
-          <Route path='/profile/' element={<Profile />} />
+            {/* Dashboard */}
+            <Route path='/dashboard/' element={<Dashboard />} />
+            <Route path='/posts/' element={<Posts />} />
+            <Route path='/add-post/' element={
+                <PrivateRoute><AddPost /></PrivateRoute>
+              } 
+            />
+            <Route path='/edit-post/:id/' element={<EditPost />} />
+            <Route path='/comments/' element={<Comments />} />
+            <Route path='/notifications/' element={<Notifications />} />
+            <Route path='/profile/' element={<Profile />} />
 
-          {/* Pages */}
-          <Route path='/about/' element={<About />} />
-          <Route path='/contact/' element={<Contact />} />
-        </Routes>
+            {/* Pages */}
+            <Route path='/about/' element={<About />} />
+            <Route path='/contact/' element={<Contact />} />
+          </Routes>
 
-      </MainWrapper>
+        </MainWrapper>
+      </Provider>
     </BrowserRouter>
   )
 }
