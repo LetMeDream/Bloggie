@@ -21,7 +21,6 @@ function Login () {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(loginData)
     setIsLoading(true)
     // Handle login logic here
     try {
