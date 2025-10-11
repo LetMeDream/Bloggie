@@ -49,7 +49,8 @@ function Index () {
         className='posts-section min-vh-100 border parallax-bg'
         style={{
           backgroundImage: `url(${bg3})`,
-        }}>
+        }}
+      >
         <div
           className='container relative md:mt-28'
         >

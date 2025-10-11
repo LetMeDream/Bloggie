@@ -1,11 +1,12 @@
 import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link, useNavigate } from 'react-router-dom'
-import { useBloggieStore } from '../../store/store'
 import { register } from '../../utils/auth'
 import { useState } from 'react'
 import Toast from '../../plugin/Toast'
 import { handleAPIError } from '../../utils/shared'
+// @ts-ignore
+import bg3 from '../../assets/bg3.jpg'
 
 function Register () {
   const [registerData, setRegisterData] = useState({ full_name: '', email: '', password: '', password2: '' })
@@ -49,6 +50,9 @@ function Register () {
       <Header />
       <section
         className='min-h-[100dvh] d-flex flex-column vh-100 mt-[40px] parallax-bg'
+        style={{
+          backgroundImage: `url(${bg3})`,
+        }}
       >
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
           <div className='col-lg-5 col-md-8 py-8 py-xl-0'>
