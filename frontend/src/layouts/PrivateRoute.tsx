@@ -7,7 +7,9 @@ import { useSelector } from 'react-redux'
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   // Use the 'useAuthStore' hook to check the user's authentication status.
   // It appears to be using a state management solution like 'zustand' or 'mobx-state-tree'.
-  const loggedIn = useSelector((state: any) => state.auth?.user?.user_id === null)
+  const auth = useSelector((state: any) => state.auth)
+  const { user } = auth || {}
+  const loggedIn = !!user
 
   // Conditionally render the children if the user is authenticated.
   // If the user is not authenticated, redirect them to the login page.
