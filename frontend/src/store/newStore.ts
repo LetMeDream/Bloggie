@@ -1,10 +1,11 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-const baseSlice = createSlice({
+/* Define a slice for authentication */
+const authSlice = createSlice({
   name: 'auth',
   initialState: { 
     user: {
-      id: null,
+      user_id: null,
       username: null,
       email: null,
     }
@@ -17,11 +18,31 @@ const baseSlice = createSlice({
   }
 })
 
-export const { setReduxUser } = baseSlice.actions;
+/* Define a slice for base state */
+const baseSlice = createSlice({
+  name: 'base',
+  initialState: {
+    isLoading: false,
+    error: null,
+  },
+  reducers: {
+    setLoading(state, action) {
+      state.isLoading = action.payload
+    },
+    setError(state, action) {
+      state.error = action.payload
+    },
+  },
+})
+
+/* Export required actions */
+export const { setReduxUser } = authSlice.actions;
+export const { setLoading, setError } = baseSlice.actions;
 
 export const newStore = configureStore({
   reducer: {
-    auth: baseSlice.reducer,
+    auth: authSlice.reducer,
+    base: baseSlice.reducer,
   },
 })
 
