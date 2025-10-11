@@ -8,7 +8,7 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   // Use the 'useAuthStore' hook to check the user's authentication status.
   // It appears to be using a state management solution like 'zustand' or 'mobx-state-tree'.
   const auth = useSelector((state: any) => state.auth)
-  const { user } = auth || {}
+  const { user } = auth
   const loggedIn = !!user
 
   // Conditionally render the children if the user is authenticated.

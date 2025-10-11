@@ -52,7 +52,7 @@ function Index () {
         }}
       >
         <div
-          className='container relative md:mt-28'
+          className='container relative md:mt-28 sm:mt-32'
         >
 
           <div className='row pb-3'>

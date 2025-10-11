@@ -9,9 +9,14 @@ import { GiAtomicSlashes } from "react-icons/gi";
 import useHeader from "../../hooks/useHeader";
 import { logout } from "../../utils/auth";
 import { useSelector } from "react-redux";
+// @ts-ignore
+import defaultImage from '../../assets/user.png'
 
 /* Route for default user image */
-const defaultImage = "https://raw.githubusercontent.com/LetMeDream/Bloggie/master/frontend/public/user.png"
+/* We used to use this route for the default user image
+*  by accesing it directly from the public folder, from Github's CDN (githubusercontent.com).
+*/
+// const defaultImage = "https://raw.githubusercontent.com/LetMeDream/Bloggie/master/frontend/public/user.png"
 
 
 const Header = () => {
