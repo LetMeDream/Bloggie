@@ -6,9 +6,10 @@ import { IoPersonAddSharp, IoLogOut } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 import { GiAtomicSlashes } from "react-icons/gi";
-import { useBloggieStore } from "../../store/store";
 import useHeader from "../../hooks/useHeader";
 import { logout } from "../../utils/auth";
+import { useSelector } from "react-redux";
+
 /* Route for default user image */
 const defaultImage = "https://raw.githubusercontent.com/LetMeDream/Bloggie/master/frontend/public/user.png"
 
@@ -17,15 +18,17 @@ const Header = () => {
 
   const location = useLocation();
   const path = location.pathname
-  const { isLoggedIn, user, allUserData } = useBloggieStore();
-  const [isLogged, setIsLogged] = useState(isLoggedIn());
+  // const { isLoggedIn, user, allUserData } = useBloggieStore();
+  const { auth } = useSelector((state: any) => state);
+  const { user } = auth
+  const [isLogged, setIsLogged] = useState(!!user);
 
 
   const { headerStyles, toggleMenu, toggleDropdown, closeDropdown, openDropdown, menuOpen } = useHeader();
 
   useEffect(() => {
-    setIsLogged(isLoggedIn());
-  }, [isLoggedIn, allUserData])
+    setIsLogged(!!user);
+  }, [user])
 
   return (
     /* Header */
@@ -176,7 +179,7 @@ const Header = () => {
                 <>
                   <div className='flex gap-2 items-center text-sm'>
                     <span>
-                      { user()?.username }
+                      { user?.username }
                     </span>
 
                     <div className="avatar">

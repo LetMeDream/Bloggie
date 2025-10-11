@@ -9,8 +9,8 @@ import './Homepage.css'
 import { Post } from '../../../types/posts'
 import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
-import { useBloggieStore } from '../../../store/store'
 import Loader from '../../core/Loader/Loader' 
+import { newStore } from '../../../store/newStore'
 
 function Index () {
   const {
@@ -37,9 +37,9 @@ function Index () {
         isLastPage: boolean
   } = useHomePage()
 
-  const isLoading = useBloggieStore(state => state.loading)
+  const { isLoading } = newStore.getState().base
 
-  return isLoading ? <Loader/> : (
+  return  isLoading  ? <Loader/> : (
     <div>
       <Header/>
 

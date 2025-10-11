@@ -1,5 +1,6 @@
 // Importing the useBloggieStore hook from the '../store/auth' file to manage authentication state
-import { useBloggieStore } from '../store/store'
+// import { useBloggieStore } from '../store/store'
+import { newStore, setReduxUser, setLoading } from '../store/newStore'
 
 // Importing the axios library for making HTTP requests
 import axios from './axios'
@@ -89,7 +90,7 @@ export const logout = () => {
   // Removing access and refresh tokens from cookies, resetting user state, and displaying success toast
   Cookies.remove('access_token')
   Cookies.remove('refresh_token')
-  useBloggieStore.getState().setUser(null)
+  newStore.dispatch(setReduxUser(null))
 
   // Displaying a success toast notification
   Toast.fire({
@@ -151,9 +152,11 @@ export const setAuthUser = (access_token: string, refresh_token: string) => {
       user_id: decoded.user_id,
       username: decoded.username
     }
-    useBloggieStore.getState().setUser(user)
+    /* Use newStore in order to set users. Remembering 'useBloggieStore' used Zustand, but 'newStore' uses ReduxRTK */
+    newStore.dispatch(setReduxUser(user))
   }
-  useBloggieStore.getState().setLoading(false)
+
+  newStore.dispatch(setLoading(false))
 }
 
 // Function to refresh the access token using the refresh token

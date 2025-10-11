@@ -1,25 +1,28 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useBloggieStore } from '../store/store';
+import { setLoading, setError, newStore } from '../store/newStore';
+
 function useDetail() {
   const { slug } = useParams<{ slug: string }>(); 
   const [currentPost, setCurrentPost] = useState([]);
-  const store = useBloggieStore()
   const navigate = useNavigate()
+  const dispatch = newStore.dispatch
 
   useEffect(() => {
     const fetchDetail = async (apiurl: string) => {
-      await store.setLoading(true)
+      dispatch(setLoading(true))
       setTimeout(async () => {
         try {
           const response = await fetch(apiurl) 
           const data = await response.json() 
           setCurrentPost(data)
           if (data) {
-            await store.setLoading(false)
+            dispatch(setLoading(false))
           }
         } catch (err) {
-          console.error('Error fetching data:', err)          
+          console.error('Error fetching data:', err)       
+          dispatch(setError('Failed to fetch data for Post Detail'))   
+          dispatch(setLoading(false))
           navigate('/')
         }
       }, 600)

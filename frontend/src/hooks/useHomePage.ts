@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { usePagination } from "./usePagination"
-import { useBloggieStore } from "../store/store"
+import { newStore, setLoading, setError } from "../store/newStore"
 
 const useHomePage = () => {
   const [posts, setPosts] = useState([])
@@ -18,12 +18,12 @@ const useHomePage = () => {
     isFirstPage,
     isLastPage
   } = usePagination({ elements: posts })
-  const baseStore =  useBloggieStore()
+  const dispatch = newStore.dispatch
 
   const fetchPosts = async () => {
     const baseUrl = 'http://127.0.0.1:8000/api'
     try {
-      await baseStore.setLoading(true)
+      dispatch(setLoading(true))
       const postsRes = await fetch(`${baseUrl}/post`)
       const postsData = await postsRes.json()
       // Asegúrate de que postsData sea siempre un array
@@ -39,7 +39,7 @@ const useHomePage = () => {
   const fetchCategories = async () => {
     try {
       const baseUrl = 'http://127.0.0.1:8000/api'
-      await baseStore.setLoading(true)
+      dispatch(setLoading(true))
       const categoryRes = await fetch(`${baseUrl}/post/category/list`)
       const categoryData = await categoryRes.json()
       // Asegúrate de que postsData sea siempre un array
@@ -47,6 +47,7 @@ const useHomePage = () => {
       // console.log(categoryData)
     } catch (err) {
       console.error('Error fetching data:', err)
+      dispatch(setError('Failed to fetch categories'))
       setPosts([]) 
     } finally {
       setAreCategoriesLoading(false) 
@@ -60,7 +61,7 @@ const useHomePage = () => {
   /* Quitar loader sólo cuando ambos; Post y Categories, hayan sido cargados */
   useEffect(() => {
     if (!areCategoriesLoading && !arePostsLoading) {
-      baseStore.setLoading(false)
+      dispatch(setLoading(false))
     }
   }, [areCategoriesLoading, arePostsLoading])
 

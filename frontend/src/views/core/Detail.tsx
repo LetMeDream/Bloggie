@@ -2,13 +2,13 @@ import Header from '../partials/Header'
 import Footer from '../partials/Footer'
 import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
-import { useBloggieStore } from '../../store/store';
 import Loader from '../core/Loader/Loader';
 import { Post } from '../../types/posts'
+import { useSelector } from 'react-redux';
 
 function Detail () {
   const  {currentPost }: { currentPost:Post[] } = useDetail()
-  const isLoading = useBloggieStore(state => state.loading)
+  const { isLoading } = useSelector((state: any) => state.base)
   return (isLoading) ? (
     <Loader />
   ) : (
