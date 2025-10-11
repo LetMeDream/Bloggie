@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { setLoading, setError, newStore } from '../store/newStore';
+import { setLoading, setError, store } from '../store/store';
 
 function useDetail() {
   const { slug } = useParams<{ slug: string }>(); 
   const [currentPost, setCurrentPost] = useState([]);
   const navigate = useNavigate()
-  const dispatch = newStore.dispatch
+  const dispatch = store.dispatch
 
   useEffect(() => {
     const fetchDetail = async (apiurl: string) => {

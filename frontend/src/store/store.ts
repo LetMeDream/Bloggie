@@ -39,7 +39,7 @@ const baseSlice = createSlice({
 export const { setReduxUser } = authSlice.actions;
 export const { setLoading, setError } = baseSlice.actions;
 
-export const newStore = configureStore({
+export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     base: baseSlice.reducer,
@@ -47,6 +47,6 @@ export const newStore = configureStore({
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof newStore.getState>
+export type RootState = ReturnType<typeof store.getState>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof newStore.dispatch
+export type AppDispatch = typeof store.dispatch

@@ -21,13 +21,13 @@ import Notifications from './views/core/dashboard/Notifications'
 import Profile from './views/core/dashboard/Profile'
 import PrivateRoute from './layouts/PrivateRoute'
 import { Provider } from 'react-redux'
-import { newStore } from './store/newStore'
+import { store } from './store/store'
 
 function App () {
 
   return (
     <BrowserRouter>
-      <Provider store={newStore}>
+      <Provider store={store}>
         <MainWrapper>
 
           <Routes>

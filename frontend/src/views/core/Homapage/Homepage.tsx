@@ -10,7 +10,7 @@ import { Post } from '../../../types/posts'
 import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
 import Loader from '../../core/Loader/Loader' 
-import { newStore } from '../../../store/newStore'
+import { store } from '../../../store/store'
 
 function Index () {
   const {
@@ -37,7 +37,7 @@ function Index () {
         isLastPage: boolean
   } = useHomePage()
 
-  const { isLoading } = newStore.getState().base
+  const { isLoading } = store.getState().base
 
   return  isLoading  ? <Loader/> : (
     <div>

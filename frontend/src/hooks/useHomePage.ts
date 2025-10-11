@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { usePagination } from "./usePagination"
-import { newStore, setLoading, setError } from "../store/newStore"
+import { store, setLoading, setError } from "../store/store"
 
 const useHomePage = () => {
   const [posts, setPosts] = useState([])
@@ -18,7 +18,7 @@ const useHomePage = () => {
     isFirstPage,
     isLastPage
   } = usePagination({ elements: posts })
-  const dispatch = newStore.dispatch
+  const dispatch = store.dispatch
 
   const fetchPosts = async () => {
     const baseUrl = 'http://127.0.0.1:8000/api'
