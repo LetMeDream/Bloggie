@@ -19,7 +19,7 @@ const Header = () => {
   const location = useLocation();
   const path = location.pathname
   // const { isLoggedIn, user, allUserData } = useBloggieStore();
-  const { auth } = useSelector((state: any) => state);
+  const auth = useSelector((state: any) => state.auth);
   const { user } = auth
   const [isLogged, setIsLogged] = useState(!!user);
 
