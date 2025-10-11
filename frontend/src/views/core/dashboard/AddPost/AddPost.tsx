@@ -3,10 +3,11 @@ import Footer from '../../../partials/Footer'
 import { Link } from 'react-router-dom'
 import { useForm, FormProvider } from 'react-hook-form'
 import MDXEditory from './MDXEditor/MDXEditor'
-import CreatableSelect from 'react-select/creatable';
+import Creatable from '../../Inputs/CreatableSelect'
 import { AddPostForm } from '../../../../types/posts'
 import Select from '../../Inputs/Select'
 import SelectableImage from '../../Inputs/SelectableImage'
+import useAddPost from '../../../../hooks/useAddPost'
 // @ts-ignore
 import bg3 from '../../../../assets/bg3.jpg';
 
@@ -14,7 +15,7 @@ function AddPost () {
   const methods = useForm<AddPostForm>({
     defaultValues: {
       title: 'Test Post',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      description: '',
       status: 'draft',
       tags: ['health', 'fitness'],
       category: 5,
@@ -24,17 +25,7 @@ function AddPost () {
   })
 
   const { handleSubmit, register, setValue, getValues } = methods
-
-  const onSubmit = (data: any) => {
-    console.log(data)
-    // Here you would typically send the data to your backend
-  } 
-
-  const selectableOptions = [
-    { value: 'health', label: 'Health' },
-    { value: 'medicine', label: 'Medicine' },
-    { value: 'fitness', label: 'Fitness' }
-  ]
+  const { addPost } = useAddPost()
 
   /* Default value for the MDX editor, here we are able to use all of the special Markdown syntaxes */
   const defaultValue = `
@@ -57,7 +48,7 @@ function AddPost () {
           <div className='row mt-0 mt-md-4'>
             <div className='col-12'>
               <FormProvider {...methods}>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(addPost)}>
                   {/* Header/Hero */}
                   <section className='py-4 py-lg-6 bg-primarys/80 rounded-3 mt-10'>
                     <div className='container'>
@@ -125,6 +116,7 @@ function AddPost () {
                             <MDXEditory 
                               defaultValue={defaultValue}
                               setValue={setValue}
+                              name={'description'}
                             />
                         </div>
                         {/* Description end */}
@@ -149,19 +141,10 @@ function AddPost () {
                         {/* Category end */}
                         {/* Tag start */}
                         <div className='mb-3'>
-                          <label className='form-label'>Tag</label>
-                          <CreatableSelect 
-                            isClearable
-                            isMulti
-                            options={selectableOptions}
-                            onChange={(selected) => {
-                              let values: string[] = []
-                              selected.forEach((item) => {
-                                values.push(item.value)
-                              })
-                              setValue('tags', values);
-                              console.log('Selected tags:', selected);
-                            }}
+                          <Creatable 
+                            setValue={setValue} 
+                            label='Tags'
+                            getValues={getValues}
                           />
                         </div>
                         {/* Tag end */}
