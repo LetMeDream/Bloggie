@@ -21,7 +21,8 @@ import { AddPostForm } from '../../../../../types/posts'
 
 type MDXEditoryProps = {
   setValue: UseFormSetValue<AddPostForm>,
-  defaultValue: String
+  defaultValue?: string,
+  name: Parameters<UseFormSetValue<AddPostForm>>[0]
 }
 
 function AdmonitionDropdown({ editorRef }: { editorRef: React.RefObject<any> }) {
@@ -51,7 +52,7 @@ function AdmonitionDropdown({ editorRef }: { editorRef: React.RefObject<any> }) 
   )
 }
 
-function MDXEditory({ setValue, defaultValue }: MDXEditoryProps) {
+function MDXEditory({ setValue, defaultValue, name }: MDXEditoryProps) {
   const [markdown, setMarkdown] = useState<string>('')
   const normalEditorRef = useRef<any>(null)
   const previewEditorRef = useRef<any>(null)
@@ -65,6 +66,7 @@ function MDXEditory({ setValue, defaultValue }: MDXEditoryProps) {
       if (defaultValue) {
         normalEditorRef.current?.setMarkdown?.(defaultValue as string || '')
         setMarkdown(defaultValue as string || '')
+        setValue(name, defaultValue as string || '')
       }
     }, 200);
   }, [])
@@ -95,7 +97,7 @@ function MDXEditory({ setValue, defaultValue }: MDXEditoryProps) {
             onChange={(value) => {
               // console.log(value)
               setMarkdown(value)
-              setValue('description', value)
+              setValue(name, value)
             }}
             markdown={markdown}
             className=''
