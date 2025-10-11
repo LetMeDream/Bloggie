@@ -6,6 +6,9 @@ import MDXEditory from './MDXEditor/MDXEditor'
 import CreatableSelect from 'react-select/creatable';
 import { AddPostForm } from '../../../../types/posts'
 import Select from '../../Inputs/Select'
+import SelectableImage from '../../Inputs/SelectableImage'
+// @ts-ignore
+import bg3 from '../../../../assets/bg3.jpg';
 
 function AddPost () {
   const methods = useForm<AddPostForm>({
@@ -45,7 +48,11 @@ function AddPost () {
   return (
     <>
       <Header />
-      <section className='pt-5 pb-5 parallax-bg'>
+      <section className='pt-5 pb-5 parallax-bg'
+        style={{
+          backgroundImage: `url(${bg3})`,
+        }}
+      >
         <div className='container'>
           <div className='row mt-0 mt-md-4'>
             <div className='col-12'>
@@ -159,37 +166,12 @@ function AddPost () {
                         </div>
                         {/* Tag end */}
 
-                        {/* Thumbnail Preview */}
-                        <label htmlFor='postTHumbnail' className='form-label'>
-                          Preview
-                        </label>
-                        <img
-                          style={{
-                            maxWidth: '100%',
-                            height: '330px',
-                            objectFit: 'fill',
-                            borderRadius: '10px',
-                            margin: '0 auto'
-                          }}
-                          className='mb-4'
-                          src='https://www.eclosio.ong/wp-content/uploads/2018/08/default.png'
-                          alt=''
-                        />
-                        {/* Thumbnail Preview End */}
-                        {/* Input Image */}
-                        <div className='mb-3'>
-                          <label htmlFor='postTHumbnail' className='form-label'>
-                            Thumbnail
-                          </label>
-                          <input
-                            id='postTHumbnail'
-                            className='form-control'
-                            type='file'
-                            accept='image/*'
-                            {...register('image')}
+                        <div className=' mb-3 flex gap-4 items-center'>
+                          <SelectableImage 
+                            register={register} 
+                            name='image'
                           />
                         </div>
-                        {/* Input Image End */}
                       </div>
                     </div>
                     <button

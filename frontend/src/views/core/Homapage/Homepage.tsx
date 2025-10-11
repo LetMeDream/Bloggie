@@ -10,7 +10,9 @@ import { Post } from '../../../types/posts'
 import { CategoryType } from '../../../types/posts'
 import Categories from '../../partials/Categories'
 import Loader from '../../core/Loader/Loader' 
-import { store } from '../../../store/store'
+import { useSelector } from 'react-redux'
+// @ts-ignore: allow importing image without type declaration
+import bg3 from '../../../assets/bg3.jpg';
 
 function Index () {
   const {
@@ -37,14 +39,18 @@ function Index () {
         isLastPage: boolean
   } = useHomePage()
 
-  const { isLoading } = store.getState().base
+  const isLoading = useSelector((state: any) => state.base.isLoading)
 
   return  isLoading  ? <Loader/> : (
     <div>
       <Header/>
 
-      <section className='posts-section min-vh-100 border parallax-bg'>
-        <div 
+      <section
+        className='posts-section min-vh-100 border parallax-bg'
+        style={{
+          backgroundImage: `url(${bg3})`,
+        }}>
+        <div
           className='container relative md:mt-28'
         >
 

@@ -2,12 +2,18 @@ import React from 'react'
 import Header from '../../partials/Header'
 import Footer from '../../partials/Footer'
 import { Link } from 'react-router-dom'
+// @ts-ignore
+import bg3 from '../../../assets/bg3.jpg';
 
 function Dashboard () {
   return (
     <>
       <Header />
-      <section className='py-4'>
+      <section className='py-4 parallax-bg !pt-28'
+        style={{
+          backgroundImage: `url(${bg3})`,
+        }}
+      >
         <div className='container'>
           <div className='row g-4'>
             <div className='col-12'>
@@ -440,7 +446,7 @@ function Dashboard () {
 
             <div className='col-12'>
               <div className='card border bg-transparent rounded-3'>
-                <div className='card-header bg-transparent border-bottom p-3'>
+                <div className='card-header bg-secondary border-bottom p-3'>
                   <div className='d-sm-flex justify-content-between align-items-center'>
                     <h5 className='mb-2 mb-sm-0'>
                       All Blog Posts{' '}
@@ -453,7 +459,7 @@ function Dashboard () {
                     </a>
                   </div>
                 </div>
-                <div className='card-body'>
+                <div className='card-body bg-primarys'>
                   <div className='row g-3 align-items-center justify-content-between mb-3'>
                     <div className='col-md-8'>
                       <form className='rounded position-relative'>
@@ -490,7 +496,7 @@ function Dashboard () {
                   </div>
                   {/* Search and select END */}
                   {/* Blog list table START */}
-                  <div className='table-responsive border-0'>
+                  <div className='table-responsive bg-secondary border-0'>
                     <table className='table align-middle p-4 mb-0 table-hover table-shrink'>
                       {/* Table head */}
                       <thead className='table-dark'>

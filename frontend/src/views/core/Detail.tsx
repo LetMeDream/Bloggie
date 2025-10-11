@@ -5,6 +5,8 @@ import useDetail from '../../hooks/useDetail';
 import Loader from '../core/Loader/Loader';
 import { Post } from '../../types/posts'
 import { useSelector } from 'react-redux';
+// @ts-ignore
+import bg3 from '../../assets/bg3.jpg';
 
 function Detail () {
   const  {currentPost }: { currentPost:Post[] } = useDetail()
@@ -14,7 +16,10 @@ function Detail () {
   ) : (
     <>
       <Header />
-      <section className=' pt-28 parallax-bg'
+      <section className=' pt-28 pb-5 parallax-bg'
+        style={{
+          backgroundImage: `url(${bg3})`,
+        }}
       >
         <div className='container'>
           <div className='row'>
