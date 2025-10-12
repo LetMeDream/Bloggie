@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react"
 import { usePagination } from "./usePagination"
 import { store, setLoading, setError } from "../store/store"
+import { useGetPostsQuery, useGetCategoriesQuery } from "../services/services"
+import type { Post, CategoryType } from "../types/posts"
 
 const useHomePage = () => {
-  const [posts, setPosts] = useState([])
-  const [arePostsLoading, setArePostsLoading] = useState(true)
-  const [category, setCategory] = useState([])
-  const [areCategoriesLoading, setAreCategoriesLoading] = useState(true)
-  const { 
+  const [posts, setPosts] = useState<Post[]>([])
+  const [category, setCategory] = useState<CategoryType[]>([])
+  const {
     currentPosts,
     totalPages,
     currentPage,
@@ -19,51 +19,27 @@ const useHomePage = () => {
     isLastPage
   } = usePagination({ elements: posts })
   const dispatch = store.dispatch
+  const { data: fetchedPosts, error: postsError, isLoading: postsLoading } = useGetPostsQuery()
+  const { data: fetchedCategories, error: categoriesError, isLoading: categoriesLoading } = useGetCategoriesQuery()
+  
 
-  const fetchPosts = async () => {
-    const baseUrl = 'http://127.0.0.1:8000/api'
-    try {
-      dispatch(setLoading(true))
-      const postsRes = await fetch(`${baseUrl}/post`)
-      const postsData = await postsRes.json()
-      // Asegúrate de que postsData sea siempre un array
-      setPosts(postsData)
-    } catch (err) {
-      console.error('Error fetching data:', err)
-      setPosts([]) 
-    } finally {
-      setArePostsLoading(false) 
-    }
-  }
- 
-  const fetchCategories = async () => {
-    try {
-      const baseUrl = 'http://127.0.0.1:8000/api'
-      dispatch(setLoading(true))
-      const categoryRes = await fetch(`${baseUrl}/post/category/list`)
-      const categoryData = await categoryRes.json()
-      // Asegúrate de que postsData sea siempre un array
-      setCategory(categoryData)
-      // console.log(categoryData)
-    } catch (err) {
-      console.error('Error fetching data:', err)
-      dispatch(setError('Failed to fetch categories'))
-      setPosts([]) 
-    } finally {
-      setAreCategoriesLoading(false) 
-    }
-  }
-
+  /* useEffect that sets the fetched data as state */
   useEffect(() => {
-    fetchPosts(), fetchCategories()
-  }, [])
+    /* Fetches */
+    if (fetchedPosts) setPosts(fetchedPosts)
+    if (fetchedCategories) setCategory(fetchedCategories)
+    /* Dispatches errors */
+    if (postsError) dispatch(setError('Error fetching posts'))
+    if (categoriesError) dispatch(setError('Error fetching categories'))
+  }, [fetchedPosts, fetchedCategories])
 
   /* Quitar loader sólo cuando ambos; Post y Categories, hayan sido cargados */
   useEffect(() => {
-    if (!areCategoriesLoading && !arePostsLoading) {
+    if (!categoriesLoading && !postsLoading) {
       dispatch(setLoading(false))
     }
-  }, [areCategoriesLoading, arePostsLoading])
+  }, [categoriesLoading, postsLoading])
+
 
   return {
     currentPosts,
