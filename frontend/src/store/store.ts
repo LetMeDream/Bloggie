@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { api } from '../services/services'
 
 /* Define a slice for authentication */
 const authSlice = createSlice({
@@ -43,7 +44,12 @@ export const store = configureStore({
   reducer: {
     auth: authSlice.reducer,
     base: baseSlice.reducer,
+    /* Here we add the API RTK Query slice */
+    // Adding the api middleware enables caching, invalidation, polling,
+    // and other useful features of `rtk-query`.
+    [api.reducerPath]: api.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
