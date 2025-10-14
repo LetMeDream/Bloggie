@@ -4,14 +4,18 @@ import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
 import Loader from '../core/Loader/Loader';
 import { Post } from '../../types/posts'
-import { useSelector } from 'react-redux';
 // @ts-ignore
 import bg3 from '../../assets/bg3.jpg';
 
+interface DetailProps {
+  currentPost: Post[] | null;
+  isLoading: boolean;
+  error: any;
+}
+
 function Detail () {
-  const  {currentPost }: { currentPost:Post[] } = useDetail()
-  const { isLoading } = useSelector((state: any) => state.base)
-  return (isLoading) ? (
+  const { currentPost, isLoading, error } : DetailProps = useDetail()
+  return (isLoading || error) ? (
     <Loader />
   ) : (
     <>
@@ -126,7 +130,7 @@ function Detail () {
               </a>
               <div className="row">
                 <h1 className='text-left'>
-                  {currentPost.length > 0 && currentPost[0].title}
+                  {currentPost?.[0].title}
                 </h1>
               </div>
               <div className="row">
