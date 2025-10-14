@@ -16,7 +16,7 @@ function AddPost () {
     defaultValues: {
       title: 'Test Post',
       description: '',
-      status: 'draft',
+      status: 'Active',
       tags: ['health', 'fitness'],
       category: 5,
       user: '67',
@@ -24,8 +24,8 @@ function AddPost () {
     }
   })
 
-  const { handleSubmit, register, setValue, getValues } = methods
-  const { addPost } = useAddPost()
+  const { handleSubmit, register, setValue, getValues, reset } = methods
+  const { addPost } = useAddPost({ reset })
 
   /* Default value for the MDX editor, here we are able to use all of the special Markdown syntaxes */
   const defaultValue = `
