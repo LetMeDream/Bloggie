@@ -7,7 +7,12 @@ function Toast ( icon?: SweetAlertIcon | undefined, title?: string | undefined, 
     position: 'top',
     showConfirmButton: false,
     timer: 1500,
-    timerProgressBar: true
+    timerProgressBar: true,
+    // Show cancel button
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
   })
 
   return Toast.fire({
