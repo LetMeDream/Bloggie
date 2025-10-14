@@ -7,6 +7,7 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
 
   // Use state to manage the image source, initializing with post image or placeholder
   const [currentSrc, setCurrentSrc] = useState(post?.image || PLACEHOLDER_URL);
+  const [imgLoading, setImgLoading] = useState(true);
 
   // Effect to reset currentSrc if the post image prop changes
   useEffect(() => {
@@ -27,13 +28,11 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
     <div className='col-12 col-md-6 col-lg-3 mb-4'>
       {/* Card height: Removed fixed 50vh from here.
          The image container aspect ratio will help control card height partially. */}
-      <div className='card d-flex flex-column h-100'> {/* Added d-flex flex-column */}
-        {/* Image Container: Added an aspect ratio class (example: ratio ratio-16x9)
-           and removed position-relative if not strictly needed for child absolute positioning.
-           Also removed fixed height style if it was there. */}
-        <div className='card-fold ratio ratio-16x9'> {/* Using Bootstrap 5 aspect ratio helper */}
+      <div className='card d-flex flex-column h-100'> 
+        <div className='card-fold ratio ratio-16x9 skeleton'> 
           <img
-            className='card-img-top' // Use card-img-top for proper card integration
+            className={`card-img-top ${imgLoading ? 'hidden' : ''}`} // Use card-img-top for proper card integration
+            onLoad={() => setImgLoading(false)}
             style={{
               // These styles are good for making the image cover the ratio container
               objectFit: 'cover',
@@ -43,9 +42,8 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
             alt='Card image'
           />
         </div>
-        {/* Card Body: Use flex-grow-1 to make body take remaining space if card is flex column */}
-        <div className='card-body px-3 pt-3 d-flex flex-column flex-grow-1'> {/* Added d-flex flex-column flex-grow-1 */}
-          <h4 className='card-title mb-2'> {/* Added mb-2 margin-bottom */}
+        <div className='card-body px-3 pt-3 d-flex flex-column flex-grow-1'> 
+          <h4 className='card-title mb-2'> 
             <Link
               to={`/${post.slug}`} // TODO: Make this dynamic based on post, use a fallback
               className='btn-link text-reset stretched-link fw-bold text-decoration-none text-truncate d-block' // Added text-truncate d-block
@@ -57,11 +55,11 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
             </Link>
           </h4>
           {/* Action buttons (Bookmark, Like): Wrap in a div for better layout control */}
-          <div className="mb-2"> {/* Added margin-bottom */}
-             <button style={{ border: 'none', background: 'none' }} aria-label="Bookmark"> {/* Added aria-label for accessibility */}
+          <div className="mb-2">
+             <button style={{ border: 'none', background: 'none' }} aria-label="Bookmark">
               <i className='fas fa-bookmark text-danger' />
              </button>
-             <button style={{ border: 'none', background: 'none', marginLeft: '8px' }} aria-label="Like"> {/* Added margin-left and aria-label */}
+             <button style={{ border: 'none', background: 'none', marginLeft: '8px' }} aria-label="Like"> 
               <i className='fas fa-thumbs-up text-primary' />
              </button>
           </div>
@@ -78,14 +76,13 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
                  {post?.user || 'Usuario Desconocido'}
               </a>
             </li>
-            <li className='d-flex align-items-center mt-yh2'> {/* Added d-flex align-items-center */}
-              <i className='fas fa-calendar me-2' /> {/* Added me-2 margin-right */}
-              {/* Asegúrate de que Moment pueda manejar valores nulos o no válidos */}
-              <span>{post?.date ? Moment(post?.date) : 'Fecha no disponible'}</span> {/* Wrap text in span for consistent alignment */}
+            <li className='d-flex align-items-center mt-yh2'>
+              <i className='fas fa-calendar me-2' /> 
+              <span>{post?.date ? Moment(post?.date) : 'Fecha no disponible'}</span> 
             </li>
-            <li className='d-flex align-items-center mt-2'> {/* Added d-flex align-items-center */}
-              <i className='fas fa-eye me-2' /> {/* Added me-2 margin-right */}
-              <span>{post?.view || 0} Vistas</span> {/* Wrap text in span, add 'Vistas' text for clarity */}
+            <li className='d-flex align-items-center mt-2'>
+              <i className='fas fa-eye me-2' /> 
+              <span>{post?.view || 0} Vistas</span> 
             </li>
           </ul>
         </div>
