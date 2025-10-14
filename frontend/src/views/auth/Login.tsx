@@ -25,18 +25,13 @@ function Login () {
     e.preventDefault()
     setIsLoading(true)
     // Handle login logic here
-    try {
-      const response = await login(loginData.email, loginData.password)
-      if (!response.error) {
-        // Login successful
-        navigate('/homepage')
-      } else {
-        // Handle login error
-        Toast('error', 'Login failed', response.error)
-        setIsLoading(false)
-      }
-    } catch (error) {
-      Toast('error', 'Login failed', error as string)
+    const response = await login(loginData.email, loginData.password)
+    if (!response.error) {
+      // Login successful
+      navigate('/')
+    } else {
+      // Handle login error
+      Toast('error', 'Login failed', response.error)
       setIsLoading(false)
     }
   }
