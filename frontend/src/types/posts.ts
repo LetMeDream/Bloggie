@@ -22,7 +22,7 @@ export interface Post {
 export type AddPostForm = {
   title: string
   description: string
-  status: 'draft' | 'published'
+  status: 'Active' | 'Draft' | 'Disabled'
   tags: string[]
   category: string | number
   user: string
