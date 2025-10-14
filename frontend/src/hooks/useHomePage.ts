@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { usePagination } from "./usePagination"
 import { store, setLoading, setError } from "../store/store"
-import { useGetPostsQuery, useGetCategoriesQuery } from "../services/services"
+import { useGetPostsQuery, useGetCategoriesQuery } from "../services/api"
 import type { Post, CategoryType } from "../types/posts"
 
 const useHomePage = () => {
