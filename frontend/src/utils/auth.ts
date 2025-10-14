@@ -1,6 +1,7 @@
 // Importing the useBloggieStore hook from the '../store/auth' file to manage authentication state
 // import { useBloggieStore } from '../store/store'
-import { store, setReduxUser, setLoading } from '../store/store'
+import { store, setReduxUser, setLoading, setError } from '../store/store'
+import { api } from '../services/api'
 
 // Importing the axios library for making HTTP requests
 import axios from './axios'
@@ -25,26 +26,26 @@ const Toast = Swal.mixin({
 
 // Function to handle user login
 export const login = async (email: string, password: string) => {
+
   try {
     // Making a POST request to obtain user tokens
-    const { data, status } = await axios.post('user/token/', {
-      email,
-      password
-    })
-
+    const result = await store.dispatch(api.endpoints.loginUser.initiate({ email, password }))
     // If the request is successful (status code 200), set authentication user and display success toast
-    if (status === 200) {
-      setAuthUser(data.access, data.refresh)
+    if (!result.error) {
+      setAuthUser(result.data.access, result.data.refresh)
 
       // Displaying a success toast notification
       Toast.fire({
         icon: 'success',
         title: 'Signed in successfully'
       })
+    } else {
+      setError(result.error)
+      throw new Error('Login failed')
     }
 
     // Returning data and error information
-    return { data, error: null }
+    return { data: result.data, error: null }
   } catch (error: any) {
     // Handling errors and returning data and error information
     return {
@@ -58,24 +59,23 @@ export const login = async (email: string, password: string) => {
 export const register = async (full_name: string, email: string, password: string, password2: string) => {
   try {
     // Making a POST request to register a new user
-    const { data, status } = await axios.post('user/register/', {
-      full_name,
-      email,
-      password,
-      password2
-    })
-
-    // Logging in the newly registered user and displaying success toast
-    await login(email, password)
-
-    // Displaying a success toast notification
-    Toast.fire({
-      icon: 'success',
-      title: 'Signed Up Successfully'
-    })
+    const result = await store.dispatch(api.endpoints.registerUser.initiate({ full_name, email, password, password2 }))
+    if (!result.error) {
+      // Logging in the newly registered user and displaying success toast
+      await login(email, password)
+  
+      // Displaying a success toast notification
+      Toast.fire({
+        icon: 'success',
+        title: 'Signed Up Successfully'
+      })
+    } else {
+      setError(result.error)
+      throw new Error('Registration failed')
+    }
 
     // Returning data and error information
-    return { data, error: null, status }
+    return { data: result.data, error: null }
   } catch (error: any) {
     // Handling errors and returning data and error information
     return {
