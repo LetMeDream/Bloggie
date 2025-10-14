@@ -94,7 +94,7 @@ class PostCategoryListView(generics.ListAPIView):
 # All Posts
 @method_decorator(cache_control(max_age=31536000), name='dispatch')  
 class PostListView(generics.ListAPIView):
-  queryset = Post.objects.all().order_by('-id')
+  queryset = Post.objects.filter(status__iexact='Active').order_by('-id')
   serializer_class = PostSerializer
 
 # Get Post by giver id (does not count the view in the view counter)
