@@ -24,24 +24,17 @@ function Register () {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    try {
       const response = await register(registerData.full_name, registerData.email, registerData.password, registerData.password2)
-      if (response.status === 201) {
+      if (!response.error) {
         setIsLoading(false)
-        navigate('/login')
+        navigate('/')
       } else {
-  
         let err = handleAPIError(response?.error)
-        
         //let err = response?.error?.length < 100 ? Object.values(response?.error)[0]?.toString() : 'Something went wrong'
-        console.log(err)
+        console.error(err)
         setIsLoading(false)
         Toast('error', 'Registration failed', err)
       }
-    } catch (error) {
-      setIsLoading(false)
-      alert('An error occurred. Please try again.')
-    }
   }
 
 
