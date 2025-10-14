@@ -7,6 +7,10 @@ admin.site.register(User, UserAdmin)
 admin.site.register(Profile)
 admin.site.register(Category)
 admin.site.register(Notification)
-admin.site.register(Post)
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'status', 'user', 'date')
+    actions = ['delete_selected', 'mark_as_disabled']
+    actions_on_top = True
 admin.site.register(Comment)
 admin.site.register(Bookmark)
