@@ -310,7 +310,7 @@ class DashboardPostCreateView(generics.CreateAPIView):
     user_id = request.data.get('user')
     profile_id = request.data.get('profile')
     title = request.data.get('title')
-    image = request.data.get('image')
+    image = request.FILES.get('image')
     description = request.data.get('description')
     tags = request.data.get('tags')
     category_id = request.data.get('category')
