@@ -5,15 +5,18 @@ import type { Post, CategoryType } from '../types/posts'
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: 'api',
+  tagTypes: ['Posts', 'Categories'],
   baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/' }),
   endpoints: (builder) => ({
     // Get all posts
     getPosts: builder.query<Post[], void>({
       query: () => `/post`,
+      providesTags: ['Posts'],
     }),
     // Get all categories
     getCategories: builder.query<CategoryType[], void>({
       query: () => `/post/category/list`,
+      providesTags: ['Categories'],
     }),
     // Get a single post by slug
     getSinglePost: builder.query<Post, string>({
@@ -53,7 +56,8 @@ export const api = createApi({
           method: 'POST',
           body: formData
         }
-      }
+      },
+      invalidatesTags: ['Posts'],
     }),
     })
 })
