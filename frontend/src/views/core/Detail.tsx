@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import useDetail from '../../hooks/useDetail';
 import Loader from '../core/Loader/Loader';
 import { Post } from '../../types/posts'
+import MDXEditory from './dashboard/AddPost/MDXEditor/MDXEditor';
 // @ts-ignore
 import bg3 from '../../assets/bg3.jpg';
 
@@ -138,49 +139,10 @@ function Detail () {
                 <div className='row'>
                   {/* Main Content START */}
                   <div className='col-lg-12 mb-5'>
-                    <p>
-                      <b>Moonlight</b> newspaper up its enjoyment agreeable depending.
-                      Timed voice share led him to widen noisy young. At weddings
-                      believed laughing although the material does the exercise of. Up
-                      attempt offered ye civilly so sitting to. She new course gets
-                      living within Elinor joy. She rapturous suffering concealed.
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Laborum est tenetur voluptatibus itaque dolor saepe mollitia et
-                      ratione odio nisi! Explicabo quod tempore voluptatibus
-                      perspiciatis, nihil dolorem magni, corrupti odio dignissimos ut
-                      temporibus laboriosam dolore vero repudiandae asperiores
-                      incidunt reiciendis corporis odit a maxime. Accusantium
-                      excepturi ut aliquid accusamus necessitatibus minus odit,
-                      assumenda rerum. Tempora deserunt officiis expedita, excepturi
-                      nihil, velit similique necessitatibus natus explicabo veritatis,
-                      vitae temporibus aliquam dicta ea. Nesciunt et fuga quis atque
-                      debitis. Vero nihil aperiam voluptatibus. Architecto reiciendis
-                      necessitatibus explicabo repellendus corrupti pariatur velit
-                      aperiam! Ad, numquam expedita iste labore tempore necessitatibus
-                      praesentium libero pariatur.
-                    </p>
-                    <p>
-                      <b>
-                        <i>
-                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                          Rerum totam quasi impedit nostrum hic consequatur! Tenetur
-                          dignissimos debitis ea ut magni laboriosam animi provident
-                          ab minima dolorem facilis minus amet culpa quam odio
-                          consectetur eos mollitia dolorum cumque at soluta atque nam,
-                          quia eaque! Sint quisquam fuga sapiente facilis provident,
-                          ullam officia! Alias voluptates officia natus eaque
-                          voluptate illum est.
-                        </i>
-                      </b>
-                    </p>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Debitis, culpa mollitia nam, ipsum hic dolorum, beatae at quis
-                      ea cum id temporibus? Asperiores, atque eos voluptatibus
-                      explicabo cum voluptatum placeat.
-                    </p>
+                    {/* Acá */}
+                    <MDXEditory
+                    
+                    />
 
                     <div className='mt-5'>
                       <h2 className='my-3'>
