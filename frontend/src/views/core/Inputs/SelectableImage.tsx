@@ -31,6 +31,7 @@ const SelectableImage = ({ register, name }: { register: UseFormRegister<any>, n
         accept='image/*'
         {...register(name)}
         onChange={handleImageChange}
+        required
       />
       </div>
       {/* Input Image End */}
