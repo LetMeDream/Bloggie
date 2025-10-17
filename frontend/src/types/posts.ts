@@ -16,6 +16,7 @@ export interface Post {
   date?: string;
   view?: number;
   slug?: string;
+  description?: string;
 }
 
 /* Utilizado en el componente de creación de post. AddPost. */
