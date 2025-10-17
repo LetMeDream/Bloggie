@@ -1,0 +1,55 @@
+/* Toolbar MDXEditor */
+.MDX-toolbar {
+  caret-color: transparent;
+  z-index: 10 !important;
+  overflow: visible !important;
+  justify-content: center;
+  display: flex;
+  flex-direction: column !important;
+}
+
+/* Media query to activate in screens bigger than 768px */
+@media (min-width: 768px) {
+  .MDX-toolbar {
+    flex-direction: row !important;
+  }
+}
+
+/* src/styles/mdxeditor-custom.css */
+.mdxeditor {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  background: #fcfcfc;
+  min-height: 50dvh;
+  resize: block !important;
+}
+.mdxeditor ul {
+  list-style-type: circle;
+  list-style-position: inside;
+}
+
+/* Code block */
+.cm-editor {
+  color: white !important;
+  background-color: rgb(44, 44, 44);
+  font-family: "Lato", sans-serif !important;
+  font-weight: 100;
+  font-style: normal; 
+  /* rgb(181, 189, 104) Verde, para los path de imports */
+  /* rgb(251, 157, 81) Naranja, para los importados */
+  /* rgb(144, 196, 249) Azul, para resto de keywords */
+
+}
+
+.sp-syntax-keyword, .sp-syntax-plain, .sp-syntax-property{
+  color: rgb(144, 196, 249) !important;
+}
+
+.sp-syntax-tag, .sp-syntax-static {
+  color: rgb(251, 157, 81) !important;
+}
+
+.sp-syntax-punctuation {
+  color: rgb(181, 189, 104) !important;
+}
+
