@@ -32,8 +32,42 @@ function AddPost () {
     # Titleless?
     ---
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    #### Lets list:
+    #### Listing:
     - One
+    - Two
+    - Three
+    
+    ---
+    ### Code Example
+    \`\`\`js
+      let x = 5;
+      let y = 6;
+      let z = x + y;
+      console.log('Hello world from a markdown')
+    \`\`\`
+
+    ---
+    ### Live Code (React) Examples
+
+    \`\`\`tsx live react
+    import React, { useState } from 'react';
+
+    export default function App() {
+      const [count, setCount] = useState(0);
+
+      return (
+        <div style={{ fontFamily: 'sans-serif', padding: 20 }}>
+          <h1>Contador clásico</h1>
+          <p>Valor: {count}</p>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button onClick={() => setCount(count - 1)}>-</button>
+            <button onClick={() => setCount(count + 1)}>+</button>
+            <button onClick={() => setCount(0)}>Reset</button>
+          </div>
+        </div>
+      );
+    }
+    \`\`\`
   `
 
   return (
