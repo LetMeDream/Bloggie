@@ -141,7 +141,8 @@ function Detail () {
                   <div className='col-lg-12 mb-5'>
                     {/* Acá */}
                     <MDXEditory
-                    
+                      mode='preview'
+                      defaultValue={currentPost?.[0].description || ''}
                     />
 
                     <div className='mt-5'>
