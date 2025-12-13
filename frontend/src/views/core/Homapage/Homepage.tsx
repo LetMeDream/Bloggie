@@ -12,7 +12,7 @@ import Categories from '../../partials/Categories'
 import Loader from '../../core/Loader/Loader' 
 import { useSelector } from 'react-redux'
 // @ts-ignore: allow importing image without type declaration
-import bg3 from '../../../assets/bg3.jpg';
+import wood from '../../../assets/wood.jpg';
 
 function Index () {
   const {
@@ -46,9 +46,9 @@ function Index () {
       <Header/>
 
       <section
-        className='posts-section min-vh-100 border parallax-bg'
+        className='posts-section min-vh-100 parallax-bg mt-10!'
         style={{
-          backgroundImage: `url(${bg3})`,
+          backgroundImage: `url(${wood})`,
         }}
       >
         <div
@@ -60,7 +60,7 @@ function Index () {
               <a href='#' className='d-block card-img-flash'>
                 <img src='assets/images/adv-3.png' alt='' />
               </a>
-              <h2 className='text-start d-block mt-1'>Trending Articles 🔥</h2>
+              <h2 className='text-start text-gray-100 d-block mt-1'>Trending Articles 🔥</h2>
             </div>
           </div>
 
@@ -88,7 +88,7 @@ function Index () {
                 <li className={Cn('page-item', { disabled: isFirstPage })}>
                   <button
                     onClick={handlePrevPage}
-                    className={Cn('page-link text-dark fw-bold me-1 rounded caret-transparent ', { '!text-gray-300': isFirstPage })}
+                    className={Cn('page-link text-dark fw-bold me-1 rounded caret-transparent  ', { '!text-gray-300': isFirstPage })}
                     disabled={isFirstPage}
                     aria-label='Previous'
                   >
@@ -127,7 +127,7 @@ function Index () {
         </div>
       </section>
 
-      <section className='bg-gray-50'>
+      <section className='bg-light-sage py-5'>
         <Categories category={category} />
       </section>
 

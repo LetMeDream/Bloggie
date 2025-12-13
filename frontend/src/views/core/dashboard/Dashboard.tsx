@@ -3,7 +3,7 @@ import Header from '../../partials/Header'
 import Footer from '../../partials/Footer'
 import { Link } from 'react-router-dom'
 // @ts-ignore
-import bg3 from '../../../assets/bg3.jpg';
+import wood from '../../../assets/wood.jpg';
 
 function Dashboard () {
   return (
@@ -11,7 +11,7 @@ function Dashboard () {
       <Header />
       <section className='py-4 parallax-bg !pt-28'
         style={{
-          backgroundImage: `url(${bg3})`,
+          backgroundImage: `url(${wood})`,
         }}
       >
         <div className='container'>

@@ -9,7 +9,7 @@ import Select from '../../Inputs/Select'
 import SelectableImage from '../../Inputs/SelectableImage'
 import useAddPost from '../../../../hooks/useAddPost'
 // @ts-ignore
-import bg3 from '../../../../assets/bg3.jpg';
+import wood from '../../../../assets/wood.jpg';
 
 function AddPost () {
   const methods = useForm<AddPostForm>({
@@ -75,7 +75,7 @@ function AddPost () {
       <Header />
       <section className='pt-5 pb-5 parallax-bg'
         style={{
-          backgroundImage: `url(${bg3})`,
+          backgroundImage: `url(${wood})`,
         }}
       >
         <div className='container'>

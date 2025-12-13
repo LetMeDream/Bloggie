@@ -6,7 +6,7 @@ import Loader from '../core/Loader/Loader';
 import { Post } from '../../types/posts'
 import MDXEditory from './dashboard/AddPost/MDXEditor/MDXEditor';
 // @ts-ignore
-import bg3 from '../../assets/bg3.jpg';
+import wood from '../../assets/wood.jpg';
 
 interface DetailProps {
   currentPost: Post[] | null;
@@ -23,12 +23,12 @@ function Detail () {
       <Header />
       <section className=' pt-28 pb-5 parallax-bg'
         style={{
-          backgroundImage: `url(${bg3})`,
+          backgroundImage: `url(${wood})`,
         }}
       >
         <div className='container'>
           <div className='row'>
-            <div className='col-lg-2'>
+            <div className='col-lg-2 rounded-l bg-light-sage'>
               <div
                 className='text-start text-lg-center mb-5'
                 data-sticky=''
@@ -124,7 +124,7 @@ function Detail () {
               </div>
             </div>
             {/* Left sidebar END */}
-            <div className='col-10 bg-primarys p-4 py-6 rounded'>
+            <div className='col-10 bg-light-sage p-4 py-6 rounded-r'>
               <a href='#' className='badge bg-danger mb-2 text-decoration-none'>
                 <i className='small fw-bold ' />
                 Lifestyle

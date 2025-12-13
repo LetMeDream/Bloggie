@@ -6,7 +6,7 @@ import { login } from '../../utils/auth'
 import Toast from '../../plugin/Toast'
 import { useNavigate } from 'react-router-dom'
 // @ts-ignore
-import bg3 from '../../assets/bg3.jpg' 
+import wood from '../../assets/wood.jpg' 
 
 function Login () {
   const [loginData, setLoginData] = useState({ email: '', password: '' })
@@ -41,7 +41,7 @@ function Login () {
       <Header />
       <section className='min-h-[100dvh] flex-grow-1 mt-[40px] parallax-bg'
         style={{
-          backgroundImage: `url(${bg3})`,
+          backgroundImage: `url(${wood})`,
         }}
       >
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>

@@ -6,7 +6,7 @@ import { useState } from 'react'
 import Toast from '../../plugin/Toast'
 import { handleAPIError } from '../../utils/shared'
 // @ts-ignore
-import bg3 from '../../assets/bg3.jpg'
+import wood from '../../assets/wood.jpg'
 
 function Register () {
   const [registerData, setRegisterData] = useState({ full_name: '', email: '', password: '', password2: '' })
@@ -44,7 +44,7 @@ function Register () {
       <section
         className='min-h-[100dvh] d-flex flex-column vh-100 mt-[40px] parallax-bg'
         style={{
-          backgroundImage: `url(${bg3})`,
+          backgroundImage: `url(${wood})`,
         }}
       >
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
