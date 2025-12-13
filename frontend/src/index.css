@@ -7,6 +7,11 @@
   --color-primary: #CBB9A8;
   --color-primary-hover: #c1ac97;
   --color-secondary: #576a7a;
+
+  /* Color for the 'Earthy tones' palette */
+  --color-dark-sage: #4A5759;
+  --color-sage: #B0C4B1;
+  --color-light-sage: #DEDBD2;
 }
 
 @theme {
@@ -14,6 +19,19 @@
   --color-secondarys: var(--color-secondary);
   --color-primarys: var(--color-primary);
   --color-primarys-hover: var(--color-primary-hover);
+
+  --color-dark-sage: var(--color-dark-sage);
+  --color-sage: var(--color-sage);
+  --color-light-sage: var(--color-light-sage);
+
+  /* Earthy tones */
+  /* 
+  #EDAFB8 - light peach
+  #F7E1D7 - lighter peach
+  #DEDBD2 - light sage
+  #B0C4B1 - sage
+  #4A5759 - dark sage
+  */
 }
 
 /* Fonts */
