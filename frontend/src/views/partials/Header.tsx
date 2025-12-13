@@ -37,16 +37,16 @@ const Header = () => {
 
   return (
     /* Header */
-    <header className='bg-[#fcfcfc] fixed top-0 left-0 w-full z-50 text-secondarys caret-transparent' id='header'>
-      <div className={headerStyles['outer-container']}>
+    <header className='bg-[#fcfcfc] fixed top-0 left-0 w-full z-50 text-secondarys caret-transparent border-transparent!' id='header'>
+      <div className={headerStyles['outer-container'] + ' bg-dark-sage'}>
         <div className={headerStyles['inner-container']}>
           {/* Logo and Search Bar */}
           <div className={headerStyles['left-side']}>
             {/* Logo */}
             <div className={headerStyles['left-side-logo']}>
               <Link to='/' className="flex items-center gap-2">
-                <GiAtomicSlashes className='text-7xl text-secondarys ' />
-                <div className="text-2xl font-bold text-secondarys libertinus-sans-bold">
+                <GiAtomicSlashes className='text-7xl text-white ' />
+                <div className="text-2xl font-bold text-white libertinus-sans-bold">
                   Bloggie
                 </div>
               </Link>

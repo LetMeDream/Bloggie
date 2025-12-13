@@ -15,7 +15,7 @@ const useHeader = () => {
 
 
   const headerStyles = {
-    'outer-container': 'bg-[#fcfcfc] text-secondarys z-50 relative flex items-center',
+    'outer-container': 'text-white z-50 relative flex items-center',
     'inner-container':'!py-[8.5px] lg:py-0 container flex flex-nowrap justify-between items-center w-[100vw]',
     'left-side': 'flex items-center',
     'left-side-logo': 'mr-5 w-48',
@@ -30,11 +30,11 @@ const useHeader = () => {
     'responsive-navigation': 'flex flex-col items-center justify-center',
     'responsive-search-container': 'w-full flex justify-center',
     'responsive-search': 'w-[80%] max-w-[500px] px-4 py-2 rounded-md bg-white text-black focus:outline-none',
-    'link-btn': 'p-2 flex items-center gap-2 !text-secondarys rounded focus:outline-none',
+    'link-btn': 'p-2 flex items-center gap-2 !text-white rounded focus:outline-none',
     'li': 'py-2 m-0 w-full flex flex-col justify-center items-center hover:text-gray-300 no-underline text-white',
-    'link': 'mr-2 !text-secondarys hover:!text-gray-300',
+    'link': 'mr-2 !text-white hover:!text-gray-300',
     'dropdown-btn': ' hover:text-gray-300 flex items-center',
-    'social-media-link': 'text-2xl text-secondarys hover'
+    'social-media-link': 'text-2xl text-white hover'
   }
 
 
