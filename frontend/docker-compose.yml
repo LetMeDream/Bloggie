@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web: # Nombre del servicio para el frontend
+    build: . # Construye desde el Dockerfile en este directorio
+    container_name: react_nginx_frontend
+    ports:
+      - "3000:80" # Mapea el puerto 3000 de tu PC al puerto 80 del contenedor Nginx
+    # Puedes usar un volume aquí para ver los logs de Nginx, pero no para código fuente.
+    # volumes:
+    #   - ./nginx.conf:/etc/nginx/conf.d/default.conf # Para actualizar la conf de Nginx sin rebuild
+    
+    # Si usas dos docker-compose.yml, esta parte es CRÍTICA
+    # Asegúrate de que esta red sea la misma donde vive tu contenedor de Django.
+    # Ejemplo si tu backend crea una red llamada 'app-network'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true # Indica que la red 'app-network' fue creada por otro docker-compose
+    name: backend_app-network  # Nombre explícito para que coincida con el frontend
