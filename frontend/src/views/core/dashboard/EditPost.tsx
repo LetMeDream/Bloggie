@@ -26,7 +26,7 @@ function AddPost () {
                           </div>
                           <div>
                             <Link
-                              to='/instructor/posts/'
+                              to='/posts/'
                               className='btn'
                               style={{
                                 backgroundColor: 'white'
