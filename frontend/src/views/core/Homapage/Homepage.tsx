@@ -77,7 +77,7 @@ function Index () {
                 )
               : (
                 // Opcional: Mostrar un mensaje si no hay posts o mientras carga
-                <p>Loading posts or no posts found...</p>
+                <p className='text-white text-xl'>Loading posts or no posts found...</p>
                 )}
           </div>
 
