@@ -2,11 +2,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { Post, CategoryType } from '../types/posts'
 
+// Name of the backend service, in case we use Docker and can't acces localhost
+const SERVICE_NAME = import.meta.env.VITE_URL_SERVICE_NAME
+
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: 'api',
   tagTypes: ['Posts', 'Categories'],
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${SERVICE_NAME || 'http://127.0.0.1:8000/'}api/` }),
   endpoints: (builder) => ({
     // Get all posts
     getPosts: builder.query<Post[], void>({
