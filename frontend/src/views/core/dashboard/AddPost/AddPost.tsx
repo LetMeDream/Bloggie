@@ -14,7 +14,7 @@ import wood from '../../../../assets/wood.jpg';
 function AddPost () {
   const methods = useForm<AddPostForm>({
     defaultValues: {
-      title: 'Test Post',
+      title: '',
       description: '',
       status: 'Active',
       tags: ['health', 'fitness'],
@@ -28,7 +28,7 @@ function AddPost () {
   const { addPost } = useAddPost({ reset })
 
   /* Default value for the MDX editor, here we are able to use all of the special Markdown syntaxes */
-  const defaultValue = `
+  const display1 = `
     # Titleless?
     ---
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -80,39 +80,34 @@ function AddPost () {
       >
         <div className='container'>
           <div className='row mt-0 mt-md-4'>
-            <div className='col-12'>
+            <div className='col-md-11 mx-auto'>
               <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(addPost)}>
                   {/* Header/Hero */}
-                  <section className='py-4 py-lg-6 bg-primarys/80 rounded-3 mt-10'>
+                  <section className='py-4 py-lg-6 bg-light-sage rounded-3 mt-10'>
                     <div className='container'>
                       <div className='row'>
                         <div className='offset-lg-1 col-lg-10 col-md-12 col-12'>
-                          <div className='d-lg-flex align-items-center justify-content-between'>
+                          <div className='d-lg-flex gap-2 align-items-center justify-content-between'>
                             <div className='mb-4 mb-lg-0'>
-                              <h1 className='text-white mb-1'>
-                                Create Blog Post
+                              <h1 className='text-gray-600 mb-1'>
+                                Create Post
                               </h1>
-                              <p className='mb-0 text-white lead'>
+                              <p className='mb-0 text-gray-600 lead'>
                                 Use the article builder below to write your
                                 article.
                               </p>
                             </div>
                             <div>
                               <Link
-                                to='/instructor/posts/'
-                                className='btn'
-                                style={{
-                                  backgroundColor: 'white'
-                                }}
+                                to='/'
+                                className='btn bg-sage! hover:bg-sage/80! text-white'
                               >
                                 {' '}
-                                <i className='fas fa-arrow-left' /> Back to
-                                Posts
+                                <i className='fas fa-arrow-left' /> Back to Posts
                               </Link>
                               <a
-                                href='instructor-posts.html'
-                                className='btn btn-dark ms-2'
+                                className='btn bg-secondary/80! hover:bg-secondary/90! text-white ms-2'
                               >
                                 Save Changes{' '}
                                 <i className='fas fa-check-circle' />
@@ -148,7 +143,6 @@ function AddPost () {
                         <div className='mb-3'>
                             <label className='form-label'>Post:</label>
                             <MDXEditory 
-                              defaultValue={defaultValue}
                               setValue={setValue}
                               name={'description'}
                             />
