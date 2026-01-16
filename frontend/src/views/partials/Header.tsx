@@ -37,15 +37,15 @@ const Header = () => {
 
   return (
     /* Header */
-    <header className='bg-[#fcfcfc] fixed top-0 left-0 w-full z-50 text-secondarys caret-transparent border-transparent!' id='header'>
-      <div className={headerStyles['outer-container'] + ' bg-dark-sage'}>
+    <header className=' fixed top-0 left-0 w-full z-50 text-secondarys caret-transparent border-transparent bg-dark-sage! py-2' id='header'>
+      <div className={headerStyles['outer-container']}>
         <div className={headerStyles['inner-container']}>
           {/* Logo and Search Bar */}
           <div className={headerStyles['left-side']}>
             {/* Logo */}
             <div className={headerStyles['left-side-logo']}>
               <Link to='/' className="flex items-center gap-2">
-                <GiAtomicSlashes className='text-7xl text-white ' />
+                <GiAtomicSlashes className='text-5xl text-white ' />
                 <div className="text-2xl font-bold text-white libertinus-sans-bold">
                   Bloggie
                 </div>
@@ -182,9 +182,9 @@ const Header = () => {
               {/* User */}
               {  isLogged && (
                 <>
-                  <div className='flex gap-2 items-center text-sm'>
+                  <div className='flex gap-2 md:gap-6! items-center text-sm'>
                     <span>
-                      { user?.username }
+                      { user.username ? user?.username?.[0].toUpperCase() + user?.username?.slice(1) : '' }
                     </span>
 
                     <div className="avatar">
@@ -349,11 +349,11 @@ const CreateBtn: React.FC<{ className?: string }> = ({ className }) => {
       <div className={className}>
         {/* Beutifully styled input */}
         <Link
-          className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all ease-in focus:shadow-none text-sm py-2 px-4 shadow-sm bg-gray-100 relative text-stone-700 hover:text-stone-700 border-stone-500 hover:bg-gray-50 duration-150 hover:border-stone-600 !rounded-full hover:shadow-none"
+
           to='/add-post/'
         >
           <div
-            className="!text-secondarys flex items-center gap-2"
+                                className='btn bg-sage! hover:bg-sage/80! text-white'
           >
           Write...
           </div>

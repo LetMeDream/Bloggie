@@ -30,7 +30,7 @@ function Detail () {
           <div className='row'>
             <div className='col-lg-2 rounded-l bg-light-sage'>
               <div
-                className='text-start text-lg-center mb-5'
+                className='text-start text-lg-center mb-5 py-4'
                 data-sticky=''
                 data-margin-top={80}
                 data-sticky-for={991}

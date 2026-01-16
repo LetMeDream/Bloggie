@@ -119,7 +119,7 @@ function Login () {
                   </div>
                   <div>
                     <div className='d-grid'>
-                      <button type='submit' className='btn btn-secondarys'>
+                      <button type='submit' className='btn btn-secondarys border-sage! hover:bg-light-sage/30!'>
                         Sign in <i className='fas fa-sign-in-alt' />
                       </button>
                     </div>
