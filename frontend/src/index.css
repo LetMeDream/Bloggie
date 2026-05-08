@@ -12,6 +12,11 @@
   --color-dark-sage: #4A5759;
   --color-sage: #B0C4B1;
   --color-light-sage: #DEDBD2;
+
+  /* NUEVA PALETA */
+  --color-dark-teal: #23333A;
+  --color-light: #EAE9E4;
+  --color-teal: #3A474D;
 }
 
 @theme {
@@ -23,6 +28,10 @@
   --color-dark-sage: var(--color-dark-sage);
   --color-sage: var(--color-sage);
   --color-light-sage: var(--color-light-sage);
+
+  --color-dark-teal: var(--color-dark-teal);
+  --color-light: var(--color-light);
+  --color-teal: var(--color-teal);
 
   /* Earthy tones */
   /* 
@@ -80,6 +89,16 @@ button{
     top: var(--extra-distance, 0px);
     position: relative;
   }
+}
+
+
+.card-moderna {
+  background: linear-gradient(135deg, rgba(242, 242, 242, 0.708) 75%, rgba(255, 255, 255, 0.65) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: .5rem; /* rounded-2xl */
+  overflow: hidden;
 }
 
 
