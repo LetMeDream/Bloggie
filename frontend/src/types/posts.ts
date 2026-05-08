@@ -12,7 +12,11 @@ export interface Post {
   title: string;
   link: string;
   image: string;
-  user?: string;
+  user?: {
+    id: number;
+    full_name: string;
+    email: string;
+  };
   date?: string;
   view?: number;
   slug?: string;
@@ -26,6 +30,10 @@ export type AddPostForm = {
   status: 'Active' | 'Draft' | 'Disabled'
   tags: string[]
   category: string | number
-  user: string
+  user: {
+    id: number;
+    full_name: string;
+    email: string;
+  };
   image: string
 }
