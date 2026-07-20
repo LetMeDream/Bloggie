@@ -12,14 +12,14 @@ COPY package.json package-lock.json ./
 # O COPY yarn.lock .
 
 # Instala las dependencias
-RUN npm install
+RUN pnpm install
 
 # Copia el código fuente
 COPY . .
 
 # Ejecuta el comando de build (asumiendo que tu script es 'npm run build')
 # Esto crea la carpeta 'build' o 'dist' con los archivos estáticos
-RUN npm run build
+RUN pnpm build
 
 
 # === ETAPA 2: Servir la Aplicación con Nginx ===
