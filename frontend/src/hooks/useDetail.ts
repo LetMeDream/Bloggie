@@ -22,11 +22,11 @@ function useDetail() {
     }
   }, [data, error, isLoading])
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (Array.isArray(currentPost) && currentPost.length > 0) {
       console.log('Datos del post:', currentPost)
     }
-  }, [currentPost]) */
+  }, [currentPost])
 
   return { 
     currentPost,
