@@ -188,7 +188,7 @@ const Header = () => {
                     </span>
 
                     <div className="avatar">
-                      <div className="w-8 rounded-full">
+                      <div className="w-8 rounded-md">
                         <img src={defaultImage} />
                       </div>  
                     </div>

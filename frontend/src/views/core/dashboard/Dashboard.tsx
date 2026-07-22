@@ -108,7 +108,7 @@ function Dashboard () {
                         <div className='ms-3'>
                           <a
                             href='#'
-                            className='h6 stretched-link text-decoration-none text-dark'
+                            className='h6   text-decoration-none text-dark'
                           >
                             Dirty little secrets about the business industry
                           </a>
@@ -140,7 +140,7 @@ function Dashboard () {
                         <div className='ms-3'>
                           <a
                             href='#'
-                            className='h6 stretched-link text-decoration-none text-dark'
+                            className='h6   text-decoration-none text-dark'
                           >
                             Dirty little secrets about the business industry
                           </a>
@@ -172,7 +172,7 @@ function Dashboard () {
                         <div className='ms-3'>
                           <a
                             href='#'
-                            className='h6 stretched-link text-decoration-none text-dark'
+                            className='h6   text-decoration-none text-dark'
                           >
                             Dirty little secrets about the business industry
                           </a>
@@ -237,7 +237,7 @@ function Dashboard () {
                           <p className='mb-1'>
                             {' '}
                             <a
-                              className='h6 stretched-link text-decoration-none text-dark'
+                              className='h6   text-decoration-none text-dark'
                               href='#'
                             >
                               {' '}
@@ -272,7 +272,7 @@ function Dashboard () {
                           <p className='mb-1'>
                             {' '}
                             <a
-                              className='h6 stretched-link text-decoration-none text-dark'
+                              className='h6   text-decoration-none text-dark'
                               href='#'
                             >
                               {' '}
@@ -308,7 +308,7 @@ function Dashboard () {
                           <p className='mb-1'>
                             {' '}
                             <a
-                              className='h6 stretched-link text-decoration-none text-dark'
+                              className='h6   text-decoration-none text-dark'
                               href='#'
                             >
                               {' '}
@@ -366,7 +366,7 @@ function Dashboard () {
                               <h6 className='mb-0'>
                                 <a
                                   href='#'
-                                  className='stretched-link text-decoration-none text-dark fw-bold'
+                                  className='  text-decoration-none text-dark fw-bold'
                                 >
                                   New Like
                                 </a>
@@ -391,7 +391,7 @@ function Dashboard () {
                               <h6 className='mb-0'>
                                 <a
                                   href='#'
-                                  className='stretched-link text-decoration-none text-dark fw-bold'
+                                  className='  text-decoration-none text-dark fw-bold'
                                 >
                                   New Comment
                                 </a>
@@ -416,7 +416,7 @@ function Dashboard () {
                               <h6 className='mb-0'>
                                 <a
                                   href='#'
-                                  className='stretched-link text-decoration-none text-dark fw-bold'
+                                  className='  text-decoration-none text-dark fw-bold'
                                 >
                                   New Bookmark
                                 </a>

@@ -46,13 +46,10 @@ function Index () {
       <Header/>
 
       <section
-        className='posts-section min-vh-100 parallax-bg mt-10!'
-        style={{
-          backgroundImage: `url(${wood})`,
-        }}
+        className='posts-section min-vh-100 parallax-bg mt-10! !bg-dark-teal'
       >
         <div
-          className='container relative md:mt-28 sm:mt-32'
+          className='container relative md:mt-28 sm:mt-32 !max-w-[85%]'
         >
 
           <div className='row pb-3'>
@@ -127,7 +124,7 @@ function Index () {
         </div>
       </section>
 
-      <section className='bg-light-sage py-5'>
+      <section className='bg-light py-5'>
         <Categories category={category} />
       </section>
 

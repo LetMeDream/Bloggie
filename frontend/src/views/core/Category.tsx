@@ -41,7 +41,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset  fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -84,7 +84,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -127,7 +127,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -170,7 +170,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -213,7 +213,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -256,7 +256,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -299,7 +299,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -342,7 +342,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -385,7 +385,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -428,7 +428,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -471,7 +471,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -514,7 +514,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -557,7 +557,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -600,7 +600,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -643,7 +643,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>
@@ -686,7 +686,7 @@ function Category () {
                   <h4 className='card-title'>
                     <a
                       href='post-single.html'
-                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                      className='btn-link text-reset   fw-bold text-decoration-none'
                     >
                       7 common mistakes everyone makes while traveling
                     </a>

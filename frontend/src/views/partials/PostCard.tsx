@@ -28,10 +28,9 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
     <div className='col-12 col-md-6 col-lg-3 mb-4'>
       {/* Card height: Removed fixed 50vh from here.
          The image container aspect ratio will help control card height partially. */}
-      <div className='card d-flex flex-column h-100'> 
-        <div className='card-fold ratio ratio-16x9 skeleton'> 
+      <div className='card-moderna'> 
+        <div className='card-fold !rounded-t-[0.5rem] ratio ratio-16x9 skeleton'> 
           <img
-            className={`card-img-top ${imgLoading ? 'hidden' : ''}`} // Use card-img-top for proper card integration
             onLoad={() => setImgLoading(false)}
             style={{
               // These styles are good for making the image cover the ratio container
@@ -46,7 +45,7 @@ const PostCard = ({ post }: { post: Post }) => {  const PLACEHOLDER_URL = 'https
           <h4 className='card-title mb-2'> 
             <Link
               to={`/${post.slug}`} // TODO: Make this dynamic based on post, use a fallback
-              className='btn-link text-reset stretched-link fw-bold text-decoration-none text-truncate d-block' // Added text-truncate d-block
+              className='btn-link text-reset   fw-bold text-decoration-none text-truncate d-block' // Added text-truncate d-block
               style={{
                 maxWidth: '100%' // Ensure text-truncate works within container
               }}
