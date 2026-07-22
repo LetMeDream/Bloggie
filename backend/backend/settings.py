@@ -97,7 +97,8 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME', 'bloggie'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'), 
+        #HOST': os.getenv('DB_HOST', 'localhost'), 
+        'HOST': 'db',         # Nombre del servicio en Docker
         'PORT': '5432',       # Default PostgreSQL port
     }
 }
