@@ -1,8 +1,30 @@
-version: '3.8'
-
 services:
+  # 1. Base de datos PostgreSQL
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}     # <--- Pon aquí el nombre de tu BD
+      POSTGRES_USER: ${DB_USER}        # <--- Pon aquí tu usuario
+      POSTGRES_PASSWORD: ${DB_PASSWORD}   # <--- Pon aquí tu contraseña
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   api_service:
     build: .
+    # Runs migrations before starting the Gunicorn server
+    command: >
+      sh -c "python manage.py migrate &&
+             gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
     container_name: django_backend
     ports:
       - "8000:8000"
@@ -13,8 +35,18 @@ services:
     networks:
       - app-network 
     environment:
-      - DB_HOST=host.docker.internal    # Se une a esta red
+      - DB_HOST=db                  # <--- IMPORTANTE: Apunta al servicio 'db' de arriba
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=5432
+    depends_on:
+      db:
+        condition: service_healthy  # Espera a que la BD esté lista antes de arrancar Django
 
 networks:
   app-network:          # Definimos la red aquí
     driver: bridge      # Es una red tipo puente estándar
+
+volumes:
+  postgres_data:
