@@ -12,6 +12,9 @@ const useAddPost = ({ reset }: { reset: () => void }) => {
     try {
       const imgFile = postData.image[0] // Extract the File object from the FileList
       await createPost({ ...postData, image: imgFile }).unwrap()
+      setTimeout(() => {
+        navigate('/')
+      }, 500);
     } catch (err) {
       console.error('Error creating post:', err)
       store.dispatch(setError('Error creating post'))
@@ -25,9 +28,6 @@ const useAddPost = ({ reset }: { reset: () => void }) => {
     if (data) {
       Toast('success', 'Post Created', 'Your post has been created successfully.')
       reset()
-      setTimeout(() => {
-        navigate('/')
-      }, 500);
     }
     if (error) {
       Toast('error', 'Post creation failed', 'There was an error creating the post.')

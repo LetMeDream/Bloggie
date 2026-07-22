@@ -19,7 +19,9 @@ const useHomePage = () => {
     isLastPage
   } = usePagination({ elements: posts })
   const dispatch = store.dispatch
-  const { data: fetchedPosts, error: postsError, isLoading: postsLoading } = useGetPostsQuery()
+  const { data: fetchedPosts, error: postsError, isLoading: postsLoading } = useGetPostsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  })
   const { data: fetchedCategories, error: categoriesError, isLoading: categoriesLoading } = useGetCategoriesQuery()
   
 

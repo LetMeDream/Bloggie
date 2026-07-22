@@ -21,10 +21,7 @@ function Detail () {
   ) : (
     <>
       <Header />
-      <section className=' pt-28 pb-5 parallax-bg'
-        style={{
-          backgroundImage: `url(${wood})`,
-        }}
+      <section className=' pt-28 pb-5 parallax-bg bg-dark-teal'
       >
         <div className='container'>
           <div className='row'>
@@ -53,9 +50,9 @@ function Detail () {
                     href='#'
                     className='h5 fw-bold text-dark text-decoration-none mt-2 mb-0 d-block'
                   >
-                    Louis Ferguson
+                      { currentPost?.[0].user?.full_name || 'Unknown Author' }
                   </a>
-                  <p>Writer at Desphixs</p>
+                  <p>Writer at Bloggie</p>
                 </div>
 
                 <hr className='d-none d-lg-block ' />
@@ -171,7 +168,7 @@ function Detail () {
                                   <h4 className='card-title'>
                                     <Link
                                       to='/7-common-mistakes-everyone-makes-while-travelling/'
-                                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                                      className='btn-link text-reset   fw-bold text-decoration-none'
                                     >
                                       7 common mistakes everyone makes while traveling
                                     </Link>
@@ -198,7 +195,7 @@ function Detail () {
                                   <h4 className='card-title'>
                                     <a
                                       href='post-single.html'
-                                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                                      className='btn-link text-reset   fw-bold text-decoration-none'
                                     >
                                       7 common mistakes everyone makes while traveling
                                     </a>
@@ -225,7 +222,7 @@ function Detail () {
                                   <h4 className='card-title'>
                                     <a
                                       href='post-single.html'
-                                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                                      className='btn-link text-reset   fw-bold text-decoration-none'
                                     >
                                       7 common mistakes everyone makes while traveling
                                     </a>
@@ -252,7 +249,7 @@ function Detail () {
                                   <h4 className='card-title'>
                                     <a
                                       href='post-single.html'
-                                      className='btn-link text-reset stretched-link fw-bold text-decoration-none'
+                                      className='btn-link text-reset   fw-bold text-decoration-none'
                                     >
                                       7 common mistakes everyone makes while traveling
                                     </a>

@@ -8,10 +8,12 @@ import { AddPostForm } from '../../../../types/posts'
 import Select from '../../Inputs/Select'
 import SelectableImage from '../../Inputs/SelectableImage'
 import useAddPost from '../../../../hooks/useAddPost'
+import { useSelector } from 'react-redux'
 // @ts-ignore
 import wood from '../../../../assets/wood.jpg';
 
 function AddPost () {
+  const { user } = useSelector((state: any) => state.auth)
   const methods = useForm<AddPostForm>({
     defaultValues: {
       title: '',
@@ -19,7 +21,7 @@ function AddPost () {
       status: 'Active',
       tags: ['health', 'fitness'],
       category: 5,
-      user: '67',
+      user: user.user_id,
       image: ''
     }
   })
