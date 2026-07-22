@@ -42,13 +42,10 @@ function Register () {
     <>
       <Header />
       <section
-        className='min-h-[100dvh] d-flex flex-column vh-100 mt-[40px] parallax-bg'
-        style={{
-          backgroundImage: `url(${wood})`,
-        }}
+        className='min-h-[100dvh] d-flex flex-column vh-100 mt-[40px] bg-dark-teal'
       >
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
-          <div className='col-lg-5 col-md-8 py-8 py-xl-0'>
+          <div className='col-lg-5 col-md-8 py-8'>
             <div className='card shadow'>
               <div className='card-body p-6'>
                 <div className='mb-4'>

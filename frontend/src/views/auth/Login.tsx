@@ -39,10 +39,7 @@ function Login () {
   return (
     <>
       <Header />
-      <section className='min-h-[100dvh] flex-grow-1 mt-[40px] parallax-bg'
-        style={{
-          backgroundImage: `url(${wood})`,
-        }}
+      <section className='min-h-[100dvh] flex-grow-1 mt-[40px] bg-dark-teal'
       >
         <div className='row align-items-center justify-content-center g-0 h-lg-100 py-8'>
           <div className='col-lg-5 col-md-8 py-8 py-xl-8'>
