@@ -15,6 +15,8 @@ import {
   sandpackPlugin,
   AdmonitionDirectiveDescriptor, directivesPlugin, CreateLink, linkDialogPlugin,
   useCodeBlockEditorContext, codeMirrorPlugin,
+  imagePlugin,
+  InsertImage,
 } from '@mdxeditor/editor'
 import { CodeBlockEditorDescriptor } from '@mdxeditor/editor'
 import '@mdxeditor/editor/style.css'
@@ -145,7 +147,7 @@ function MDXEditory({ setValue, defaultValue, name, mode = 'normal' }: MDXEditor
       <>
         {/* name of each tab group should be unique */}
         <div className='tabs tabs-border'>
-          <input type="radio" name="my_tabs_2" className="tab bg-primarys" aria-label="Write" defaultChecked />
+          <input type="radio" name="my_tabs_2" className="tab bg-dark-sage hover:bg-dark-sage/80 text-gray-100!" aria-label="Write" defaultChecked />
           <div className="tab-content" ref={normalEditorWrapperRef}>
             {/* Normal */}
             <MDXEditor
@@ -171,11 +173,21 @@ function MDXEditory({ setValue, defaultValue, name, mode = 'normal' }: MDXEditor
                 directivesPlugin({ 
                   directiveDescriptors: [AdmonitionDirectiveDescriptor] 
                 }),
+                imagePlugin({
+                  imageUploadHandler: (e) => {
+                    console.log(e)
+                    const fileUrl = URL.createObjectURL(e)
+                    return Promise.resolve(fileUrl)
+                    // return Promise.resolve('https://picsum.photos/200/300')
+                  },
+                  imageAutocompleteSuggestions: ['https://picsum.photos/200/300', 'https://picsum.photos/200']
+                }),
                 markdownShortcutPlugin(),
                 toolbarPlugin({
                   toolbarClassName: 'MDX-toolbar',
                   toolbarContents: () => (
                     <>
+                      <InsertImage />
                       <ConditionalContents
                         options={[
                           { when: (editor) => editor?.editorType === 'codeblock', contents: () => <ChangeCodeMirrorLanguage /> },
@@ -195,7 +207,6 @@ function MDXEditory({ setValue, defaultValue, name, mode = 'normal' }: MDXEditor
                       <BlockTypeSelect />
                       <CreateLink />
                       <AdmonitionDropdown editorRef={normalEditorRef} />
-  
                     </>
                   )
                 })
@@ -204,7 +215,7 @@ function MDXEditory({ setValue, defaultValue, name, mode = 'normal' }: MDXEditor
   
           </div>
   
-          <input type="radio" name="my_tabs_2" className="tab bg-primarys" aria-label="Markdownless " />
+          <input type="radio" name="my_tabs_2" className="tab bg-dark-sage hover:bg-dark-sage/80 text-gray-100!" aria-label="Markdownless " />
           <div className="tab-content">
             {/* Preview */}
             <textarea
