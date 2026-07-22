@@ -49,6 +49,7 @@ export const store = configureStore({
     // and other useful features of `rtk-query`.
     [api.reducerPath]: api.reducer,
   },
+  devTools: true,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 })
 
