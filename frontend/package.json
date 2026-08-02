@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@mdxeditor/editor": "^3.42.0",
+    "@radix-ui/colors": "^3.0.0",
     "@redux-devtools/extension": "^3.3.0",
     "@reduxjs/toolkit": "^2.9.0",
     "@tailwindcss/vite": "^4.1.4",

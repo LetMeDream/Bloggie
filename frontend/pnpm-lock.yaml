@@ -11,6 +11,9 @@ importers:
       '@mdxeditor/editor':
         specifier: ^3.42.0
         version: 3.42.0(@codemirror/language@6.11.3)(@lezer/highlight@1.2.1)(@types/react-dom@18.3.7(@types/react@18.3.24))(@types/react@18.3.24)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.27)
+      '@radix-ui/colors':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@redux-devtools/extension':
         specifier: ^3.3.0
         version: 3.3.0(redux@5.0.1)
